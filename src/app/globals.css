@@ -24,6 +24,10 @@
   --animate-flip: flip 6s ease-in-out infinite;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--color-background);
   color: var(--color-primary);
@@ -31,4 +35,25 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+/* Performance optimization: hint browser about animated elements */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* Accessibility: respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

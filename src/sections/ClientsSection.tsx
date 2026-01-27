@@ -1,125 +1,150 @@
+"use client";
+
+import React from "react";
 import Image from "next/image";
+import { motion, useInView } from "framer-motion";
+import { scaleIn, createStaggerContainer, cardHover } from "@/utils/animations";
+
+const clientTypes = [
+  // First Row
+  ["Interior Designer", "Freelancer", "Restaurant Owner"],
+  // Second Row
+  ["Tech Startup", "IT Consultant"],
+  // Third Row
+  ["Fitness Trainer", "Still You", "Photographer"],
+  // Fourth Row
+  ["psychologist", "naturopath"],
+];
 
 const ClientsSection = () => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
+
   return (
-    <section className="w-screen flex justify-center items-center my-32">
-      <div className="w-full max-w-[1136px] flex flex-col gap-10 justify-center items-center">
+    <section
+      ref={ref}
+      className="w-screen flex justify-center items-center my-32"
+    >
+      <motion.div
+        className="w-full max-w-[1136px] flex flex-col gap-10 justify-center items-center"
+        variants={createStaggerContainer(0.08, 0)}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+      >
         {/* First Row */}
         <div className="w-full flex items-center justify-between px-8">
-          <div className="flex flex-col items-center justify-center gap-4">
-            <Image
-              src="/images/Anxious_Beetle.gif"
-              alt="Animation"
-              width={150}
-              height={150}
-              unoptimized
-            />
-            <h1 className="text-xl">Interior Designer</h1>
-          </div>
-          <div className="flex flex-col items-center justify-center gap-4 -translate-y-12">
-            <Image
-              src="/images/Anxious_Beetle.gif"
-              alt="Animation"
-              width={150}
-              height={150}
-              unoptimized
-            />
-            <h1 className="text-xl">Freelancer</h1>
-          </div>
-          <div className="flex flex-col items-center justify-center gap-4">
-            <Image
-              src="/images/Anxious_Beetle.gif"
-              alt="Animation"
-              width={150}
-              height={150}
-              unoptimized
-            />
-            <h1 className="text-xl">Restaurant Owner</h1>
-          </div>
+          {clientTypes[0].map((client, index) => (
+            <motion.div
+              key={client}
+              className={`flex flex-col items-center justify-center gap-4 ${
+                index === 1 ? "-translate-y-12" : ""
+              }`}
+              variants={scaleIn}
+              whileHover={cardHover}
+            >
+              <motion.div whileHover={{ rotate: 3 }}>
+                <Image
+                  src="/images/Anxious_Beetle.gif"
+                  alt="Animation"
+                  width={150}
+                  height={150}
+                  unoptimized
+                />
+              </motion.div>
+              <motion.h1
+                className="text-xl"
+                whileHover={{ color: "var(--color-secondary)" }}
+              >
+                {client}
+              </motion.h1>
+            </motion.div>
+          ))}
         </div>
 
         {/* Second Row */}
         <div className="w-1/2 flex items-center justify-between">
-          <div className="flex flex-col items-center justify-center gap-4">
-            <Image
-              src="/images/Anxious_Beetle.gif"
-              alt="Animation"
-              width={150}
-              height={150}
-              unoptimized
-            />
-            <h1 className="text-xl">Tech Startup</h1>
-          </div>
-          <div className="flex flex-col items-center justify-center gap-4">
-            <Image
-              src="/images/Anxious_Beetle.gif"
-              alt="Animation"
-              width={150}
-              height={150}
-              unoptimized
-            />
-            <h1 className="text-xl">IT Consuktant</h1>
-          </div>
+          {clientTypes[1].map((client) => (
+            <motion.div
+              key={client}
+              className="flex flex-col items-center justify-center gap-4"
+              variants={scaleIn}
+              whileHover={cardHover}
+            >
+              <motion.div whileHover={{ rotate: 3 }}>
+                <Image
+                  src="/images/Anxious_Beetle.gif"
+                  alt="Animation"
+                  width={150}
+                  height={150}
+                  unoptimized
+                />
+              </motion.div>
+              <motion.h1
+                className="text-xl"
+                whileHover={{ color: "var(--color-secondary)" }}
+              >
+                {client}
+              </motion.h1>
+            </motion.div>
+          ))}
         </div>
 
         {/* Third Row */}
         <div className="w-full flex items-center justify-between">
-          <div className="flex flex-col items-center justify-center gap-4">
-            <Image
-              src="/images/Anxious_Beetle.gif"
-              alt="Animation"
-              width={150}
-              height={150}
-              unoptimized
-            />
-            <h1 className="text-xl">Fitness Trainer</h1>
-          </div>
-          <div className="flex flex-col items-center justify-center gap-4 ">
-            <Image
-              src="/images/Anxious_Beetle.gif"
-              alt="Animation"
-              width={150}
-              height={150}
-              unoptimized
-            />
-            <h1 className="text-xl">Still You</h1>
-          </div>
-          <div className="flex flex-col items-center justify-center gap-4">
-            <Image
-              src="/images/Anxious_Beetle.gif"
-              alt="Animation"
-              width={150}
-              height={150}
-              unoptimized
-            />
-            <h1 className="text-xl">Photographer</h1>
-          </div>
+          {clientTypes[2].map((client) => (
+            <motion.div
+              key={client}
+              className="flex flex-col items-center justify-center gap-4"
+              variants={scaleIn}
+              whileHover={cardHover}
+            >
+              <motion.div whileHover={{ rotate: 3 }}>
+                <Image
+                  src="/images/Anxious_Beetle.gif"
+                  alt="Animation"
+                  width={150}
+                  height={150}
+                  unoptimized
+                />
+              </motion.div>
+              <motion.h1
+                className="text-xl"
+                whileHover={{ color: "var(--color-secondary)" }}
+              >
+                {client}
+              </motion.h1>
+            </motion.div>
+          ))}
         </div>
 
         {/* Fourth Row */}
         <div className="w-1/2 flex items-center justify-between">
-          <div className="flex flex-col items-center justify-center gap-4">
-            <Image
-              src="/images/Anxious_Beetle.gif"
-              alt="Animation"
-              width={150}
-              height={150}
-              unoptimized
-            />
-            <h1 className="text-xl">psychologist</h1>
-          </div>
-          <div className="flex flex-col items-center justify-center gap-4">
-            <Image
-              src="/images/Anxious_Beetle.gif"
-              alt="Animation"
-              width={150}
-              height={150}
-              unoptimized
-            />
-            <h1 className="text-xl">naturopath</h1>
-          </div>
+          {clientTypes[3].map((client) => (
+            <motion.div
+              key={client}
+              className="flex flex-col items-center justify-center gap-4"
+              variants={scaleIn}
+              whileHover={cardHover}
+            >
+              <motion.div whileHover={{ rotate: 3 }}>
+                <Image
+                  src="/images/Anxious_Beetle.gif"
+                  alt="Animation"
+                  width={150}
+                  height={150}
+                  unoptimized
+                />
+              </motion.div>
+              <motion.h1
+                className="text-xl"
+                whileHover={{ color: "var(--color-secondary)" }}
+              >
+                {client}
+              </motion.h1>
+            </motion.div>
+          ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

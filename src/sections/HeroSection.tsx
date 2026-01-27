@@ -1,5 +1,14 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import {
+  heroHeading,
+  heroBeetle,
+  heroArrow,
+  heroParagraph,
+} from "@/utils/animations";
 
 const HeroSection = () => {
   return (
@@ -11,44 +20,78 @@ const HeroSection = () => {
         backgroundSize: "36px 36px",
       }}
     >
-      {/* <h1 className="w-full max-w-[750px] text-8xl font-semibold text-center leading-[80%] tracking-tight">
-        Ready to{" "}
-        <span className="inline-block font-bold animate-flip">FLIP</span> the
-        right side up?
-      </h1> */}
-      <h1 className="w-full max-w-[600px] text-7xl text-center">
+      <motion.h1
+        className="w-full max-w-[600px] text-7xl text-center"
+        initial="hidden"
+        animate="visible"
+        variants={heroHeading}
+      >
         Ready to FLIP the right side up?
-      </h1>
-      <div className="w-full flex justify-center items-center mt-8">
-        <div className="relative flex items-center">
-          <Image
-            src="/images/Anxious_Beetle.gif"
-            alt="Animation"
-            width={250}
-            height={250}
-            unoptimized
-          />
-          <div className="absolute left-full flex items-center gap-4">
+      </motion.h1>
+      <div className="w-full flex justify-center items-center -mt-4">
+        <div className="relative flex items-center justify-center">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={heroBeetle}
+            className="-my-12"
+          >
             <Image
-              src="/icons/ArrowIcon.svg"
-              alt="ArrowIcon"
-              width={65}
-              height={20}
+              src="/images/Anxious_Beetle.gif"
+              alt="Animation"
+              width={350}
+              height={350}
+              unoptimized
             />
-            <p className="font-oxygen text-black whitespace-nowrap">
+          </motion.div>
+          <motion.div
+            className="absolute flex items-center gap-6"
+            style={{ left: "calc(50% + 120px)" }}
+            initial="hidden"
+            animate="visible"
+            variants={heroArrow}
+          >
+            <motion.div
+              className="shrink-0"
+              animate={{
+                x: [-8, 8, -8],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              <Image
+                src="/icons/ArrowIcon.svg"
+                alt="ArrowIcon"
+                width={90}
+                height={28}
+                style={{
+                  filter: "brightness(0) saturate(100%)",
+                  opacity: 0.7
+                }}
+              />
+            </motion.div>
+            <p className="font-oxygen text-black whitespace-nowrap text-lg">
               This is you,
               <br />
               anxious to build a
               <br />
               digital presence
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
-      <p className="w-full max-w-[600px] text-xl font-oxygen text-black text-center mt-12">
+      <motion.p
+        className="w-full max-w-[600px] text-xl font-oxygen text-black text-center"
+        initial="hidden"
+        animate="visible"
+        variants={heroParagraph}
+      >
         Whether you&apos;re an expert, a startup, or a small business,
         you&apos;re in the right place for a professionally crafted website.
-      </p>
+      </motion.p>
     </section>
   );
 };
