@@ -8,7 +8,7 @@ const AboutSection = () => {
         <div className="flex flex-col">
           <h1 className="text-7xl text-start text-nowrap">Hi, im Sulti</h1>
           <p className="text-2xl text-start">A freelance Autist</p>
-          <p className="font-oxygen text-lg text-start mt-4">
+          <p className="font-oxygen text-black text-lg text-start mt-4">
             I create comprehensive websites from scratch. Working with me you
             get memorable, unique websites tailored to your specific needs,
             hassle-free process and first class service.
@@ -40,7 +40,7 @@ const AboutSection = () => {
           </div>
         </div>
       </div>
-      <p className="w-full max-w-[500px] text-lg font-oxygen text-center mt-12">
+      <p className="w-full max-w-[500px] text-lg font-oxygen text-black text-center mt-12">
         Whether you&apos;re an expert, a startup, or a small business,
         you&apos;re in the right place for a professionally crafted website.
       </p>

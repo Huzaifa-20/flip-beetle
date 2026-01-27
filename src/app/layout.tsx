@@ -29,9 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${bangers.variable} ${oxygen.variable} antialiased`}
-      >
+      <body className={`${bangers.variable} ${oxygen.variable} antialiased`}>
         <Navbar />
         {children}
       </body>

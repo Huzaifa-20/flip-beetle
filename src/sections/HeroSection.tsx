@@ -35,7 +35,7 @@ const HeroSection = () => {
               width={65}
               height={20}
             />
-            <p className="font-oxygen whitespace-nowrap">
+            <p className="font-oxygen text-black whitespace-nowrap">
               This is you,
               <br />
               anxious to build a
@@ -45,7 +45,7 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-      <p className="w-full max-w-[600px] text-xl font-oxygen text-center mt-12">
+      <p className="w-full max-w-[600px] text-xl font-oxygen text-black text-center mt-12">
         Whether you&apos;re an expert, a startup, or a small business,
         you&apos;re in the right place for a professionally crafted website.
       </p>
