@@ -18,7 +18,7 @@ const clientTypes = [
 
 const ClientsSection = () => {
   const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: false, amount: 0.3 });
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
     <section
@@ -36,9 +36,8 @@ const ClientsSection = () => {
           {clientTypes[0].map((client, index) => (
             <motion.div
               key={client}
-              className={`flex flex-col items-center justify-center gap-4 ${
-                index === 1 ? "-translate-y-12" : ""
-              }`}
+              className={`flex flex-col items-center justify-center gap-4 ${index === 1 ? "-translate-y-12" : ""
+                }`}
               variants={scaleIn}
               whileHover={cardHover}
             >
