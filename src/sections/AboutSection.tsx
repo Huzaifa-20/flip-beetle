@@ -18,9 +18,9 @@ const AboutSection = () => {
   return (
     <section
       ref={ref}
-      className="w-screen flex flex-col justify-center items-center my-32"
+      className="w-screen flex flex-col justify-center items-center my-32 px-12"
     >
-      <div className="max-w-[1136px] flex justify-center items-center">
+      <div className="w-full flex justify-center items-center">
         <motion.div
           className="flex flex-col"
           initial="hidden"
@@ -29,7 +29,7 @@ const AboutSection = () => {
         >
           <h1 className="text-7xl text-start text-nowrap">Hi, im Sulti</h1>
           <p className="text-2xl text-start">A freelance Autist</p>
-          <p className="font-oxygen text-black text-lg text-start mt-4">
+          <p className="font-josefin text-black text-lg text-start mt-4">
             I create comprehensive websites from scratch. Working with me you
             get memorable, unique websites tailored to your specific needs,
             hassle-free process and first class service.
@@ -57,7 +57,7 @@ const AboutSection = () => {
         </div>
       </div>
       <motion.p
-        className="w-full max-w-[500px] text-lg font-oxygen text-black text-center mt-12"
+        className="w-full max-w-[700px] text-lg font-josefin text-black text-center mt-12"
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         variants={fadeInUp}

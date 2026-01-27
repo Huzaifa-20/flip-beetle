@@ -42,7 +42,7 @@ const Navbar = () => {
       animate="visible"
       variants={navbarSlideDown}
     >
-      <div className="w-full max-w-[1136px] flex justify-between items-center py-4 px-8">
+      <div className="w-full flex justify-between items-center py-4 px-12">
         <motion.div
           className="w-fit flex justify-center items-center gap-8"
           variants={createStaggerContainer(0.05, 0.5)}

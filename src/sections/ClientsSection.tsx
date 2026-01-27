@@ -18,21 +18,21 @@ const clientTypes = [
 
 const ClientsSection = () => {
   const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const isInView = useInView(ref, { once: false, amount: 0.3 });
 
   return (
     <section
       ref={ref}
-      className="w-screen flex justify-center items-center my-32"
+      className="w-screen flex justify-center items-center my-32 px-12"
     >
       <motion.div
-        className="w-full max-w-[1136px] flex flex-col gap-10 justify-center items-center"
+        className="w-full flex flex-col gap-10 justify-center items-center"
         variants={createStaggerContainer(0.08, 0)}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
         {/* First Row */}
-        <div className="w-full flex items-center justify-between px-8">
+        <div className="w-full flex items-center justify-between">
           {clientTypes[0].map((client, index) => (
             <motion.div
               key={client}
@@ -52,7 +52,7 @@ const ClientsSection = () => {
                 />
               </motion.div>
               <motion.h1
-                className="text-xl"
+                className="text-xl text-primary"
                 whileHover={{ color: "var(--color-secondary)" }}
               >
                 {client}
@@ -80,7 +80,7 @@ const ClientsSection = () => {
                 />
               </motion.div>
               <motion.h1
-                className="text-xl"
+                className="text-xl text-primary"
                 whileHover={{ color: "var(--color-secondary)" }}
               >
                 {client}
@@ -108,7 +108,7 @@ const ClientsSection = () => {
                 />
               </motion.div>
               <motion.h1
-                className="text-xl"
+                className="text-xl text-primary"
                 whileHover={{ color: "var(--color-secondary)" }}
               >
                 {client}
@@ -136,7 +136,7 @@ const ClientsSection = () => {
                 />
               </motion.div>
               <motion.h1
-                className="text-xl"
+                className="text-xl text-primary"
                 whileHover={{ color: "var(--color-secondary)" }}
               >
                 {client}

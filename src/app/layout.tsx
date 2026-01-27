@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bangers, Oxygen } from "next/font/google";
+import { Bangers, Josefin_Sans } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 
@@ -10,8 +10,8 @@ const bangers = Bangers({
   display: "swap",
 });
 
-const oxygen = Oxygen({
-  variable: "--font-oxygen",
+const josefinSans = Josefin_Sans({
+  variable: "--font-josefin",
   subsets: ["latin"],
   weight: ["400", "700"],
   display: "swap",
@@ -29,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${bangers.variable} ${oxygen.variable} antialiased`}>
+      <body className={`${bangers.variable} ${josefinSans.variable} antialiased`}>
         <Navbar />
         {children}
       </body>

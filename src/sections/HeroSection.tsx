@@ -13,7 +13,7 @@ import {
 const HeroSection = () => {
   return (
     <section
-      className="w-screen min-h-screen flex flex-col justify-center items-center"
+      className="w-screen min-h-screen flex flex-col justify-center items-center px-12"
       style={{
         backgroundImage:
           "radial-gradient(circle, #b3af9a 1.25px, transparent 1.25px)",
@@ -21,7 +21,7 @@ const HeroSection = () => {
       }}
     >
       <motion.h1
-        className="w-full max-w-[600px] text-7xl text-center"
+        className="w-full max-w-[800px] text-7xl text-center"
         initial="hidden"
         animate="visible"
         variants={heroHeading}
@@ -73,7 +73,7 @@ const HeroSection = () => {
                 }}
               />
             </motion.div>
-            <p className="font-oxygen text-black whitespace-nowrap text-lg">
+            <p className="font-josefin text-black whitespace-nowrap text-lg">
               This is you,
               <br />
               anxious to build a
@@ -84,7 +84,7 @@ const HeroSection = () => {
         </div>
       </div>
       <motion.p
-        className="w-full max-w-[600px] text-xl font-oxygen text-black text-center"
+        className="w-full max-w-[800px] text-xl font-josefin text-black text-center"
         initial="hidden"
         animate="visible"
         variants={heroParagraph}

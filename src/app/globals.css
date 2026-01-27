@@ -5,7 +5,7 @@
   --color-primary: #606c38;
   --color-secondary: #bc6c25;
   --font-bangers: var(--font-bangers);
-  --font-oxygen: var(--font-oxygen);
+  --font-josefin: var(--font-josefin);
 
   @keyframes flip {
     0%,
