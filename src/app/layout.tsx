@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Bangers, Josefin_Sans } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import "./globals.css";
+import NavbarAlt from "@/components/NavbarAlt";
 
 const bangers = Bangers({
   variable: "--font-bangers",
@@ -30,7 +31,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${bangers.variable} ${josefinSans.variable} antialiased`}>
-        <Navbar />
+        {/* <Navbar /> */}
+        <NavbarAlt />
         {children}
       </body>
     </html>
