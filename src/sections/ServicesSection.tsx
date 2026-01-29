@@ -55,6 +55,7 @@ const ServicesSection = () => {
   return (
     <section
       ref={ref}
+      data-theme="black"
       className="w-screen flex justify-center items-center my-32 px-12"
     >
       <div className="w-full flex flex-col gap-20 justify-start items-center">
@@ -142,7 +143,7 @@ const ServicesSection = () => {
                 </div>
               </div>
 
-              <p className="text-xl font-josefin text-black">Perfect for:</p>
+              <p className="text-xl font-josefin">Perfect for:</p>
 
               <div className="flex gap-3 flex-wrap">
                 {service.tags.map((tag) => (
@@ -155,7 +156,7 @@ const ServicesSection = () => {
                 ))}
               </div>
 
-              <p className="text-lg font-josefin text-black leading-relaxed max-w-xl">
+              <p className="text-lg font-josefin leading-relaxed max-w-xl">
                 {service.description}
               </p>
             </motion.div>

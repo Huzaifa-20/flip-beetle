@@ -7,14 +7,29 @@ import { scaleIn, createStaggerContainer, cardHover } from "@/utils/animations";
 
 const clientTypes = [
   // First Row
-  ["Interior Designer", "Freelancer", "Restaurant Owner"],
+  ["Cook", "Freelancer", "Gym Instructor"],
   // Second Row
-  ["Tech Startup", "IT Consultant"],
+  ["Padel Coach", "Photographer"],
   // Third Row
-  ["Fitness Trainer", "Still You", "Photographer"],
+  ["Tech CEO", "You", "Therapist"],
   // Fourth Row
-  ["psychologist", "naturopath"],
+  ["Freelancer", "Gym Instructor"],
 ];
+
+// Helper function to get the image path based on client name
+const getClientImage = (clientName: string): string => {
+  const imageMap: Record<string, string> = {
+    "Cook": "/clients/cook.png",
+    "Freelancer": "/clients/freelance.png",
+    "Gym Instructor": "/clients/gym-instructor.png",
+    "Padel Coach": "/clients/padel-coach.png",
+    "Photographer": "/clients/photographer.png",
+    "Tech CEO": "/clients/tech-ceo.png",
+    "You": "/images/Anxious_Beetle.gif",
+    "Therapist": "/clients/therapist.png",
+  };
+  return imageMap[clientName] || "/images/Anxious_Beetle.gif";
+};
 
 const ClientsSection = () => {
   const ref = React.useRef(null);
@@ -23,6 +38,7 @@ const ClientsSection = () => {
   return (
     <section
       ref={ref}
+      data-theme="cream"
       className="w-screen flex justify-center items-center my-32 px-12"
     >
       <motion.div
@@ -35,7 +51,7 @@ const ClientsSection = () => {
         <div className="w-full flex items-center justify-between">
           {clientTypes[0].map((client, index) => (
             <motion.div
-              key={client}
+              key={`${client}-${index}`}
               className={`flex flex-col items-center justify-center gap-4 ${index === 1 ? "-translate-y-12" : ""
                 }`}
               variants={scaleIn}
@@ -43,15 +59,14 @@ const ClientsSection = () => {
             >
               <motion.div whileHover={{ rotate: 3 }}>
                 <Image
-                  src="/images/Anxious_Beetle.gif"
-                  alt="Animation"
-                  width={150}
-                  height={150}
-                  unoptimized
+                  src={getClientImage(client)}
+                  alt={client}
+                  width={200}
+                  height={200}
                 />
               </motion.div>
               <motion.h1
-                className="text-xl text-primary"
+                className="text-xl"
                 whileHover={{ color: "var(--color-secondary)" }}
               >
                 {client}
@@ -62,24 +77,23 @@ const ClientsSection = () => {
 
         {/* Second Row */}
         <div className="w-1/2 flex items-center justify-between">
-          {clientTypes[1].map((client) => (
+          {clientTypes[1].map((client, index) => (
             <motion.div
-              key={client}
+              key={`${client}-${index}`}
               className="flex flex-col items-center justify-center gap-4"
               variants={scaleIn}
               whileHover={cardHover}
             >
               <motion.div whileHover={{ rotate: 3 }}>
                 <Image
-                  src="/images/Anxious_Beetle.gif"
-                  alt="Animation"
-                  width={150}
-                  height={150}
-                  unoptimized
+                  src={getClientImage(client)}
+                  alt={client}
+                  width={200}
+                  height={200}
                 />
               </motion.div>
               <motion.h1
-                className="text-xl text-primary"
+                className="text-xl"
                 whileHover={{ color: "var(--color-secondary)" }}
               >
                 {client}
@@ -90,24 +104,23 @@ const ClientsSection = () => {
 
         {/* Third Row */}
         <div className="w-full flex items-center justify-between">
-          {clientTypes[2].map((client) => (
+          {clientTypes[2].map((client, index) => (
             <motion.div
-              key={client}
+              key={`${client}-${index}`}
               className="flex flex-col items-center justify-center gap-4"
               variants={scaleIn}
               whileHover={cardHover}
             >
               <motion.div whileHover={{ rotate: 3 }}>
                 <Image
-                  src="/images/Anxious_Beetle.gif"
-                  alt="Animation"
-                  width={150}
-                  height={150}
-                  unoptimized
+                  src={getClientImage(client)}
+                  alt={client}
+                  width={200}
+                  height={200}
                 />
               </motion.div>
               <motion.h1
-                className="text-xl text-primary"
+                className="text-xl"
                 whileHover={{ color: "var(--color-secondary)" }}
               >
                 {client}
@@ -118,24 +131,23 @@ const ClientsSection = () => {
 
         {/* Fourth Row */}
         <div className="w-1/2 flex items-center justify-between">
-          {clientTypes[3].map((client) => (
+          {clientTypes[3].map((client, index) => (
             <motion.div
-              key={client}
+              key={`${client}-${index}`}
               className="flex flex-col items-center justify-center gap-4"
               variants={scaleIn}
               whileHover={cardHover}
             >
               <motion.div whileHover={{ rotate: 3 }}>
                 <Image
-                  src="/images/Anxious_Beetle.gif"
-                  alt="Animation"
-                  width={150}
-                  height={150}
-                  unoptimized
+                  src={getClientImage(client)}
+                  alt={client}
+                  width={200}
+                  height={200}
                 />
               </motion.div>
               <motion.h1
-                className="text-xl text-primary"
+                className="text-xl"
                 whileHover={{ color: "var(--color-secondary)" }}
               >
                 {client}

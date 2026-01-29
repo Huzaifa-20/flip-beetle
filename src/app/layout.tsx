@@ -3,6 +3,10 @@ import { Bangers, Josefin_Sans } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 import NavbarAlt from "@/components/NavbarAlt";
+import { ThemeProvider } from "@/contexts/ThemeContext";
+import ThemeTransition from "@/components/ThemeTransition";
+import ScrollThemeController from "@/components/ScrollThemeController";
+import Footer from "@/components/Footer";
 
 const bangers = Bangers({
   variable: "--font-bangers",
@@ -31,9 +35,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${bangers.variable} ${josefinSans.variable} antialiased`}>
-        {/* <Navbar /> */}
-        <NavbarAlt />
-        {children}
+        <ThemeProvider>
+          <ThemeTransition />
+          <ScrollThemeController />
+          {/* <Navbar /> */}
+          <NavbarAlt />
+          {children}
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

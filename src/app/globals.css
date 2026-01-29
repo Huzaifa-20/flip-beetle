@@ -7,6 +7,18 @@
   --font-bangers: var(--font-bangers);
   --font-josefin: var(--font-josefin);
 
+  /* Theme Colors */
+  --color-theme-green: #606c38;
+  --color-theme-cream: #fefae0;
+  --color-theme-black: #1a1a1a;
+  --color-theme-dark-cream: #e8dcc4;
+
+  /* Text Colors for each theme */
+  --color-text-on-green: #fefae0;
+  --color-text-on-cream: #1a1a1a;
+  --color-text-on-black: #fefae0;
+  --color-text-on-dark-cream: #1a1a1a;
+
   @keyframes flip {
     0%,
     40% {

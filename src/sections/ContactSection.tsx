@@ -54,6 +54,7 @@ const ContactSection = () => {
   return (
     <section
       ref={ref}
+      data-theme="cream"
       className="w-screen flex flex-col justify-center items-center my-32 px-12"
     >
       <motion.div
@@ -71,7 +72,7 @@ const ContactSection = () => {
 
         {/* Description */}
         <motion.p
-          className="max-w-3xl text-lg font-josefin text-black text-center leading-relaxed"
+          className="max-w-3xl text-lg font-josefin text-center leading-relaxed"
           variants={fadeInUp}
           transition={{ delay: 0.2 }}
         >

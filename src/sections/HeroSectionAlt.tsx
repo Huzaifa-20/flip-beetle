@@ -12,7 +12,8 @@ const HeroSectionAlt = () => {
   return (
     <section
       ref={ref}
-      className="relative w-screen h-screen flex items-center justify-center bg-primary overflow-hidden px-12"
+      data-theme="green"
+      className="relative w-screen h-screen flex items-center justify-center overflow-hidden px-12"
     >
       <motion.div
         className="w-full h-full flex flex-col justify-between"
@@ -30,17 +31,17 @@ const HeroSectionAlt = () => {
             <div className="relative flex items-center justify-center">
               {/* FLIP BEETLE Text */}
               <h1
-                className="text-[14rem] md:text-[18rem] lg:text-[22rem] font-bangers leading-none text-nowrap text-background"
+                className="text-[14rem] md:text-[18rem] lg:text-[22rem] font-bangers leading-none text-nowrap"
               >
                 FLIP BEETLE
               </h1>
 
-              {/* Beetle positioned absolutely in center, moved up */}
+              {/* Beetle positioned absolutely in center */}
               <motion.div
-                className="absolute left-1/2 top-1/2 -translate-x-1/2 z-20"
-                style={{ transform: 'translateX(-50%) translateY(-65%)' }}
-                initial={{ scale: 0, y: 100 }}
-                animate={{ scale: 1, y: 0 }}
+                className="absolute left-1/2 -translate-x-1/2 z-20"
+                style={{ top: '70%', transform: 'translateX(-50%)' }}
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
                 transition={{
                   delay: 0.6,
                   duration: 0.8,
@@ -51,8 +52,8 @@ const HeroSectionAlt = () => {
                 <Image
                   src="/images/Anxious_Beetle.gif"
                   alt="Flip Beetle"
-                  width={500}
-                  height={500}
+                  width={350}
+                  height={350}
                   className="drop-shadow-2xl"
                   unoptimized
                   priority
@@ -70,10 +71,10 @@ const HeroSectionAlt = () => {
             variants={fadeInLeft}
             transition={{ delay: 0.8 }}
           >
-            <h2 className="text-xl md:text-2xl font-josefin text-background leading-tighter mb-4">
+            <h2 className="text-xl md:text-2xl font-josefin leading-tighter mb-4">
               THE DIGITAL AGENCY THAT LOVES TO SHOW OFF A THING OR TWO.
             </h2>
-            <p className="text-xl md:text-2xl font-josefin text-background leading-tighter">
+            <p className="text-xl md:text-2xl font-josefin leading-tighter">
               STARTING WITH YOUR BRAND.
             </p>
           </motion.div>
@@ -84,7 +85,7 @@ const HeroSectionAlt = () => {
             variants={fadeInRight}
             transition={{ delay: 0.9 }}
           >
-            <p className="font-josefin text-background text-xs uppercase tracking-wider leading-relaxed">
+            <p className="font-josefin text-xs uppercase tracking-wider leading-relaxed">
               IMPACTFUL DIGITAL
               <br />
               EXPERIENCES FOR AMBITIOUS
