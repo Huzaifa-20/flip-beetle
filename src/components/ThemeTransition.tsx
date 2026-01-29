@@ -1,24 +1,25 @@
 "use client";
 
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useTheme, ThemeType } from "@/contexts/ThemeContext";
 
 /**
  * Theme color mappings
- * These correspond to the CSS variables defined in globals.css
+ * Now using CSS variable references for better maintainability
  */
 const themeColors: Record<ThemeType, string> = {
-  green: "#606c38",
-  cream: "#fefae0",
-  black: "#1a1a1a",
-  "dark-cream": "#e8dcc4",
+  green: "var(--color-theme-green)",
+  cream: "var(--color-theme-cream)",
+  black: "var(--color-theme-black)",
+  "dark-cream": "var(--color-theme-dark-cream)",
 };
 
 const themeTextColors: Record<ThemeType, string> = {
-  green: "#fefae0",
-  cream: "#1a1a1a",
-  black: "#fefae0",
-  "dark-cream": "#1a1a1a",
+  green: "var(--color-text-on-green)",
+  cream: "var(--color-text-on-cream)",
+  black: "var(--color-text-on-black)",
+  "dark-cream": "var(--color-text-on-dark-cream)",
 };
 
 /**
@@ -30,12 +31,20 @@ const themeTextColors: Record<ThemeType, string> = {
 export default function ThemeTransition() {
   const { currentTheme } = useTheme();
 
+  // Update CSS variable for text color - much more performant than style tag injection
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      '--theme-text-color',
+      themeTextColors[currentTheme]
+    );
+  }, [currentTheme]);
+
   return (
     <>
       {/* Background color overlay */}
       <motion.div
         className="fixed inset-0 pointer-events-none z-[-1]"
-        initial={{ backgroundColor: themeColors.cream }}
+        initial={{ backgroundColor: themeColors.green }}
         animate={{
           backgroundColor: themeColors[currentTheme],
         }}
@@ -44,14 +53,6 @@ export default function ThemeTransition() {
           ease: [0.43, 0.13, 0.23, 0.96], // Custom easing for smooth feel
         }}
       />
-
-      {/* This style tag dynamically updates the text color */}
-      <style jsx global>{`
-        body {
-          color: ${themeTextColors[currentTheme]};
-          transition: color 0.8s cubic-bezier(0.43, 0.13, 0.23, 0.96);
-        }
-      `}</style>
     </>
   );
 }

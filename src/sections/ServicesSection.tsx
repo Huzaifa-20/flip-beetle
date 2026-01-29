@@ -156,7 +156,7 @@ const ServicesSection = () => {
                 ))}
               </div>
 
-              <p className="text-lg font-josefin leading-relaxed max-w-xl">
+              <p className="text-lg font-josefin leading-relaxed max-w-3xl">
                 {service.description}
               </p>
             </motion.div>

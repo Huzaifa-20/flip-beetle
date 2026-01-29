@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Bangers, Josefin_Sans } from "next/font/google";
-import Navbar from "@/components/Navbar";
 import "./globals.css";
 import NavbarAlt from "@/components/NavbarAlt";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { SplashAnimationProvider } from "@/contexts/SplashAnimationContext";
 import ThemeTransition from "@/components/ThemeTransition";
 import ScrollThemeController from "@/components/ScrollThemeController";
 import Footer from "@/components/Footer";
@@ -36,12 +36,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${bangers.variable} ${josefinSans.variable} antialiased`}>
         <ThemeProvider>
-          <ThemeTransition />
-          <ScrollThemeController />
-          {/* <Navbar /> */}
-          <NavbarAlt />
-          {children}
-          <Footer />
+          <SplashAnimationProvider>
+            <ThemeTransition />
+            <ScrollThemeController />
+            {/* <Navbar /> */}
+            <NavbarAlt />
+            {children}
+            <Footer />
+          </SplashAnimationProvider>
         </ThemeProvider>
       </body>
     </html>

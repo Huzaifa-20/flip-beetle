@@ -32,7 +32,7 @@ const Footer = () => {
                 FLIP BEETLE
               </h1>
             </div>
-            <h2 className="text-2xl font-bangers mb-6 leading-tight max-w-xs">
+            <h2 className="text-2xl font-bangers mb-6 leading-tight max-w-60">
               PARTNER WITH A DIGITAL AGENCY THAT&apos;S AS AMBITIOUS AS YOU ARE.
             </h2>
             <a

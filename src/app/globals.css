@@ -1,23 +1,46 @@
 @import "tailwindcss";
 
 @theme inline {
+  /* Base Colors - Use these throughout the app */
   --color-background: #fefae0;
   --color-primary: #606c38;
   --color-secondary: #bc6c25;
+
+  /* Font Variables */
   --font-bangers: var(--font-bangers);
   --font-josefin: var(--font-josefin);
 
-  /* Theme Colors */
+  /* Theme Background Colors */
   --color-theme-green: #606c38;
   --color-theme-cream: #fefae0;
   --color-theme-black: #1a1a1a;
   --color-theme-dark-cream: #e8dcc4;
 
-  /* Text Colors for each theme */
+  /* Theme Text Colors */
   --color-text-on-green: #fefae0;
   --color-text-on-cream: #1a1a1a;
   --color-text-on-black: #fefae0;
   --color-text-on-dark-cream: #1a1a1a;
+
+  /* Dynamic theme text color - updated by ThemeTransition */
+  --theme-text-color: #fefae0;
+
+  /* Animation & Transition Durations */
+  --duration-fast: 0.3s;
+  --duration-normal: 0.5s;
+  --duration-slow: 0.8s;
+  --duration-splash: 2.5s;
+
+  /* Easing Functions */
+  --ease-smooth: cubic-bezier(0.43, 0.13, 0.23, 0.96);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 3rem;
+  --spacing-xl: 6rem;
 
   @keyframes flip {
     0%,
@@ -41,12 +64,13 @@ html {
 }
 
 body {
-  background: var(--color-background);
-  color: var(--color-primary);
+  background-color: var(--color-primary);
+  color: var(--theme-text-color);
   font-family: var(--font-bangers), sans-serif;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  transition: color var(--duration-slow) var(--ease-smooth);
 }
 
 /* Performance optimization: hint browser about animated elements */

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useMemo } from "react";
 
 export type ThemeType = "green" | "cream" | "black" | "dark-cream";
 
@@ -15,18 +15,22 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [currentTheme, setCurrentTheme] = useState<ThemeType>("cream");
+  const [currentTheme, setCurrentTheme] = useState<ThemeType>("green");
   const [isAlternateTheme, setIsAlternateTheme] = useState(false);
 
+  // Memoize context value to prevent unnecessary re-renders
+  const value = useMemo(
+    () => ({
+      currentTheme,
+      setCurrentTheme,
+      isAlternateTheme,
+      setIsAlternateTheme,
+    }),
+    [currentTheme, isAlternateTheme]
+  );
+
   return (
-    <ThemeContext.Provider
-      value={{
-        currentTheme,
-        setCurrentTheme,
-        isAlternateTheme,
-        setIsAlternateTheme,
-      }}
-    >
+    <ThemeContext.Provider value={value}>
       {children}
     </ThemeContext.Provider>
   );

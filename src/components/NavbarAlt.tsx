@@ -3,26 +3,15 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
-
-const MenuItems = [
-  { label: "HOME", href: "#" },
-  { label: "ABOUT", href: "#" },
-  { label: "WORK", href: "#" },
-  { label: "JOURNAL", href: "#" },
-  { label: "CONTACT", href: "#" },
-];
-
-const SocialLinks = [
-  { label: "LINKEDIN", href: "https://linkedin.com" },
-  { label: "TWITTER", href: "https://twitter.com" },
-  { label: "INSTAGRAM", href: "https://instagram.com" },
-];
+import { useSplashAnimation } from "@/contexts/SplashAnimationContext";
+import { MENU_ITEMS, SOCIAL_LINKS } from "@/constants/navigation";
 
 const NavbarAlt = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const { scrollY } = useScroll();
   const [prevScrollY, setPrevScrollY] = useState(0);
+  const { isSplashComplete } = useSplashAnimation();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const isScrollingDown = latest > prevScrollY && latest > 50;
@@ -54,9 +43,12 @@ const NavbarAlt = () => {
           <motion.button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="flex flex-col gap-1.5 cursor-pointer p-2"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, delay: 0.8 }}
+            initial={{ opacity: 0, y: -50 }}
+            animate={{
+              opacity: isSplashComplete ? 1 : 0,
+              y: isSplashComplete ? 0 : -50
+            }}
+            transition={{ duration: 0.5, delay: 0, ease: [0.43, 0.13, 0.23, 0.96] }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -98,7 +90,7 @@ const NavbarAlt = () => {
 
               {/* Menu Items */}
               <nav className="flex flex-col gap-8 mt-20">
-                {MenuItems.map((item, index) => (
+                {MENU_ITEMS.map((item, index) => (
                   <motion.div
                     key={item.label}
                     initial={{ opacity: 0, x: 50 }}
@@ -118,7 +110,7 @@ const NavbarAlt = () => {
 
               {/* Social Links */}
               <div className="flex gap-8">
-                {SocialLinks.map((social, index) => (
+                {SOCIAL_LINKS.map((social, index) => (
                   <motion.a
                     key={social.label}
                     href={social.href}
