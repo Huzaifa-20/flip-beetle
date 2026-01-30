@@ -39,7 +39,6 @@ export default function RootLayout({
           <SplashAnimationProvider>
             <ThemeTransition />
             <ScrollThemeController />
-            {/* <Navbar /> */}
             <NavbarAlt />
             {children}
             <Footer />

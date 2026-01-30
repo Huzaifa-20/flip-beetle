@@ -8,7 +8,6 @@ export default function Home() {
   return (
     <>
       <HeroSectionAlt />
-      {/* <HeroSection /> */}
       <AboutSection />
       <ClientsSection />
       <ServicesSection />

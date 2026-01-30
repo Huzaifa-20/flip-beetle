@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { useSplashAnimation } from "@/contexts/SplashAnimationContext";
+import { useTheme } from "@/contexts/ThemeContext";
 import { MENU_ITEMS, SOCIAL_LINKS } from "@/constants/navigation";
 
 const NavbarAlt = () => {
@@ -12,6 +13,16 @@ const NavbarAlt = () => {
   const { scrollY } = useScroll();
   const [prevScrollY, setPrevScrollY] = useState(0);
   const { isSplashComplete } = useSplashAnimation();
+  const { currentTheme } = useTheme();
+
+  // Determine hamburger icon color based on current theme
+  const getHamburgerColor = () => {
+    // On light backgrounds (cream, dark-cream), use dark color
+    // On dark backgrounds (green, black), use light color
+    return currentTheme === "cream" || currentTheme === "dark-cream"
+      ? "var(--color-primary)"
+      : "var(--color-background)";
+  };
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const isScrollingDown = latest > prevScrollY && latest > 50;
@@ -52,9 +63,18 @@ const NavbarAlt = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
-            <span className="w-8 h-0.5 bg-background transition-all duration-300"></span>
-            <span className="w-8 h-0.5 bg-background transition-all duration-300"></span>
-            <span className="w-8 h-0.5 bg-background transition-all duration-300"></span>
+            <span
+              className="w-8 h-0.5 transition-all duration-300"
+              style={{ backgroundColor: getHamburgerColor() }}
+            ></span>
+            <span
+              className="w-8 h-0.5 transition-all duration-300"
+              style={{ backgroundColor: getHamburgerColor() }}
+            ></span>
+            <span
+              className="w-8 h-0.5 transition-all duration-300"
+              style={{ backgroundColor: getHamburgerColor() }}
+            ></span>
           </motion.button>
         </div>
       </motion.div>
