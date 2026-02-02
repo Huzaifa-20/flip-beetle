@@ -1,15 +1,45 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState, useRef } from "react";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useSplashAnimation } from "@/contexts/SplashAnimationContext";
+import { PARALLAX_SPEEDS, SCROLL_OFFSETS } from "@/utils/parallaxConfig";
 
 const HeroSectionAlt = () => {
   const [progress, setProgress] = useState(0);
   const { setIsSplashComplete } = useSplashAnimation();
   const [showProgressBar, setShowProgressBar] = useState(true);
   const [animationComplete, setAnimationComplete] = useState(false);
+
+  // Parallax scroll setup
+  const heroRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: SCROLL_OFFSETS.HERO,
+  });
+
+  // Parallax transforms - only active after splash completes
+  // Text moves slower (0.8x) for background depth effect
+  const textY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    progress >= 100 ? [0, -50 * PARALLAX_SPEEDS.SLOW] : [0, 0]
+  );
+
+  // Beetle moves faster (1.2x) for foreground prominence
+  const beetleY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    progress >= 100 ? [0, 40 * PARALLAX_SPEEDS.MEDIUM] : [0, 0]
+  );
+
+  // Bottom text moves slightly slower (0.9x) for subtle depth
+  const bottomTextY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    progress >= 100 ? [0, -90 * PARALLAX_SPEEDS.VERY_FAST] : [0, 0]
+  );
 
   // Disable scrolling during animation
   useEffect(() => {
@@ -118,6 +148,7 @@ const HeroSectionAlt = () => {
 
   return (
     <section
+      ref={heroRef}
       data-theme="green"
       className="relative w-screen h-screen flex items-center justify-center overflow-hidden px-12"
     >
@@ -126,8 +157,8 @@ const HeroSectionAlt = () => {
         <div className="flex-1 flex items-center justify-center relative pt-20 px-0">
           <div className="relative -mt-12">
             <div className="relative flex items-center justify-center">
-              {/* FLIP BEETLE Text - Outlined background */}
-              <div className="relative inline-block">
+              {/* FLIP BEETLE Text - Outlined background with parallax */}
+              <motion.div className="relative inline-block" style={{ y: textY }}>
                 <h1
                   className="text-[14rem] md:text-[18rem] lg:text-[22rem] font-bangers leading-none text-nowrap"
                   style={{
@@ -155,12 +186,15 @@ const HeroSectionAlt = () => {
                     FLIP BEETLE
                   </h1>
                 </div>
-              </div>
+              </motion.div>
 
-              {/* Beetle - appears after splash complete */}
+              {/* Beetle - appears after splash complete with parallax */}
               <motion.div
                 className="absolute left-1/2 -translate-x-1/2 z-20"
-                style={{ top: "70%", transform: "translateX(-50%)" }}
+                style={{
+                  top: "70%",
+                  y: beetleY,
+                }}
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{
                   scale: progress >= 100 ? 1 : 0,
@@ -214,13 +248,16 @@ const HeroSectionAlt = () => {
           </div>
         </div>
 
-        {/* Bottom Content - appears after splash complete */}
+        {/* Bottom Content - appears after splash complete with parallax */}
         <motion.div
           className="flex justify-between items-start pb-12 gap-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{
             opacity: progress >= 100 ? 1 : 0,
             y: progress >= 100 ? 0 : 20,
+          }}
+          style={{
+            y: bottomTextY,
           }}
           transition={{ duration: 0.8, delay: 0.7, ease: [0.43, 0.13, 0.23, 0.96] }}
         >

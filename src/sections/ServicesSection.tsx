@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { fadeInLeft, fadeInRight } from "@/utils/animations";
+import { PARALLAX_SPEEDS } from "@/utils/parallaxConfig";
 
 interface Service {
   id: string;
@@ -50,12 +51,20 @@ const ServicesSection = () => {
     offset: ["start end", "end start"]
   });
 
+  // Existing price badge rotation
   const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
+
+  // New parallax transforms for images and text
+  // Images move faster (1.15x) forward
+  // const imageY = useTransform(scrollYProgress, [0, 1], [0, 50 * PARALLAX_SPEEDS.FASTER]);
+
+  // Text moves slower (0.9x) backward for depth
+  // const textY = useTransform(scrollYProgress, [0, 1], [0, -30 * PARALLAX_SPEEDS.MEDIUM]);
 
   return (
     <section
       ref={ref}
-      data-theme="black"
+      data-theme="cream"
       className="w-screen flex justify-center items-center my-32 px-12"
     >
       <div className="w-full flex flex-col gap-20 justify-start items-center">
@@ -79,6 +88,7 @@ const ServicesSection = () => {
               className="relative"
               variants={fadeInLeft}
               transition={{ delay: 0.3 + index * 0.2 }}
+            // style={{ y: imageY }}
             >
               {/* Price Badge */}
               <div className="absolute -left-8 top-8 z-10">
@@ -133,6 +143,7 @@ const ServicesSection = () => {
               className="flex flex-col items-start gap-6"
               variants={fadeInRight}
               transition={{ delay: 0.5 + index * 0.2 }}
+            // style={{ y: textY }}
             >
               <div className="flex items-center gap-4">
                 <h1 className="text-6xl text-start text-nowrap">

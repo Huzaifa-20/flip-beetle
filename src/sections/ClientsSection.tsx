@@ -1,9 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
-import { motion, useInView } from "framer-motion";
-import { scaleIn, createStaggerContainer, cardHover } from "@/utils/animations";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { scaleIn, createStaggerContainer } from "@/utils/animations";
 
 const clientTypes = [
   // First Row
@@ -11,29 +11,81 @@ const clientTypes = [
   // Second Row
   ["Padel Coach", "Photographer"],
   // Third Row
-  ["Tech CEO", "You", "Therapist"],
-  // Fourth Row
-  ["Freelancer", "Gym Instructor"],
+  ["Tech CEO", "Therapist", "Freelancer"],
 ];
 
-// Helper function to get the image path based on client name
-const getClientImage = (clientName: string): string => {
-  const imageMap: Record<string, string> = {
-    "Cook": "/clients/cook.png",
-    "Freelancer": "/clients/freelance.png",
-    "Gym Instructor": "/clients/gym-instructor.png",
-    "Padel Coach": "/clients/padel-coach.png",
-    "Photographer": "/clients/photographer.png",
-    "Tech CEO": "/clients/tech-ceo.png",
-    "You": "/images/Anxious_Beetle.gif",
-    "Therapist": "/clients/therapist.png",
+// Helper function to get the video path based on client name
+const getClientVideo = (clientName: string): string => {
+  const videoMap: Record<string, string> = {
+    "Cook": "/clients/Chef_Beetle.webm",
+    "Freelancer": "/clients/Chef_Beetle.webm",
+    "Gym Instructor": "/clients/Chef_Beetle.webm",
+    "Padel Coach": "/clients/Chef_Beetle.webm",
+    "Photographer": "/clients/Chef_Beetle.webm",
+    "Tech CEO": "/clients/Chef_Beetle.webm",
+    "Therapist": "/clients/Chef_Beetle.webm",
   };
-  return imageMap[clientName] || "/images/Anxious_Beetle.gif";
+  return videoMap[clientName] || "/images/Anxious_Beetle.mp4";
+};
+
+// Component to handle play/pause video on hover
+const AnimatedClientVideo = ({ client }: { client: string }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handleMouseEnter = () => {
+    if (videoRef.current) {
+      videoRef.current.play();
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  };
+
+  if (client === "You")
+    return (
+      <Image
+        src={getClientVideo(client)}
+        alt={client}
+        width={200}
+        height={200}
+      />)
+
+  return (
+    <div
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className="w-[200px] h-[200px] cursor-pointer transition-transform duration-200 hover:scale-105"
+    >
+      <video
+        ref={videoRef}
+        src={getClientVideo(client)}
+        width={200}
+        height={200}
+        loop
+        muted
+        playsInline
+        className="w-full h-full object-contain"
+      />
+    </div>
+  );
 };
 
 const ClientsSection = () => {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
+
+  // Parallax scroll setup
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  // Unified parallax effect for all cards
+  const cardY = useTransform(scrollYProgress, [0, 1], [30, -60]);
 
   return (
     <section
@@ -42,7 +94,7 @@ const ClientsSection = () => {
       className="w-screen flex justify-center items-center my-32 px-12"
     >
       <motion.div
-        className="w-full flex flex-col gap-10 justify-center items-center"
+        className="max-w-[1136px] w-full flex flex-col gap-10 justify-center items-center"
         variants={createStaggerContainer(0.08, 0)}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
@@ -52,19 +104,11 @@ const ClientsSection = () => {
           {clientTypes[0].map((client, index) => (
             <motion.div
               key={`${client}-${index}`}
-              className={`flex flex-col items-center justify-center gap-4 ${index === 1 ? "-translate-y-12" : ""
-                }`}
+              className={`flex flex-col items-center justify-center gap-4 ${index === 1 && "-translate-y-12"}`}
               variants={scaleIn}
-              whileHover={cardHover}
+              style={{ y: cardY }}
             >
-              <motion.div whileHover={{ rotate: 3 }}>
-                <Image
-                  src={getClientImage(client)}
-                  alt={client}
-                  width={200}
-                  height={200}
-                />
-              </motion.div>
+              <AnimatedClientVideo client={client} />
               <motion.h1
                 className="text-xl"
                 whileHover={{ color: "var(--color-secondary)" }}
@@ -82,16 +126,9 @@ const ClientsSection = () => {
               key={`${client}-${index}`}
               className="flex flex-col items-center justify-center gap-4"
               variants={scaleIn}
-              whileHover={cardHover}
+              style={{ y: cardY }}
             >
-              <motion.div whileHover={{ rotate: 3 }}>
-                <Image
-                  src={getClientImage(client)}
-                  alt={client}
-                  width={200}
-                  height={200}
-                />
-              </motion.div>
+              <AnimatedClientVideo client={client} />
               <motion.h1
                 className="text-xl"
                 whileHover={{ color: "var(--color-secondary)" }}
@@ -107,45 +144,11 @@ const ClientsSection = () => {
           {clientTypes[2].map((client, index) => (
             <motion.div
               key={`${client}-${index}`}
-              className="flex flex-col items-center justify-center gap-4"
+              className={`flex flex-col items-center justify-center gap-4 ${index === 1 && "translate-y-12"}`}
               variants={scaleIn}
-              whileHover={cardHover}
+              style={{ y: cardY }}
             >
-              <motion.div whileHover={{ rotate: 3 }}>
-                <Image
-                  src={getClientImage(client)}
-                  alt={client}
-                  width={200}
-                  height={200}
-                />
-              </motion.div>
-              <motion.h1
-                className="text-xl"
-                whileHover={{ color: "var(--color-secondary)" }}
-              >
-                {client}
-              </motion.h1>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Fourth Row */}
-        <div className="w-1/2 flex items-center justify-between">
-          {clientTypes[3].map((client, index) => (
-            <motion.div
-              key={`${client}-${index}`}
-              className="flex flex-col items-center justify-center gap-4"
-              variants={scaleIn}
-              whileHover={cardHover}
-            >
-              <motion.div whileHover={{ rotate: 3 }}>
-                <Image
-                  src={getClientImage(client)}
-                  alt={client}
-                  width={200}
-                  height={200}
-                />
-              </motion.div>
+              <AnimatedClientVideo client={client} />
               <motion.h1
                 className="text-xl"
                 whileHover={{ color: "var(--color-secondary)" }}

@@ -1,12 +1,30 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { fadeInUp, fadeInLeft, fadeInRight } from "@/utils/animations";
+import { PARALLAX_SPEEDS, SCROLL_OFFSETS } from "@/utils/parallaxConfig";
 
 const ContactSection = () => {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
+
+  // Parallax scroll setup
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: SCROLL_OFFSETS.FOOTER,
+  });
+
+  // Cascading parallax effects
+  const headingY = useTransform(scrollYProgress, [0, 1], [0, -40 * PARALLAX_SPEEDS.SLOWER]);
+  const descriptionY = useTransform(scrollYProgress, [0, 1], [0, -30 * PARALLAX_SPEEDS.MEDIUM]);
+  const formY = useTransform(scrollYProgress, [0, 1], [0, 35 * PARALLAX_SPEEDS.MEDIUM_FAST]);
+
+  // Individual cascading transforms for each social link (must be at top level)
+  const social1Y = useTransform(scrollYProgress, [0, 1], [0, (45 * PARALLAX_SPEEDS.FASTER) + (0 * 5)]);
+  const social2Y = useTransform(scrollYProgress, [0, 1], [0, (45 * PARALLAX_SPEEDS.FASTER) + (1 * 5)]);
+  const social3Y = useTransform(scrollYProgress, [0, 1], [0, (45 * PARALLAX_SPEEDS.FASTER) + (2 * 5)]);
+  const social4Y = useTransform(scrollYProgress, [0, 1], [0, (45 * PARALLAX_SPEEDS.FASTER) + (3 * 5)]);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -66,6 +84,7 @@ const ContactSection = () => {
         <motion.h1
           className="text-6xl md:text-7xl text-center text-primary italic"
           variants={fadeInUp}
+          style={{ y: headingY }}
         >
           READY TO START? LET&apos;S CONNECT!
         </motion.h1>
@@ -74,6 +93,7 @@ const ContactSection = () => {
         <motion.p
           className="max-w-3xl text-lg font-josefin text-center leading-relaxed"
           variants={fadeInUp}
+          style={{ y: descriptionY }}
           transition={{ delay: 0.2 }}
         >
           Whether you&apos;re curious about creating a new website or have questions on
@@ -88,6 +108,7 @@ const ContactSection = () => {
             onSubmit={handleSubmit}
             className="flex-2 p-12 border-4 border-primary rounded-[40px] bg-background"
             variants={fadeInLeft}
+            style={{ y: formY }}
             transition={{ delay: 0.3 }}
           >
             {/* To Field */}
@@ -176,23 +197,29 @@ const ContactSection = () => {
             )}
           </motion.form>
 
-          {/* Social Media Links */}
+          {/* Social Media Links - Cascading parallax */}
           <motion.div
             className="flex flex-col gap-6"
             variants={fadeInRight}
             transition={{ delay: 0.4 }}
           >
-            {socialLinks.map((social, index) => (
-              <motion.a
-                key={social.name}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-96 px-12 py-6 bg-primary text-background text-3xl font-bangers italic text-center rounded-2xl hover:bg-secondary transition-colors duration-300"
-              >
-                {social.name}
-              </motion.a>
-            ))}
+            {socialLinks.map((social, index) => {
+              // Get the pre-defined transform for this index
+              const cascadeY = [social1Y, social2Y, social3Y, social4Y][index];
+
+              return (
+                <motion.a
+                  key={social.name}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-96 px-12 py-6 bg-primary text-background text-3xl font-bangers italic text-center rounded-2xl hover:bg-secondary transition-colors duration-300"
+                  style={{ y: cascadeY }}
+                >
+                  {social.name}
+                </motion.a>
+              );
+            })}
           </motion.div>
         </div>
       </motion.div>
