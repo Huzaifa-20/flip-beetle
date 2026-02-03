@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { fadeInLeft, fadeInRight } from "@/utils/animations";
 import { PARALLAX_SPEEDS } from "@/utils/parallaxConfig";
+import AnimatedTextSection from "@/components/AnimatedTextSection";
 
 interface Service {
   id: string;
@@ -61,14 +62,11 @@ const ServicesSection = () => {
       className="w-screen flex justify-center items-center my-32 px-12"
     >
       <div className="w-full flex flex-col gap-20 justify-start items-center">
-        <motion.h1
-          className="w-full text-7xl text-start text-nowrap"
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          variants={fadeInLeft}
-        >
-          Ways I can help
-        </motion.h1>
+        <AnimatedTextSection
+          sentence="Ways we can help you get on the right track"
+          highlightWord="right"
+          animationType="fade-in"
+        />
 
         {services.map((service, index) => (
           <motion.div

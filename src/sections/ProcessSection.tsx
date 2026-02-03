@@ -2,6 +2,7 @@
 
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import AnimatedTextSection from "@/components/AnimatedTextSection";
 
 const processSteps = [
   {
@@ -70,17 +71,12 @@ const ProcessSection = () => {
       <div className="sticky top-0 h-screen flex items-center overflow-hidden">
         <div className="w-full px-12">
           {/* Section Header */}
-          <motion.div
-            className="mb-16"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-6xl mb-4">
-              OUR PROCESS
-            </h2>
-          </motion.div>
+          <AnimatedTextSection
+            sentence="From start to end, we go through a process"
+            animationType="word-by-word"
+          />
+
+          <div className="h-24" />
 
           {/* Horizontally Scrolling Cards */}
           <motion.div

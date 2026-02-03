@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef, useMemo } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, animate } from "framer-motion";
 import { useSplashAnimation } from "@/contexts/SplashAnimationContext";
 import { PARALLAX_SPEEDS, SCROLL_OFFSETS } from "@/utils/parallaxConfig";
 
@@ -46,6 +46,52 @@ const HeroSectionAlt = () => {
     scrollYProgress,
     [0, 1],
     shouldAnimate ? [0, -90 * PARALLAX_SPEEDS.VERY_FAST] : [0, 0]
+  );
+
+  // Create motion values for the initial slide-up offsets
+  const leftTextOffset = useMotionValue(40);
+  const rightTextOffset = useMotionValue(40);
+
+  // Animate the offsets when progress reaches 100
+  useEffect(() => {
+    if (progress >= 100) {
+      // Animate both texts together
+      const leftControls = animate(leftTextOffset, 0, {
+        duration: 0.4,
+        delay: 0.2,
+        ease: [0.43, 0.13, 0.23, 0.96]
+      });
+
+      const rightControls = animate(rightTextOffset, 0, {
+        duration: 0.4,
+        delay: 0.2,
+        ease: [0.43, 0.13, 0.23, 0.96]
+      });
+
+      return () => {
+        leftControls.stop();
+        rightControls.stop();
+      };
+    }
+  }, [progress, leftTextOffset, rightTextOffset]);
+
+  // Combined Y transforms that include both initial slide-up and parallax
+  const leftTextCombinedY = useTransform(
+    [leftTextOffset, bottomTextY],
+    (latest: number[]) => {
+      const offset = latest[0];
+      const parallax = latest[1];
+      return offset + parallax;
+    }
+  );
+
+  const rightTextCombinedY = useTransform(
+    [rightTextOffset, bottomTextY],
+    (latest: number[]) => {
+      const offset = latest[0];
+      const parallax = latest[1];
+      return offset + parallax;
+    }
   );
 
   // Manage body overflow - consolidated into single effect
@@ -271,30 +317,39 @@ const HeroSectionAlt = () => {
         </div>
 
         {/* Bottom Content - appears after splash complete with parallax */}
-        <motion.div
-          className="flex justify-between items-start pb-12 gap-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{
-            opacity: progress >= 100 ? 1 : 0,
-            y: progress >= 100 ? 0 : 20,
-          }}
-          style={{
-            y: bottomTextY,
-          }}
-          transition={{ duration: 0.8, delay: 0.7, ease: [0.43, 0.13, 0.23, 0.96] }}
-        >
+        <div className="flex justify-between items-start pb-12 gap-12">
           {/* Left Side Text */}
-          <div className="max-w-96">
+          <motion.div
+            className="max-w-96"
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: progress >= 100 ? 1 : 0,
+            }}
+            style={{
+              y: leftTextCombinedY,
+            }}
+            transition={{ duration: 0.4, delay: 0.2, ease: [0.43, 0.13, 0.23, 0.96] }}
+          >
             <h2 className="text-xl md:text-2xl font-josefin leading-tighter mb-4">
               THE DIGITAL AGENCY THAT LOVES TO SHOW OFF A THING OR TWO.
             </h2>
             <p className="text-xl md:text-2xl font-josefin leading-tighter">
               STARTING WITH YOUR BRAND.
             </p>
-          </div>
+          </motion.div>
 
           {/* Right Side Text */}
-          <div className="text-right shrink-0">
+          <motion.div
+            className="text-right shrink-0"
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: progress >= 100 ? 1 : 0,
+            }}
+            style={{
+              y: rightTextCombinedY,
+            }}
+            transition={{ duration: 0.4, delay: 0.2, ease: [0.43, 0.13, 0.23, 0.96] }}
+          >
             <p className="font-josefin text-xs uppercase tracking-wider leading-relaxed">
               IMPACTFUL DIGITAL
               <br />
@@ -302,8 +357,8 @@ const HeroSectionAlt = () => {
               <br />
               BRANDS
             </p>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

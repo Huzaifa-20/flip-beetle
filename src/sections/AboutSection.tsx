@@ -22,8 +22,7 @@ const AboutSection = () => {
   });
 
   // Parallax transforms - useTransform handles optimization internally
-  const headingY = useTransform(scrollYProgress, [0, 1], [0, -40 * PARALLAX_SPEEDS.SLOWER]);
-  const paragraphY = useTransform(scrollYProgress, [0, 1], [0, -25 * PARALLAX_SPEEDS.MEDIUM]);
+  const videoY = useTransform(scrollYProgress, [0, 1], [0, -70 * PARALLAX_SPEEDS.FASTER]);
 
   return (
     <section
@@ -37,7 +36,7 @@ const AboutSection = () => {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={fadeInLeft}
-          style={{ y: headingY }}
+        // style={{ y: leftTextY }}
         >
           <h1 className="text-7xl text-start text-nowrap">Hi, im Sulti</h1>
           <p className="text-2xl text-start">A freelance Autist</p>
@@ -53,42 +52,39 @@ const AboutSection = () => {
             variants={createStaggerContainer(0.1, 0.3)}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
+            style={{ y: videoY }}
           >
-            {[1, 2, 3].map((imgIndex) => {
-              return (
-                <motion.div
-                  key={imgIndex}
-                  variants={scaleIn}
-                  whileHover={imageHover}
-                  className="w-[150px] h-[150px] overflow-hidden"
-                >
-                  <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-full object-contain"
-                  >
-                    <source src="/images/Anxious_Beetle.webm" type="video/webm" />
-                    <source src="/images/Anxious_Beetle.mp4" type="video/mp4" />
-                  </video>
-                </motion.div>
-              );
-            })}
+            <motion.div
+              variants={scaleIn}
+              whileHover={imageHover}
+              className="w-[150px] h-[150px] overflow-hidden"
+            >
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-contain"
+              >
+                <source src="/images/Anxious_Beetle.webm" type="video/webm" />
+              </video>
+            </motion.div>
+
+
           </motion.div>
         </div>
       </div>
-      <motion.p
+      {/* <motion.p
         className="w-full max-w-[700px] text-lg font-josefin text-center mt-12"
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         variants={fadeInUp}
-        style={{ y: paragraphY }}
+        style={{ y: bottomTextY }}
         transition={{ delay: 0.5 }}
       >
         Whether you&apos;re an expert, a startup, or a small business,
         you&apos;re in the right place for a professionally crafted website.
-      </motion.p>
+      </motion.p> */}
     </section>
   );
 };
