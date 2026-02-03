@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import Image from "next/image";
 import { useSplashAnimation } from "@/contexts/SplashAnimationContext";
 import { PARALLAX_SPEEDS, SCROLL_OFFSETS } from "@/utils/parallaxConfig";
 
@@ -12,6 +11,12 @@ const HeroSectionAlt = () => {
   const [showProgressBar, setShowProgressBar] = useState(true);
   const [animationComplete, setAnimationComplete] = useState(false);
 
+  // Check for reduced motion preference
+  const prefersReducedMotion = useMemo(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }, []);
+
   // Parallax scroll setup
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -19,45 +24,46 @@ const HeroSectionAlt = () => {
     offset: SCROLL_OFFSETS.HERO,
   });
 
-  // Parallax transforms - only active after splash completes
+  // Parallax transforms - only active after splash completes and if motion is allowed
+  const shouldAnimate = !prefersReducedMotion && progress >= 100;
+
   // Text moves slower (0.8x) for background depth effect
   const textY = useTransform(
     scrollYProgress,
     [0, 1],
-    progress >= 100 ? [0, -50 * PARALLAX_SPEEDS.SLOW] : [0, 0]
+    shouldAnimate ? [0, -50 * PARALLAX_SPEEDS.SLOW] : [0, 0]
   );
 
   // Beetle moves faster (1.2x) for foreground prominence
   const beetleY = useTransform(
     scrollYProgress,
     [0, 1],
-    progress >= 100 ? [0, 40 * PARALLAX_SPEEDS.MEDIUM] : [0, 0]
+    shouldAnimate ? [0, 40 * PARALLAX_SPEEDS.MEDIUM] : [0, 0]
   );
 
   // Bottom text moves slightly slower (0.9x) for subtle depth
   const bottomTextY = useTransform(
     scrollYProgress,
     [0, 1],
-    progress >= 100 ? [0, -90 * PARALLAX_SPEEDS.VERY_FAST] : [0, 0]
+    shouldAnimate ? [0, -90 * PARALLAX_SPEEDS.VERY_FAST] : [0, 0]
   );
 
-  // Disable scrolling during animation
+  // Manage body overflow - consolidated into single effect
   useEffect(() => {
-    document.body.style.overflow = "hidden";
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = animationComplete ? "unset" : "hidden";
 
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = originalOverflow;
     };
-  }, []);
-
-  // Re-enable scrolling when animation completes
-  useEffect(() => {
-    if (animationComplete) {
-      document.body.style.overflow = "unset";
-    }
   }, [animationComplete]);
 
+  // Animation effect with proper RAF cleanup
   useEffect(() => {
+    let rafId: number | undefined;
+    let cancelled = false;
+    const timeoutIds: number[] = [];
+
     // Easing function for smooth acceleration/deceleration
     const easeInOutCubic = (t: number): number => {
       return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
@@ -66,8 +72,6 @@ const HeroSectionAlt = () => {
     // Define animation segments with smooth easing
     const segments = [
       { start: 0, end: 100, duration: 2500, pauseAfter: 200 },
-      // { start: 25, end: 65, duration: 1000, pauseAfter: 300 },
-      // { start: 65, end: 100, duration: 500, pauseAfter: 0 },
     ];
 
     let currentSegment = 0;
@@ -76,16 +80,22 @@ const HeroSectionAlt = () => {
     let pauseStartTime: number | null = null;
 
     const animate = () => {
+      if (cancelled) return; // Stop if component unmounted
+
       if (currentSegment >= segments.length) {
         // Animation complete
         setProgress(100);
-        setTimeout(() => {
+        const timeout1 = window.setTimeout(() => {
+          if (cancelled) return;
           setShowProgressBar(false);
-          setTimeout(() => {
+          const timeout2 = window.setTimeout(() => {
+            if (cancelled) return;
             setIsSplashComplete(true);
             setAnimationComplete(true);
           }, 400);
+          timeoutIds.push(timeout2);
         }, 100);
+        timeoutIds.push(timeout1);
         return;
       }
 
@@ -105,10 +115,10 @@ const HeroSectionAlt = () => {
           pauseStartTime = null;
           currentSegment++;
           segmentStartTime = null;
-          requestAnimationFrame(animate);
+          rafId = requestAnimationFrame(animate);
         } else {
           // Still pausing, hold current value
-          requestAnimationFrame(animate);
+          rafId = requestAnimationFrame(animate);
         }
         return;
       }
@@ -132,18 +142,27 @@ const HeroSectionAlt = () => {
         setProgress(segment.end);
         if (segment.pauseAfter > 0) {
           isPausing = true;
-          requestAnimationFrame(animate);
+          rafId = requestAnimationFrame(animate);
         } else {
           currentSegment++;
           segmentStartTime = null;
-          requestAnimationFrame(animate);
+          rafId = requestAnimationFrame(animate);
         }
       } else {
-        requestAnimationFrame(animate);
+        rafId = requestAnimationFrame(animate);
       }
     };
 
-    requestAnimationFrame(animate);
+    rafId = requestAnimationFrame(animate);
+
+    // Cleanup function - cancels RAF and clears all timeouts
+    return () => {
+      cancelled = true;
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
+      timeoutIds.forEach((id) => window.clearTimeout(id));
+    };
   }, [setIsSplashComplete]);
 
   return (
@@ -160,8 +179,9 @@ const HeroSectionAlt = () => {
               {/* FLIP BEETLE Text - Outlined background with parallax */}
               <motion.div className="relative inline-block" style={{ y: textY }}>
                 <h1
-                  className="text-[14rem] md:text-[18rem] lg:text-[22rem] font-bangers leading-none text-nowrap"
+                  className="text-[8rem] md:text-[12rem] lg:text-[15rem] font-bold text-nowrap"
                   style={{
+                    fontFamily: "var(--font-inter-tight)",
                     WebkitTextStroke: "3px var(--color-background)",
                     WebkitTextFillColor: "transparent",
                     color: "transparent",
@@ -178,8 +198,9 @@ const HeroSectionAlt = () => {
                   }}
                 >
                   <h1
-                    className="text-[14rem] md:text-[18rem] lg:text-[22rem] font-bangers leading-none text-nowrap"
+                    className="text-[8rem] md:text-[12rem] lg:text-[15rem] font-bold text-nowrap"
                     style={{
+                      fontFamily: "var(--font-inter-tight)",
                       color: "var(--color-background)",
                     }}
                   >
@@ -208,15 +229,16 @@ const HeroSectionAlt = () => {
                   damping: 20,
                 }}
               >
-                <Image
-                  src="/images/Anxious_Beetle.gif"
-                  alt="Flip Beetle"
-                  width={350}
-                  height={350}
-                  className="drop-shadow-2xl"
-                  unoptimized
-                  priority
-                />
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="drop-shadow-2xl w-[350px] h-[350px] object-contain"
+                >
+                  <source src="/images/Anxious_Beetle.webm" type="video/webm" />
+                  <source src="/images/Anxious_Beetle.mp4" type="video/mp4" />
+                </video>
               </motion.div>
             </div>
 

@@ -7,8 +7,8 @@
   --color-secondary: #bc6c25;
 
   /* Font Variables */
-  --font-bangers: var(--font-bangers);
   --font-josefin: var(--font-josefin);
+  --font-inter-tight: var(--font-inter-tight);
 
   /* Theme Background Colors */
   --color-theme-green: #606c38;
@@ -66,7 +66,7 @@ html {
 body {
   background-color: var(--color-primary);
   color: var(--theme-text-color);
-  font-family: var(--font-bangers), sans-serif;
+  font-family: var(--font-inter-tight), sans-serif;
   box-sizing: border-box;
   margin: 0;
   padding: 0;

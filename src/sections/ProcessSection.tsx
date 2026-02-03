@@ -65,7 +65,7 @@ const ProcessSection = () => {
       ref={containerRef}
       data-theme="cream"
       className="relative"
-      style={{ height: `${200 + processSteps.length * 30}vh` }}
+      style={{ height: `${150 + processSteps.length * 10}vh` }}
     >
       <div className="sticky top-0 h-screen flex items-center overflow-hidden">
         <div className="w-full px-12">
@@ -77,7 +77,7 @@ const ProcessSection = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-6xl font-bold mb-4">
+            <h2 className="text-6xl mb-4">
               OUR PROCESS
             </h2>
           </motion.div>
@@ -110,14 +110,14 @@ const ProcessSection = () => {
               >
                 {/* Card Header */}
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-3xl font-bold text-white">
+                  <h3 className="text-3xl font-josefin text-white">
                     {step.number}. {step.title}
                   </h3>
                 </div>
 
                 {/* Card Content */}
                 <div className="bg-(--color-background) rounded-2xl p-6 min-h-[200px]">
-                  <p className="text-gray-800 text-lg leading-relaxed">
+                  <p className="text-gray-800 text-lg font-josefin leading-relaxed">
                     {step.description}
                   </p>
                 </div>

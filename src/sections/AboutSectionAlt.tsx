@@ -21,8 +21,8 @@ const AboutSectionAlt = () => {
       data-theme="cream"
       className="relative w-screen flex items-center justify-center px-12 pt-32 pb-16"
     >
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-1xl md:text-2xl lg:text-3xl xl:text-5xl font-josefin text-center leading-tight">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-1xl md:text-2xl lg:text-3xl xl:text-8xl font-inter-tight text-center leading-tight">
           {words.map((word, index) => (
             <motion.span
               key={index}
@@ -33,7 +33,7 @@ const AboutSectionAlt = () => {
                 delay: index * delayPerWord,
                 ease: [0.25, 0.1, 0.25, 1],
               }}
-              className="inline-block mr-2"
+              className="inline-block mr-6"
             >
               {word}
             </motion.span>

@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
-import Image from "next/image";
+import React, { useRef, useEffect } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { scaleIn, createStaggerContainer } from "@/utils/animations";
 
@@ -14,27 +13,15 @@ const clientTypes = [
   ["Tech CEO", "Therapist", "Freelancer"],
 ];
 
-// Helper function to get the video path based on client name
-const getClientVideo = (clientName: string): string => {
-  const videoMap: Record<string, string> = {
-    "Cook": "/clients/Chef_Beetle.webm",
-    "Freelancer": "/clients/Chef_Beetle.webm",
-    "Gym Instructor": "/clients/Chef_Beetle.webm",
-    "Padel Coach": "/clients/Chef_Beetle.webm",
-    "Photographer": "/clients/Chef_Beetle.webm",
-    "Tech CEO": "/clients/Chef_Beetle.webm",
-    "Therapist": "/clients/Chef_Beetle.webm",
-  };
-  return videoMap[clientName] || "/images/Anxious_Beetle.mp4";
-};
-
-// Component to handle play/pause video on hover
+// Optimized component - uses single video source for all clients
 const AnimatedClientVideo = ({ client }: { client: string }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleMouseEnter = () => {
     if (videoRef.current) {
-      videoRef.current.play();
+      videoRef.current.play().catch(() => {
+        // Ignore play errors (e.g., if user hasn't interacted with page)
+      });
     }
   };
 
@@ -45,14 +32,16 @@ const AnimatedClientVideo = ({ client }: { client: string }) => {
     }
   };
 
-  if (client === "You")
-    return (
-      <Image
-        src={getClientVideo(client)}
-        alt={client}
-        width={200}
-        height={200}
-      />)
+  // Cleanup video on unmount
+  useEffect(() => {
+    return () => {
+      if (videoRef.current) {
+        videoRef.current.pause();
+        videoRef.current.src = "";
+        videoRef.current.load();
+      }
+    };
+  }, []);
 
   return (
     <div
@@ -62,14 +51,16 @@ const AnimatedClientVideo = ({ client }: { client: string }) => {
     >
       <video
         ref={videoRef}
-        src={getClientVideo(client)}
         width={200}
         height={200}
         loop
         muted
         playsInline
+        preload="metadata"
         className="w-full h-full object-contain"
-      />
+      >
+        <source src="/clients/Chef_Beetle.webm" type="video/webm" />
+      </video>
     </div>
   );
 };
@@ -84,7 +75,7 @@ const ClientsSection = () => {
     offset: ["start end", "end start"],
   });
 
-  // Unified parallax effect for all cards
+  // Parallax effect - useTransform handles optimization internally
   const cardY = useTransform(scrollYProgress, [0, 1], [30, -60]);
 
   return (

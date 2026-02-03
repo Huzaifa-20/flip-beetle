@@ -51,15 +51,8 @@ const ServicesSection = () => {
     offset: ["start end", "end start"]
   });
 
-  // Existing price badge rotation
+  // Price badge rotation - useTransform handles optimization internally
   const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
-
-  // New parallax transforms for images and text
-  // Images move faster (1.15x) forward
-  // const imageY = useTransform(scrollYProgress, [0, 1], [0, 50 * PARALLAX_SPEEDS.FASTER]);
-
-  // Text moves slower (0.9x) backward for depth
-  // const textY = useTransform(scrollYProgress, [0, 1], [0, -30 * PARALLAX_SPEEDS.MEDIUM]);
 
   return (
     <section
@@ -121,10 +114,10 @@ const ServicesSection = () => {
                     </g>
                   </motion.svg>
                   <div className="relative z-10 text-center">
-                    <p className="text-background text-sm font-bangers uppercase">
+                    <p className="text-background text-sm font-inter-tight uppercase">
                       From
                     </p>
-                    <p className="text-background text-xl font-bangers">
+                    <p className="text-background text-xl font-inter-tight">
                       {service.price}
                     </p>
                   </div>

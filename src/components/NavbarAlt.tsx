@@ -120,7 +120,7 @@ const NavbarAlt = () => {
                     <Link
                       href={item.href}
                       onClick={() => setIsMenuOpen(false)}
-                      className="text-5xl font-bangers text-background hover:text-secondary transition-colors duration-300"
+                      className="text-5xl font-inter-tight text-background hover:text-secondary transition-colors duration-300"
                     >
                       {item.label}
                     </Link>

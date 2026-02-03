@@ -53,7 +53,7 @@ const Navbar = () => {
             <motion.div key={navLink.label} variants={navItemStagger}>
               <Link
                 href={navLink.href}
-                className="text-xl font-bangers relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 after:ease-in-out hover:after:w-full hover:scale-105 transition-transform"
+                className="text-xl font-inter-tight relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 after:ease-in-out hover:after:w-full hover:scale-105 transition-transform"
               >
                 {navLink.label}
               </Link>
@@ -61,7 +61,7 @@ const Navbar = () => {
           ))}
         </motion.div>
         <motion.button
-          className="w-fit text-background text-xl font-bangers px-4 pt-1.5 pb-2 rounded-4xl cursor-pointer bg-primary"
+          className="w-fit text-background text-xl font-inter-tight px-4 pt-1.5 pb-2 rounded-4xl cursor-pointer bg-primary"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4, delay: 0.8 }}

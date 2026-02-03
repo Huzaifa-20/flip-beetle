@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import {
   fadeInLeft,
@@ -22,19 +21,8 @@ const AboutSection = () => {
     offset: SCROLL_OFFSETS.SECTION,
   });
 
-  // Heading parallax - moves slightly slower (0.85x) for stability
+  // Parallax transforms - useTransform handles optimization internally
   const headingY = useTransform(scrollYProgress, [0, 1], [0, -40 * PARALLAX_SPEEDS.SLOWER]);
-
-  // Image parallax - images move faster (1.3x-1.4x) with horizontal shifts
-  const image1Y = useTransform(scrollYProgress, [0, 1], [0, 60 * PARALLAX_SPEEDS.VERY_FAST]);
-  // const image1X = useTransform(scrollYProgress, [0, 1], [0, 15]); // Rightward shift
-
-  const image2Y = useTransform(scrollYProgress, [0, 1], [0, 60 * PARALLAX_SPEEDS.HERO]); // Fastest
-
-  const image3Y = useTransform(scrollYProgress, [0, 1], [0, 60 * PARALLAX_SPEEDS.VERY_FAST]);
-  // const image3X = useTransform(scrollYProgress, [0, 1], [0, -15]); // Leftward shift
-
-  // Bottom paragraph parallax - subtle upward float (0.9x)
   const paragraphY = useTransform(scrollYProgress, [0, 1], [0, -25 * PARALLAX_SPEEDS.MEDIUM]);
 
   return (
@@ -67,33 +55,23 @@ const AboutSection = () => {
             animate={isInView ? "visible" : "hidden"}
           >
             {[1, 2, 3].map((imgIndex) => {
-              // Apply different parallax based on image position
-              const imageStyles = imgIndex === 1
-                ? {
-                  y: image1Y,
-                  // x: image1X
-                }
-                : imgIndex === 2
-                  ? { y: image2Y }
-                  : {
-                    y: image3Y,
-                    // x: image3X 
-                  };
-
               return (
                 <motion.div
                   key={imgIndex}
                   variants={scaleIn}
                   whileHover={imageHover}
-                // style={imageStyles}
+                  className="w-[150px] h-[150px] overflow-hidden"
                 >
-                  <Image
-                    src="/images/Anxious_Beetle.gif"
-                    alt="Animation"
-                    width={150}
-                    height={150}
-                    unoptimized
-                  />
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-contain"
+                  >
+                    <source src="/images/Anxious_Beetle.webm" type="video/webm" />
+                    <source src="/images/Anxious_Beetle.mp4" type="video/mp4" />
+                  </video>
                 </motion.div>
               );
             })}

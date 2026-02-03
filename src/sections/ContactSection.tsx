@@ -15,12 +15,12 @@ const ContactSection = () => {
     offset: SCROLL_OFFSETS.FOOTER,
   });
 
-  // Cascading parallax effects
+  // Cascading parallax effects - useTransform handles optimization internally
   const headingY = useTransform(scrollYProgress, [0, 1], [0, -40 * PARALLAX_SPEEDS.SLOWER]);
   const descriptionY = useTransform(scrollYProgress, [0, 1], [0, -30 * PARALLAX_SPEEDS.MEDIUM]);
   const formY = useTransform(scrollYProgress, [0, 1], [0, 35 * PARALLAX_SPEEDS.MEDIUM_FAST]);
 
-  // Individual cascading transforms for each social link (must be at top level)
+  // Individual cascading transforms for each social link
   const social1Y = useTransform(scrollYProgress, [0, 1], [0, (45 * PARALLAX_SPEEDS.FASTER) + (0 * 5)]);
   const social2Y = useTransform(scrollYProgress, [0, 1], [0, (45 * PARALLAX_SPEEDS.FASTER) + (1 * 5)]);
   const social3Y = useTransform(scrollYProgress, [0, 1], [0, (45 * PARALLAX_SPEEDS.FASTER) + (2 * 5)]);
@@ -82,7 +82,7 @@ const ContactSection = () => {
       >
         {/* Heading */}
         <motion.h1
-          className="text-6xl md:text-7xl text-center text-primary italic"
+          className="text-6xl md:text-7xl text-center text-primary"
           variants={fadeInUp}
           style={{ y: headingY }}
         >
@@ -172,7 +172,7 @@ const ContactSection = () => {
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                className="px-12 py-4 border-4 border-secondary text-secondary text-2xl font-bangers rounded-full hover:bg-secondary hover:text-background transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-12 py-4 border-4 border-secondary text-secondary text-2xl font-inter-tight rounded-full hover:bg-secondary hover:text-background transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 whileHover={{ scale: isSubmitting ? 1 : 1.05 }}
                 whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
               >
@@ -213,7 +213,7 @@ const ContactSection = () => {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-96 px-12 py-6 bg-primary text-background text-3xl font-bangers italic text-center rounded-2xl hover:bg-secondary transition-colors duration-300"
+                  className="w-96 px-12 py-6 bg-primary text-background text-3xl font-inter-tight italic text-center rounded-2xl hover:bg-secondary transition-colors duration-300"
                   style={{ y: cascadeY }}
                 >
                   {social.name}

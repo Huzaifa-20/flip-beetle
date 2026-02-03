@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bangers, Josefin_Sans } from "next/font/google";
+import { Josefin_Sans, Inter_Tight } from "next/font/google";
 import "./globals.css";
 import NavbarAlt from "@/components/NavbarAlt";
 import { ThemeProvider } from "@/contexts/ThemeContext";
@@ -8,17 +8,17 @@ import ThemeTransition from "@/components/ThemeTransition";
 import ScrollThemeController from "@/components/ScrollThemeController";
 import Footer from "@/components/Footer";
 
-const bangers = Bangers({
-  variable: "--font-bangers",
-  subsets: ["latin"],
-  weight: ["400"],
-  display: "swap",
-});
-
 const josefinSans = Josefin_Sans({
   variable: "--font-josefin",
   subsets: ["latin"],
   weight: ["400", "700"],
+  display: "swap",
+});
+
+const interTight = Inter_Tight({
+  variable: "--font-inter-tight",
+  subsets: ["latin"],
+  weight: ["400", "700", "800", "900"],
   display: "swap",
 });
 
@@ -34,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${bangers.variable} ${josefinSans.variable} antialiased`}>
+      <body className={`${josefinSans.variable} ${interTight.variable} antialiased`}>
         <ThemeProvider>
           <SplashAnimationProvider>
             <ThemeTransition />
