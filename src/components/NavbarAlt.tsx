@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { useSplashAnimation } from "@/contexts/SplashAnimationContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import { MENU_ITEMS, SOCIAL_LINKS } from "@/constants/navigation";
+import { MenuVertical } from "@/components/ui/menu-vertical";
 
 const NavbarAlt = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -94,7 +94,7 @@ const NavbarAlt = () => {
 
             {/* Drawer */}
             <motion.div
-              className="fixed right-0 top-0 h-screen w-[500px] bg-[#2a2a2a] z-70 flex flex-col justify-between p-12"
+              className="fixed right-0 top-0 h-screen w-[500px] bg-[#2a2a2a] z-70 flex flex-col justify-between py-12 px-8"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
@@ -109,23 +109,13 @@ const NavbarAlt = () => {
               </button>
 
               {/* Menu Items */}
-              <nav className="flex flex-col gap-8 mt-20">
-                {MENU_ITEMS.map((item, index) => (
-                  <motion.div
-                    key={item.label}
-                    initial={{ opacity: 0, x: 50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <Link
-                      href={item.href}
-                      onClick={() => setIsMenuOpen(false)}
-                      className="text-5xl font-inter-tight text-background hover:text-secondary transition-colors duration-300"
-                    >
-                      {item.label}
-                    </Link>
-                  </motion.div>
-                ))}
+              <nav className="mt-20">
+                <MenuVertical
+                  menuItems={MENU_ITEMS}
+                  color="var(--color-secondary)"
+                  skew={-1}
+                  onItemClick={() => setIsMenuOpen(false)}
+                />
               </nav>
 
               {/* Social Links */}
