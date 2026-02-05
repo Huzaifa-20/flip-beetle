@@ -7,6 +7,7 @@ import ContactSection from "@/sections/ContactSection";
 import HeroSectionAlt from "@/sections/HeroSectionAlt";
 import AboutSectionAlt from "@/sections/AboutSectionAlt";
 import TextScrollBanner from "@/components/TextScrollBanner";
+import Testimonials from "@/sections/Testimonials";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <TextScrollBanner text="FLIPBEETLE" />
       <ServicesSection />
       <ProcessSection />
+      <Testimonials />
       <FAQSection />
       <ContactSection />
     </>
