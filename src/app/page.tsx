@@ -16,7 +16,7 @@ export default function Home() {
       <AboutSectionAlt />
       <AboutSection />
       <ClientsSection />
-      <TextScrollBanner text="FLIPBEETLE" />
+      <TextScrollBanner />
       <ServicesSection />
       <ProcessSection />
       <Testimonials />

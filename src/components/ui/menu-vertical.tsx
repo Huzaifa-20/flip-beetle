@@ -30,14 +30,15 @@ export const MenuVertical = ({
       {menuItems.map((item, index) => (
         <motion.div
           key={`${item.href}-${index}`}
-          className="group/nav flex items-center gap-2 cursor-pointer text-zinc-900 dark:text-zinc-50"
+          className="group/nav flex items-center gap-2 cursor-pointer"
+          style={{ color }}
           initial="initial"
           whileHover="hover"
         >
           <motion.div
             variants={{
-              initial: { x: "-100%", color: "inherit", opacity: 0 },
-              hover: { x: 0, color, opacity: 1 },
+              initial: { x: "-100%", opacity: 0 },
+              hover: { x: 0, opacity: 1 },
             }}
             transition={{ duration: 0.3, ease: "easeOut" }}
             className="z-0"
@@ -49,11 +50,12 @@ export const MenuVertical = ({
             href={item.href}
             onClick={onItemClick}
             variants={{
-              initial: { x: -40, color: "inherit" },
-              hover: { x: 0, color, skewX: skew },
+              initial: { x: -40 },
+              hover: { x: 0, skewX: skew },
             }}
             transition={{ duration: 0.3, ease: "easeOut" }}
             className="font-semibold text-4xl no-underline"
+            style={{ color }}
           >
             {item.label}
           </MotionLink>

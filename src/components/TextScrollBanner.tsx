@@ -4,14 +4,12 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 interface TextScrollBannerProps {
-  text: string;
   direction?: "left" | "right";
   speed?: number;
   className?: string;
 }
 
 const TextScrollBanner = ({
-  text,
   direction = "left",
   speed = 1,
   className = "",
@@ -29,7 +27,7 @@ const TextScrollBanner = ({
   const x = useTransform(scrollYProgress, [0, 1], [0, scrollMultiplier]);
 
   // Repeat the text multiple times to ensure it fills the screen
-  const repeatedText = Array(10).fill(text).join(" ");
+  const repeatedText = Array(10).fill("FLIPBEETLE").join(" ");
 
   return (
     <section
@@ -40,13 +38,7 @@ const TextScrollBanner = ({
         style={{ x, rotate: -3 }}
         className="flex whitespace-nowrap"
       >
-        <h2 className="text-[8rem] md:text-[12rem] lg:text-[14rem] font-inter-tight font-bold tracking-tighter"
-        // style={{
-        // WebkitTextStroke: "3px var(--color-theme-black)",
-        // WebkitTextFillColor: "transparent",
-        // color: "transparent",
-        // }}
-        >
+        <h2 className="text-[8rem] md:text-[12rem] lg:text-[14rem] font-inter-tight font-bold tracking-tighter">
           {repeatedText}
         </h2>
       </motion.div>

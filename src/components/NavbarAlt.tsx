@@ -24,6 +24,39 @@ const NavbarAlt = () => {
       : "var(--color-background)";
   };
 
+  // Determine sidebar background color based on current theme
+  const getSidebarBgColor = () => {
+    switch (currentTheme) {
+      case "cream":
+        return "var(--color-theme-green)";
+      case "dark-cream":
+        return "var(--color-theme-dark-cream)";
+      case "green":
+        return "var(--color-theme-cream)";
+      case "black":
+        return "var(--color-theme-black)";
+      default:
+        return "var(--color-theme-black)";
+    }
+  };
+
+  // Determine sidebar text color for contrast
+  // Logic is inverted from theme because sidebar background is opposite
+  const getSidebarTextColor = () => {
+    switch (currentTheme) {
+      case "cream": // sidebar is green, needs light text
+        return "var(--color-background)";
+      case "green": // sidebar is cream, needs dark text
+        return "var(--color-primary)";
+      case "dark-cream": // sidebar is dark-cream, needs dark text
+        return "var(--color-primary)";
+      case "black": // sidebar is black, needs light text
+        return "var(--color-background)";
+      default:
+        return "var(--color-background)";
+    }
+  };
+
   useMotionValueEvent(scrollY, "change", (latest) => {
     const isScrollingDown = latest > prevScrollY && latest > 50;
     const isScrollingUp = latest < prevScrollY;
@@ -94,7 +127,8 @@ const NavbarAlt = () => {
 
             {/* Drawer */}
             <motion.div
-              className="fixed right-0 top-0 h-screen w-[500px] bg-[#2a2a2a] z-70 flex flex-col justify-between py-12 px-8"
+              className="fixed right-0 top-0 h-screen w-[500px] z-70 flex flex-col justify-between py-12 px-8 transition-colors duration-500"
+              style={{ backgroundColor: getSidebarBgColor() }}
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
@@ -103,7 +137,8 @@ const NavbarAlt = () => {
               {/* Close Button */}
               <button
                 onClick={() => setIsMenuOpen(false)}
-                className="absolute top-8 right-12 text-background text-4xl hover:text-secondary transition-colors"
+                className="absolute top-8 right-12 text-4xl transition-colors duration-300 cursor-pointer"
+                style={{ color: getSidebarTextColor() }}
               >
                 ×
               </button>
@@ -112,7 +147,7 @@ const NavbarAlt = () => {
               <nav className="mt-20">
                 <MenuVertical
                   menuItems={MENU_ITEMS}
-                  color="var(--color-secondary)"
+                  color={getSidebarTextColor()}
                   skew={-1}
                   onItemClick={() => setIsMenuOpen(false)}
                 />
@@ -126,7 +161,8 @@ const NavbarAlt = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm font-josefin text-background hover:text-secondary transition-colors duration-300 uppercase tracking-wider"
+                    className="text-sm font-josefin transition-colors duration-300 uppercase tracking-wider"
+                    style={{ color: getSidebarTextColor() }}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 + index * 0.1 }}

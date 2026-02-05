@@ -13,9 +13,22 @@ const clientTypes = [
   ["Tech CEO", "Therapist", "Freelancer"],
 ];
 
-// Optimized component - uses single video source for all clients
+// Optimized component - shows appropriate beetle video based on client type
 const AnimatedClientVideo = ({ client }: { client: string }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Determine which beetle video to show based on client label
+  const getBeetleVideo = (clientLabel: string) => {
+    switch (clientLabel) {
+      case "Cook":
+        return "/clients/Cook_Beetle.webm";
+      // Add more cases here as needed
+      // case "Gym Instructor":
+      //   return "/clients/Gym_Beetle.webm";
+      default:
+        return "/clients/Gym_Beetle.webm";
+    }
+  };
 
   const handleMouseEnter = () => {
     if (videoRef.current) {
@@ -59,7 +72,7 @@ const AnimatedClientVideo = ({ client }: { client: string }) => {
         preload="metadata"
         className="w-full h-full object-contain"
       >
-        <source src="/clients/Chef_Beetle.webm" type="video/webm" />
+        <source src={getBeetleVideo(client)} type="video/webm" />
       </video>
     </div>
   );
@@ -82,10 +95,29 @@ const ClientsSection = () => {
     <section
       ref={ref}
       data-theme="cream"
-      className="w-screen flex justify-center items-center my-32 px-12"
+      className="w-screen flex justify-center items-center my-32 px-12 py-36 relative"
+      style={{
+        backgroundImage:
+          "radial-gradient(circle, #b3af9a 1.25px, transparent 1.25px)",
+        backgroundSize: "36px 36px",
+      }}
     >
+      {/* Top fade overlay */}
+      <div
+        className="absolute top-0 left-0 right-0 h-32 pointer-events-none z-10"
+        style={{
+          background: "linear-gradient(to bottom, #fefae0, transparent)"
+        }}
+      />
+      {/* Bottom fade overlay */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10"
+        style={{
+          background: "linear-gradient(to top, #fefae0, transparent)"
+        }}
+      />
       <motion.div
-        className="max-w-[1136px] w-full flex flex-col gap-10 justify-center items-center"
+        className="max-w-[1136px] w-full flex flex-col gap-10 justify-center items-center relative z-20"
         variants={createStaggerContainer(0.08, 0)}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
