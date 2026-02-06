@@ -8,8 +8,13 @@ import HeroSectionAlt from "@/sections/HeroSectionAlt";
 import AboutSectionAlt from "@/sections/AboutSectionAlt";
 import TextScrollBanner from "@/components/TextScrollBanner";
 import Testimonials from "@/sections/Testimonials";
+import BlogSection from "@/sections/BlogSection";
+import { getFeaturedPosts } from "@/lib/blog";
 
-export default function Home() {
+export default async function Home() {
+  // Fetch featured blog posts for the blog section
+  const featuredPosts = await getFeaturedPosts(4);
+
   return (
     <>
       <HeroSectionAlt />
@@ -20,6 +25,7 @@ export default function Home() {
       <ServicesSection />
       <ProcessSection />
       <Testimonials />
+      <BlogSection posts={featuredPosts} />
       <FAQSection />
       <ContactSection />
     </>

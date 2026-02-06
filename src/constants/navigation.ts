@@ -16,7 +16,7 @@ export const MENU_ITEMS: NavItem[] = [
   { label: "HOME", href: "#" },
   { label: "ABOUT", href: "#" },
   { label: "WORK", href: "#" },
-  { label: "JOURNAL", href: "#" },
+  { label: "JOURNAL", href: "/blog" },
   { label: "CONTACT", href: "#" },
 ];
 
