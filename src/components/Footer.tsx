@@ -2,8 +2,12 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 const Footer = () => {
+  const pathname = usePathname();
+  const isBlogPage = pathname?.startsWith("/blog");
+
   const navigationLinks = [
     { name: "Home", href: "/" },
     { name: "About", href: "#about" },
@@ -20,8 +24,14 @@ const Footer = () => {
     { name: "Telegram", href: "https://telegram.org" },
   ];
 
+  // Use black background for blog pages, primary color for others
+  const bgColor = isBlogPage ? "bg-black" : "bg-primary";
+  const textColor = isBlogPage ? "text-white" : "text-background";
+  const borderColor = isBlogPage ? "border-white/20" : "border-background/20";
+  const hoverColor = isBlogPage ? "hover:text-gray-300" : "hover:text-secondary";
+
   return (
-    <footer className="w-screen min-h-screen bg-primary text-background px-12 py-16 flex flex-col justify-between max-md:px-6 max-md:min-h-[100dvh]">
+    <footer className={`w-screen min-h-screen ${bgColor} ${textColor} px-12 py-16 flex flex-col justify-between max-md:px-6 max-md:min-h-[100dvh]`}>
       <div className="w-full max-w-full mx-auto flex-1 flex flex-col justify-between">
         {/* Main Footer Content */}
         <div className="grid grid-cols-12 gap-12 max-md:grid-cols-1 max-md:gap-8">
@@ -37,7 +47,7 @@ const Footer = () => {
             </h2>
             <a
               href="#contact"
-              className="inline-block px-8 py-3 border-2 border-background text-background font-mono text-sm uppercase rounded-sm hover:bg-background hover:text-primary transition-all duration-300"
+              className={`inline-block px-8 py-3 border-2 ${isBlogPage ? 'border-white text-white hover:bg-white hover:text-black' : 'border-background text-background hover:bg-background hover:text-primary'} font-mono text-sm uppercase rounded-sm transition-all duration-300`}
             >
               Contact
             </a>
@@ -55,7 +65,7 @@ const Footer = () => {
                   <li key={link.name}>
                     <a
                       href={link.href}
-                      className="text-lg font-josefin hover:text-secondary transition-colors duration-300"
+                      className={`text-lg font-josefin ${hoverColor} transition-colors duration-300`}
                     >
                       {link.name}
                     </a>
@@ -76,7 +86,7 @@ const Footer = () => {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-lg font-josefin hover:text-secondary transition-colors duration-300"
+                      className={`text-lg font-josefin ${hoverColor} transition-colors duration-300`}
                     >
                       {link.name}
                     </a>
@@ -93,13 +103,13 @@ const Footer = () => {
               <div className="space-y-4">
                 <a
                   href="tel:+1234567890"
-                  className="block text-lg font-josefin hover:text-secondary transition-colors duration-300"
+                  className={`block text-lg font-josefin ${hoverColor} transition-colors duration-300`}
                 >
                   (123) 456-7890
                 </a>
                 <a
                   href="mailto:hello@flipbeetle.com"
-                  className="block text-lg font-josefin hover:text-secondary transition-colors duration-300 break-words"
+                  className={`block text-lg font-josefin ${hoverColor} transition-colors duration-300 break-words`}
                 >
                   hello@flipbeetle.com
                 </a>
@@ -109,21 +119,21 @@ const Footer = () => {
         </div>
 
         {/* Bottom Section - Copyright & Location */}
-        <div className="pt-8 border-t border-background/20 flex justify-between items-center max-md:flex-col max-md:items-start max-md:gap-4 mt-auto">
+        <div className={`pt-8 border-t ${borderColor} flex justify-between items-center max-md:flex-col max-md:items-start max-md:gap-4 mt-auto`}>
           <div className="flex items-center gap-6 max-md:flex-col max-md:items-start max-md:gap-2">
             <p className="font-mono text-xs uppercase">
               © {new Date().getFullYear()} Flip Beetle.
             </p>
             <a
               href="/privacy"
-              className="font-mono text-xs uppercase hover:text-secondary transition-colors duration-300"
+              className={`font-mono text-xs uppercase ${hoverColor} transition-colors duration-300`}
             >
               Privacy Policy
             </a>
           </div>
           <div className="font-mono text-xs uppercase text-right max-md:text-left">
             <p>WE&apos;RE READY TO FLIP</p>
-            <p className="text-secondary">WORLDWIDE, REMOTE, AMBITIOUS</p>
+            <p className={isBlogPage ? "text-gray-400" : "text-secondary"}>WORLDWIDE, REMOTE, AMBITIOUS</p>
           </div>
         </div>
       </div>

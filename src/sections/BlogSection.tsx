@@ -89,10 +89,10 @@ const BlogSection: React.FC<BlogSectionProps> = ({ posts }) => {
             const tagColor = getTagColor(primaryTag);
 
             return (
-              <motion.div key={post.slug} variants={fadeInUp}>
+              <motion.div key={post.slug} variants={fadeInUp} className="flex justify-center">
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="group block bg-transparent rounded-2xl overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                  className="group block bg-transparent overflow-hidden w-full max-w-[374px]"
                 >
                   {/* Image */}
                   <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-100">
@@ -100,7 +100,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ posts }) => {
                       src={post.coverImage}
                       alt={post.title}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105 rounded-lg"
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     />
                   </div>

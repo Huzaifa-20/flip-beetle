@@ -11,29 +11,36 @@ interface BlogListingClientProps {
   posts: BlogMetadata[];
 }
 
-// Helper function to get tag color
-const getTagColor = (tag: string) => {
-  const colorMap: { [key: string]: string } = {
-    "Web Design": "bg-[#ff8c6b]",
-    "Trends": "bg-[#ff8c6b]",
-    "2026": "bg-[#ff8c6b]",
-    "News": "bg-[#ff8c6b]",
-    "Branding": "bg-[#c5a882]",
-    "UI/UX": "bg-[#c5a882]",
-    "Typography": "bg-[#c5a882]",
-    "Accessibility": "bg-[#a0c4d9]",
-    "WCAG": "bg-[#a0c4d9]",
-    "CSS": "bg-[#8fb5d9]",
-    "Mobile First": "bg-[#8fb5d9]",
-    "Responsive Design": "bg-[#8fb5d9]",
-    "Animation": "bg-[#b5a8d4]",
-    "Performance": "bg-[#b5a8d4]",
-    "Framer Motion": "bg-[#b5a8d4]",
-    "Best Practices": "bg-[#a8d4b5]",
-    "Minimalism": "bg-[#a8d4b5]",
-  };
+// Helper function to map tags to main categories
+const getPostCategory = (tags: string[]): string => {
+  // Design: Visual design, aesthetics, minimalism, branding
+  if (tags.some(tag => ["Minimalism", "Branding", "Typography", "Best Practices"].includes(tag))) {
+    return "DESIGN";
+  }
+  // News: Trends, what's new in the industry
+  if (tags.some(tag => ["Trends", "2026"].includes(tag))) {
+    return "NEWS";
+  }
+  // Insights: Technical deep-dives, accessibility, responsive design, performance
+  if (tags.some(tag => ["Accessibility", "WCAG", "Responsive Design", "CSS", "Mobile First", "Animation", "Performance", "Framer Motion"].includes(tag))) {
+    return "INSIGHTS";
+  }
+  // Pulp Fiction: Creative content, stories
+  if (tags.some(tag => ["Pulp Fiction", "Story", "Creative"].includes(tag))) {
+    return "PULP FICTION";
+  }
+  return "DESIGN"; // default
+};
 
-  return colorMap[tag] || "bg-gray-400";
+// Helper function to get category color
+const getCategoryColor = (category: string) => {
+  const colorMap: { [key: string]: string } = {
+    "DESIGN": "bg-[#ff8c6b]",
+    "NEWS": "bg-[#c5a882]",
+    "INSIGHTS": "bg-[#a0c4d9]",
+    "PULP FICTION": "bg-[#b5a8d4]",
+  };
+  return colorMap[category] || "bg-[#ff8c6b]";
 };
 
 // Fade in up animation variant
@@ -55,16 +62,19 @@ export default function BlogListingClient({ posts }: BlogListingClientProps) {
   const isFeaturedInView = useInView(featuredRef, { once: true, amount: 0.3 });
   const isGridInView = useInView(gridRef, { once: true, amount: 0.2 });
 
-  const [selectedTag, setSelectedTag] = useState<string>("ALL");
+  const [selectedCategory, setSelectedCategory] = useState<string>("ALL");
 
-  // Get all unique tags
-  const allTags = Array.from(new Set(posts.flatMap((post) => post.tags))).sort();
+  // Fixed categories
+  const categories = ["ALL", "DESIGN", "NEWS", "PULP FICTION", "INSIGHTS"];
 
-  // Filter posts by selected tag
+  // Filter posts by selected category
   const filteredPosts =
-    selectedTag === "ALL"
+    selectedCategory === "ALL"
       ? posts
-      : posts.filter((post) => post.tags.includes(selectedTag));
+      : posts.filter((post) => {
+          const postCategory = getPostCategory(post.tags);
+          return postCategory === selectedCategory;
+        });
 
   // Featured post is the first one
   const featuredPost = filteredPosts[0];
@@ -110,27 +120,17 @@ export default function BlogListingClient({ posts }: BlogListingClientProps) {
               FILTER WORK
             </p>
             <div className="flex flex-wrap gap-3">
-              <button
-                onClick={() => setSelectedTag("ALL")}
-                className={`px-6 py-2.5 rounded-full font-inter-tight font-semibold text-sm transition-all duration-300 ${
-                  selectedTag === "ALL"
-                    ? "bg-white text-black"
-                    : "bg-white/10 text-white hover:bg-white/20"
-                }`}
-              >
-                ALL
-              </button>
-              {allTags.map((tag) => (
+              {categories.map((category) => (
                 <button
-                  key={tag}
-                  onClick={() => setSelectedTag(tag)}
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
                   className={`px-6 py-2.5 rounded-full font-inter-tight font-semibold text-sm transition-all duration-300 ${
-                    selectedTag === tag
+                    selectedCategory === category
                       ? "bg-white text-black"
                       : "bg-white/10 text-white hover:bg-white/20"
                   }`}
                 >
-                  {tag.toUpperCase()}
+                  {category}
                 </button>
               ))}
             </div>
@@ -146,63 +146,61 @@ export default function BlogListingClient({ posts }: BlogListingClientProps) {
             variants={fadeInUp}
             className="mb-16 lg:mb-24"
           >
-            <Link href={`/blog/${featuredPost.slug}`}>
-              <div className="bg-white rounded-3xl overflow-hidden hover:scale-[1.01] transition-transform duration-500 cursor-pointer">
-                <div className="grid lg:grid-cols-2 gap-0">
-                  {/* Image Section */}
-                  <div className="relative h-[300px] md:h-[400px] lg:h-[600px]">
-                    <Image
-                      src={featuredPost.coverImage}
-                      alt={featuredPost.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                      priority
-                    />
+            <div className="bg-transparent overflow-hidden">
+              <div className="grid lg:grid-cols-2 gap-0">
+                {/* Image Section */}
+                <div className="relative h-[300px] md:h-[400px] lg:h-[600px]">
+                  <Image
+                    src={featuredPost.coverImage}
+                    alt={featuredPost.title}
+                    fill
+                    className="object-cover rounded-lg"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    priority
+                  />
+                </div>
+
+                {/* Content Section */}
+                <div className="p-8 lg:p-12 flex flex-col justify-center">
+                  <div className="mb-6">
+                    <span className="inline-block px-4 py-1.5 bg-white text-black text-xs font-inter-tight font-bold tracking-wider rounded-full mb-4">
+                      FEATURED
+                    </span>
+                    <span
+                      className={`inline-block ml-2 px-4 py-1.5 text-white text-xs font-inter-tight font-bold tracking-wider rounded-full ${getCategoryColor(
+                        getPostCategory(featuredPost.tags)
+                      )}`}
+                    >
+                      {getPostCategory(featuredPost.tags)}
+                    </span>
                   </div>
 
-                  {/* Content Section */}
-                  <div className="p-8 lg:p-12 flex flex-col justify-center">
-                    <div className="mb-6">
-                      <span className="inline-block px-4 py-1.5 bg-black text-white text-xs font-inter-tight font-bold tracking-wider rounded-full mb-4">
-                        FEATURED
-                      </span>
-                      {featuredPost.tags.length > 0 && (
-                        <span
-                          className={`inline-block ml-2 px-4 py-1.5 text-white text-xs font-inter-tight font-bold tracking-wider rounded-full ${getTagColor(
-                            featuredPost.tags[0]
-                          )}`}
-                        >
-                          {featuredPost.tags[0].toUpperCase()}
-                        </span>
-                      )}
-                    </div>
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-inter-tight font-bold text-white mb-4 lg:mb-6 leading-tight">
+                    {featuredPost.title}
+                  </h2>
 
-                    <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-inter-tight font-bold text-black mb-4 lg:mb-6 leading-tight">
-                      {featuredPost.title}
-                    </h2>
+                  <p className="text-base lg:text-lg font-josefin text-white/70 mb-6 line-clamp-3">
+                    {featuredPost.excerpt}
+                  </p>
 
-                    <p className="text-base lg:text-lg font-josefin text-black/70 mb-6 line-clamp-3">
-                      {featuredPost.excerpt}
-                    </p>
-
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm font-josefin text-black/60">
-                        {new Date(featuredPost.date).toLocaleDateString("en-US", {
-                          month: "long",
-                          day: "numeric",
-                          year: "numeric",
-                        })}{" "}
-                        • {featuredPost.readTime} min read
-                      </span>
-                      <span className="text-sm font-inter-tight font-semibold text-black hover:underline">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-josefin text-white/60">
+                      {new Date(featuredPost.date).toLocaleDateString("en-US", {
+                        month: "long",
+                        day: "numeric",
+                        year: "numeric",
+                      })}{" "}
+                      • {featuredPost.readTime} min read
+                    </span>
+                    <Link href={`/blog/${featuredPost.slug}`}>
+                      <span className="text-sm font-inter-tight font-semibold text-white hover:underline cursor-pointer">
                         Read more →
                       </span>
-                    </div>
+                    </Link>
                   </div>
                 </div>
               </div>
-            </Link>
+            </div>
           </motion.div>
         )}
 
@@ -216,41 +214,35 @@ export default function BlogListingClient({ posts }: BlogListingClientProps) {
             animate={isGridInView ? "visible" : "hidden"}
           >
             {remainingPosts.map((post) => (
-              <motion.div key={post.slug} variants={fadeInUp}>
-                <Link href={`/blog/${post.slug}`}>
-                  <div className="bg-white rounded-2xl overflow-hidden hover:scale-105 hover:shadow-2xl transition-all duration-300 cursor-pointer h-full flex flex-col">
+              <motion.div key={post.slug} variants={fadeInUp} className="flex justify-center">
+                <Link href={`/blog/${post.slug}`} className="w-full max-w-[374px]">
+                  <div className="bg-transparent overflow-hidden cursor-pointer h-full flex flex-col">
                     {/* Image */}
                     <div className="relative h-48 md:h-56">
                       <Image
                         src={post.coverImage}
                         alt={post.title}
                         fill
-                        className="object-cover"
+                        className="object-cover rounded-lg"
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
                     </div>
 
                     {/* Content */}
-                    <div className="p-6 flex-1 flex flex-col">
-                      {post.tags.length > 0 && (
-                        <span
-                          className={`inline-block px-3 py-1 text-white text-xs font-inter-tight font-bold tracking-wider rounded-full mb-4 self-start ${getTagColor(
-                            post.tags[0]
-                          )}`}
-                        >
-                          {post.tags[0].toUpperCase()}
-                        </span>
-                      )}
+                    <div className="pt-6 pr-6 flex-1 flex flex-col">
+                      <span
+                        className={`inline-block px-3 py-1 text-white text-xs font-inter-tight font-bold tracking-wider rounded-full mb-4 self-start ${getCategoryColor(
+                          getPostCategory(post.tags)
+                        )}`}
+                      >
+                        {getPostCategory(post.tags)}
+                      </span>
 
-                      <h3 className="text-xl lg:text-2xl font-inter-tight font-bold text-black mb-3 line-clamp-2 flex-1">
+                      <h3 className="text-xl lg:text-2xl font-inter-tight font-bold text-white mb-3 line-clamp-2 flex-1">
                         {post.title}
                       </h3>
 
-                      <p className="text-sm font-josefin text-black/60 mb-4 line-clamp-2">
-                        {post.excerpt}
-                      </p>
-
-                      <div className="text-xs font-josefin text-black/50 mt-auto">
+                      <div className="text-xs font-josefin text-white/50 mt-auto">
                         {new Date(post.date).toLocaleDateString("en-US", {
                           month: "short",
                           day: "numeric",
