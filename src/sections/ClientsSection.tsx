@@ -134,7 +134,7 @@ const ClientsSection = () => {
               <AnimatedClientVideo client={client} />
               <motion.h1
                 className="text-xl"
-                whileHover={{ color: "var(--color-secondary)" }}
+                whileHover={{ color: "var(--color-primary)" }}
               >
                 {client}
               </motion.h1>
@@ -154,7 +154,7 @@ const ClientsSection = () => {
               <AnimatedClientVideo client={client} />
               <motion.h1
                 className="text-xl"
-                whileHover={{ color: "var(--color-secondary)" }}
+                whileHover={{ color: "var(--color-primary)" }}
               >
                 {client}
               </motion.h1>
@@ -174,7 +174,7 @@ const ClientsSection = () => {
               <AnimatedClientVideo client={client} />
               <motion.h1
                 className="text-xl"
-                whileHover={{ color: "var(--color-secondary)" }}
+                whileHover={{ color: "var(--color-primary)" }}
               >
                 {client}
               </motion.h1>

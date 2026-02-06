@@ -155,20 +155,17 @@ const NavbarAlt = () => {
 
               {/* Social Links */}
               <div className="flex gap-8">
-                {SOCIAL_LINKS.map((social, index) => (
-                  <motion.a
+                {SOCIAL_LINKS.map((social) => (
+                  <a
                     key={social.label}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm font-josefin transition-colors duration-300 uppercase tracking-wider"
                     style={{ color: getSidebarTextColor() }}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 + index * 0.1 }}
                   >
                     {social.label}
-                  </motion.a>
+                  </a>
                 ))}
               </div>
             </motion.div>
