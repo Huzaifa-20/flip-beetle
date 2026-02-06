@@ -32,13 +32,13 @@ const TextScrollBanner = ({
   return (
     <section
       ref={ref}
-      className={`w-screen overflow-hidden py-12 ${className}`}
+      className={`w-screen overflow-hidden ${className}`}
     >
       <motion.div
         style={{ x, rotate: -3 }}
         className="flex whitespace-nowrap"
       >
-        <h2 className="text-[8rem] md:text-[12rem] lg:text-[14rem] font-inter-tight font-bold tracking-tighter">
+        <h2 className="text-[8rem] md:text-[12rem] lg:text-[18rem] font-inter-tight font-bold tracking-tighter">
           {repeatedText}
         </h2>
       </motion.div>
