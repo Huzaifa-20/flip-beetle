@@ -64,6 +64,11 @@ export default function BlogListingClient({ posts }: BlogListingClientProps) {
 
   const [selectedCategory, setSelectedCategory] = useState<string>("ALL");
 
+  // Scroll to top when component mounts
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // Fixed categories
   const categories = ["ALL", "DESIGN", "NEWS", "PULP FICTION", "INSIGHTS"];
 
@@ -72,9 +77,9 @@ export default function BlogListingClient({ posts }: BlogListingClientProps) {
     selectedCategory === "ALL"
       ? posts
       : posts.filter((post) => {
-          const postCategory = getPostCategory(post.tags);
-          return postCategory === selectedCategory;
-        });
+        const postCategory = getPostCategory(post.tags);
+        return postCategory === selectedCategory;
+      });
 
   // Featured post is the first one
   const featuredPost = filteredPosts[0];
@@ -82,7 +87,7 @@ export default function BlogListingClient({ posts }: BlogListingClientProps) {
 
   return (
     <main className="min-h-screen w-screen bg-black px-6 md:px-12 py-24 md:py-36">
-      <div className="max-w-7xl mx-auto">
+      <div className="mx-auto">
         {/* Header Section */}
         <motion.div
           ref={headerRef}
@@ -124,11 +129,10 @@ export default function BlogListingClient({ posts }: BlogListingClientProps) {
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-6 py-2.5 rounded-full font-inter-tight font-semibold text-sm transition-all duration-300 ${
-                    selectedCategory === category
-                      ? "bg-white text-black"
-                      : "bg-white/10 text-white hover:bg-white/20"
-                  }`}
+                  className={`px-6 py-2.5 rounded-full font-inter-tight font-semibold text-sm transition-all duration-300 ${selectedCategory === category
+                    ? "bg-white text-black"
+                    : "bg-white/10 text-white hover:bg-white/20"
+                    }`}
                 >
                   {category}
                 </button>
@@ -208,7 +212,7 @@ export default function BlogListingClient({ posts }: BlogListingClientProps) {
         {remainingPosts.length > 0 && (
           <motion.div
             ref={gridRef}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
             variants={createStaggerContainer(0.08, 0.2)}
             initial="hidden"
             animate={isGridInView ? "visible" : "hidden"}
@@ -238,7 +242,7 @@ export default function BlogListingClient({ posts }: BlogListingClientProps) {
                         {getPostCategory(post.tags)}
                       </span>
 
-                      <h3 className="text-xl lg:text-2xl font-inter-tight font-bold text-white mb-3 line-clamp-2 flex-1">
+                      <h3 className="text-lg font-josefin text-white mb-3 line-clamp-2 flex-1 leading-tight">
                         {post.title}
                       </h3>
 

@@ -108,7 +108,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ posts }) => {
                   {/* Content */}
                   <div className="pt-6 pr-6 flex flex-col gap-4">
                     {/* Title */}
-                    <h3 className="text-xl md:text-2xl font-inter-tight text-gray-900 line-clamp-2 leading-tight group-hover:text-[var(--color-primary)] transition-colors duration-300">
+                    <h3 className="text-lg font-josefin text-gray-900 line-clamp-2 leading-tight group-hover:text-[var(--color-primary)] transition-colors duration-300">
                       {post.title}
                     </h3>
 
