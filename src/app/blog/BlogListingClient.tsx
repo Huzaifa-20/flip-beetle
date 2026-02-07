@@ -36,12 +36,12 @@ const getPostCategory = (tags: string[]): string => {
 // Helper function to get category color
 const getCategoryColor = (category: string) => {
   const colorMap: { [key: string]: string } = {
-    "DESIGN": "bg-[#ff8c6b]",
-    "NEWS": "bg-[#c5a882]",
-    "INSIGHTS": "bg-[#a0c4d9]",
-    "PULP FICTION": "bg-[#b5a8d4]",
+    "DESIGN": "bg-[var(--color-tag-coral)]",
+    "NEWS": "bg-[var(--color-tag-tan)]",
+    "INSIGHTS": "bg-[var(--color-tag-light-blue)]",
+    "PULP FICTION": "bg-[var(--color-tag-purple)]",
   };
-  return colorMap[category] || "bg-[#ff8c6b]";
+  return colorMap[category] || "bg-[var(--color-tag-coral)]";
 };
 
 // Fixed categories array outside component

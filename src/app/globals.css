@@ -25,6 +25,23 @@
   /* Dynamic theme text color - updated by ThemeTransition */
   --theme-text-color: #fefae0;
 
+  /* Blog Category & Tag Colors */
+  --color-tag-coral: #ff8c6b;
+  --color-tag-light-coral: #ffb5a0;
+  --color-tag-tan: #c5a882;
+  --color-tag-light-blue: #a0c4d9;
+  --color-tag-purple: #b5a8d4;
+
+  /* Decorative & Accent Colors */
+  --color-dot-pattern: #b3af9a;
+  --color-badge-rose: #e89b92;
+  --color-menu-default: #ff6900;
+
+  /* Code Block Colors */
+  --color-code-bg: rgba(255, 255, 255, 0.05);
+  --color-code-text: #a8b88a;
+  --color-code-highlight: #d4d4d4;
+
   /* Animation & Transition Durations */
   --duration-fast: 0.3s;
   --duration-normal: 0.5s;
@@ -194,7 +211,7 @@ body {
 }
 
 .article-content pre {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: var(--color-code-bg);
   border-radius: 0.75rem;
   padding: 1.5rem;
   overflow-x: auto;
@@ -205,8 +222,8 @@ body {
 .article-content code {
   font-family: 'Courier New', monospace;
   font-size: 0.875rem;
-  color: #a8b88a;
-  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--color-code-text);
+  background-color: var(--color-code-bg);
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
 }
@@ -214,7 +231,7 @@ body {
 .article-content pre code {
   background-color: transparent;
   padding: 0;
-  color: #d4d4d4;
+  color: var(--color-code-highlight);
 }
 
 .article-content img {
@@ -226,7 +243,7 @@ body {
 }
 
 .article-content a {
-  color: #a8b88a;
+  color: var(--color-code-text);
   text-decoration: underline;
   transition: opacity 0.2s ease;
 }

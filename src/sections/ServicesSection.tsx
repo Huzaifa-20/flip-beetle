@@ -92,7 +92,7 @@ const ServicesSection = () => {
                     {/* Create scalloped badge - 24 scallops around the circle */}
                     <g>
                       {/* Base circle */}
-                      <circle cx="50" cy="50" r="38" fill="#E89B92" />
+                      <circle cx="50" cy="50" r="38" fill="var(--color-badge-rose)" />
                       {/* Scallops around the edge */}
                       {[...Array(24)].map((_, i) => {
                         const angle = (i * 360) / 24;
@@ -105,7 +105,7 @@ const ServicesSection = () => {
                             cx={x}
                             cy={y}
                             r="3.8"
-                            fill="#E89B92"
+                            fill="var(--color-badge-rose)"
                           />
                         );
                       })}

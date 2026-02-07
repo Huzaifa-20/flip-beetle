@@ -98,7 +98,7 @@ const ClientsSection = () => {
       className="w-screen flex justify-center items-center my-32 px-12 py-36 relative"
       style={{
         backgroundImage:
-          "radial-gradient(circle, #b3af9a 1.25px, transparent 1.25px)",
+          "radial-gradient(circle, var(--color-dot-pattern) 1.25px, transparent 1.25px)",
         backgroundSize: "36px 36px",
       }}
     >
@@ -106,14 +106,14 @@ const ClientsSection = () => {
       <div
         className="absolute top-0 left-0 right-0 h-32 pointer-events-none z-10"
         style={{
-          background: "linear-gradient(to bottom, #fefae0, transparent)"
+          background: "linear-gradient(to bottom, var(--color-theme-cream), transparent)"
         }}
       />
       {/* Bottom fade overlay */}
       <div
         className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10"
         style={{
-          background: "linear-gradient(to top, #fefae0, transparent)"
+          background: "linear-gradient(to top, var(--color-theme-cream), transparent)"
         }}
       />
       <motion.div

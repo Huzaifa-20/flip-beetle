@@ -23,7 +23,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ posts }) => {
     >
       <div className="max-w-7xl w-full">
         {/* Section Header */}
-        <div className="w-full flex items-center justify-between mb-16">
+        <div className="w-full flex items-end justify-between mb-16">
           <motion.h2
             initial={{ opacity: 0, x: -20 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
@@ -39,7 +39,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ posts }) => {
           >
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 text-lg md:text-xl riposte uppercase tracking-wider "
+              className="inline-flex items-center gap-2 text-base sm:text-lg riposte uppercase tracking-wider "
             >
               VIEW ALL
               <ArrowRight className="w-5 h-5" />

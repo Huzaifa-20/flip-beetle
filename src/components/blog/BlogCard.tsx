@@ -15,15 +15,15 @@ const getPrimaryTag = (tags: string[]) => {
 // Helper function to get tag color
 const getTagColor = (tag: string) => {
   const colors: { [key: string]: string } = {
-    "News": "bg-[#ff8c6b]",
-    "Web Design": "bg-[#ff8c6b]",
-    "Trends": "bg-[#ff8c6b]",
-    "Case Study": "bg-[#ffb5a0]",
-    "Branding": "bg-[#c5a882]",
-    "Typography": "bg-[#c5a882]",
-    "Accessibility": "bg-[#a0c4d9]",
-    "UI/UX": "bg-[#a0c4d9]",
-    "default": "bg-[#c5a882]"
+    "News": "bg-[var(--color-tag-coral)]",
+    "Web Design": "bg-[var(--color-tag-coral)]",
+    "Trends": "bg-[var(--color-tag-coral)]",
+    "Case Study": "bg-[var(--color-tag-light-coral)]",
+    "Branding": "bg-[var(--color-tag-tan)]",
+    "Typography": "bg-[var(--color-tag-tan)]",
+    "Accessibility": "bg-[var(--color-tag-light-blue)]",
+    "UI/UX": "bg-[var(--color-tag-light-blue)]",
+    "default": "bg-[var(--color-tag-tan)]"
   };
   return colors[tag] || colors.default;
 };
@@ -48,12 +48,12 @@ const getPostCategory = (tags: string[]): string => {
 // Helper function to get category color
 const getCategoryColor = (category: string) => {
   const colorMap: { [key: string]: string } = {
-    "DESIGN": "bg-[#ff8c6b]",
-    "NEWS": "bg-[#c5a882]",
-    "INSIGHTS": "bg-[#a0c4d9]",
-    "PULP FICTION": "bg-[#b5a8d4]",
+    "DESIGN": "bg-[var(--color-tag-coral)]",
+    "NEWS": "bg-[var(--color-tag-tan)]",
+    "INSIGHTS": "bg-[var(--color-tag-light-blue)]",
+    "PULP FICTION": "bg-[var(--color-tag-purple)]",
   };
-  return colorMap[category] || "bg-[#ff8c6b]";
+  return colorMap[category] || "bg-[var(--color-tag-coral)]";
 };
 
 type BlogCardVariant = "homepage" | "listing" | "default";
@@ -68,15 +68,15 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, variant = "default", index = 
   // Format date based on variant
   const formattedDate = variant === "listing"
     ? new Date(post.date).toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-      })
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    })
     : new Date(post.date).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      });
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
 
   // Homepage variant (used in BlogSection)
   if (variant === "homepage") {
@@ -90,7 +90,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, variant = "default", index = 
           className="group block bg-transparent overflow-hidden w-full max-w-[374px]"
         >
           {/* Image */}
-          <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-100">
+          <div className="relative w-full aspect-[4/3] overflow-hidden">
             <Image
               src={post.coverImage}
               alt={post.title}
@@ -103,14 +103,14 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, variant = "default", index = 
           {/* Content */}
           <div className="pt-6 pr-6 flex flex-col gap-4">
             {/* Title */}
-            <h3 className="text-lg riposte text-gray-900 line-clamp-2 leading-tight group-hover:text-[var(--color-primary)] transition-colors duration-300">
+            <h3 className="text-lg riposte line-clamp-2">
               {post.title}
             </h3>
 
             {/* Tag */}
             <div>
               <span
-                className={`inline-block px-4 py-1.5 ${tagColor} text-gray-900 text-xs riposte uppercase tracking-wider rounded-md`}
+                className={`inline-block px-4 py-1.5 ${tagColor} text-xs riposte uppercase tracking-wider rounded-md`}
               >
                 {primaryTag}
               </span>
@@ -144,16 +144,16 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, variant = "default", index = 
             {/* Content */}
             <div className="pt-6 pr-6 flex-1 flex flex-col">
               <span
-                className={`inline-block px-3 py-1 text-white text-xs riposte font-bold tracking-wider rounded-full mb-4 self-start ${categoryColor}`}
+                className={`inline-block px-3 py-1 text-xs riposte font-bold tracking-wider rounded-full mb-4 self-start ${categoryColor}`}
               >
                 {category}
               </span>
 
-              <h3 className="text-lg riposte text-white mb-3 line-clamp-2 flex-1 leading-tight">
+              <h3 className="text-lg riposte mb-3 line-clamp-2 flex-1 leading-tight">
                 {post.title}
               </h3>
 
-              <div className="text-xs riposte text-white/50 mt-auto">
+              <div className="text-xs riposte mt-auto">
                 {formattedDate} • {post.readTime} min
               </div>
             </div>
@@ -172,10 +172,10 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, variant = "default", index = 
     >
       <Link
         href={`/blog/${post.slug}`}
-        className="block bg-[var(--color-theme-cream)] rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
+        className="block rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
       >
         {/* Cover Image */}
-        <div className="relative w-full aspect-[16/9] overflow-hidden bg-[var(--color-primary)]/10">
+        <div className="relative w-full aspect-[16/9] overflow-hidden">
           <Image
             src={post.coverImage}
             alt={post.title}
@@ -194,7 +194,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, variant = "default", index = 
               {post.tags.slice(0, 3).map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1 bg-[var(--color-primary)]/10 text-[var(--color-primary)] text-xs riposte uppercase tracking-wider rounded-full"
+                  className="px-3 py-1 text-xs riposte uppercase tracking-wider rounded-full"
                 >
                   {tag}
                 </span>
@@ -203,17 +203,17 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, variant = "default", index = 
           )}
 
           {/* Title */}
-          <h3 className="text-2xl md:text-3xl riposte text-[var(--color-text-on-cream)] mb-3 line-clamp-2 group-hover:text-[var(--color-primary)] transition-colors duration-300">
+          <h3 className="text-2xl md:text-3xl riposte mb-3 line-clamp-2 transition-colors duration-300">
             {post.title}
           </h3>
 
           {/* Excerpt */}
-          <p className="text-lg riposte text-[var(--color-text-on-cream)]/80 mb-4 line-clamp-3 leading-relaxed">
+          <p className="text-lg riposte mb-4 line-clamp-3 leading-relaxed">
             {post.excerpt}
           </p>
 
           {/* Meta Info */}
-          <div className="flex items-center justify-between text-sm riposte text-[var(--color-text-on-cream)]/60">
+          <div className="flex items-center justify-between text-sm riposte">
             <span>{formattedDate}</span>
             <span>{post.readTime} min read</span>
           </div>

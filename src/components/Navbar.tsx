@@ -153,7 +153,7 @@ const Navbar = () => {
 
             {/* Drawer */}
             <motion.div
-              className="fixed right-0 top-0 h-screen w-[500px] z-70 flex flex-col justify-between py-12 px-8 transition-colors duration-500"
+              className="fixed right-0 top-0 h-screen w-[85vw] xs:w-[75vw] sm:w-[400px] md:w-[450px] lg:w-[500px] max-w-full z-70 flex flex-col justify-between py-8 sm:py-10 md:py-12 px-5 sm:px-6 md:px-8 transition-colors duration-500"
               style={{ backgroundColor: getSidebarBgColor() }}
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
@@ -163,14 +163,15 @@ const Navbar = () => {
               {/* Close Button */}
               <button
                 onClick={() => setIsMenuOpen(false)}
-                className="absolute top-8 right-12 text-4xl transition-colors duration-300 cursor-pointer"
+                className="absolute top-6 sm:top-7 md:top-8 right-5 sm:right-8 md:right-12 text-3xl sm:text-4xl transition-colors duration-300 cursor-pointer hover:scale-110 active:scale-95"
                 style={{ color: getSidebarTextColor() }}
+                aria-label="Close menu"
               >
                 ×
               </button>
 
               {/* Menu Items */}
-              <nav className="mt-20">
+              <nav className="mt-16 sm:mt-18 md:mt-20">
                 <MenuVertical
                   menuItems={MENU_ITEMS}
                   color={getSidebarTextColor()}
@@ -180,14 +181,14 @@ const Navbar = () => {
               </nav>
 
               {/* Social Links */}
-              <div className="flex gap-8">
+              <div className="flex flex-wrap gap-4 sm:gap-6 md:gap-8">
                 {SOCIAL_LINKS.map((social) => (
                   <a
                     key={social.label}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm riposte transition-colors duration-300 uppercase tracking-wider"
+                    className="text-xs sm:text-sm riposte transition-colors duration-300 uppercase tracking-wider hover:opacity-70"
                     style={{ color: getSidebarTextColor() }}
                   >
                     {social.label}
