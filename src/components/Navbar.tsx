@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import {
@@ -75,4 +75,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default React.memo(Navbar);

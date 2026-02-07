@@ -7,19 +7,163 @@ import { motion } from "framer-motion";
 import { fadeInUp } from "@/utils/animations";
 import type { BlogMetadata } from "@/types/blog";
 
+// Helper function to get primary tag
+const getPrimaryTag = (tags: string[]) => {
+  return tags[0] || "Article";
+};
+
+// Helper function to get tag color
+const getTagColor = (tag: string) => {
+  const colors: { [key: string]: string } = {
+    "News": "bg-[#ff8c6b]",
+    "Web Design": "bg-[#ff8c6b]",
+    "Trends": "bg-[#ff8c6b]",
+    "Case Study": "bg-[#ffb5a0]",
+    "Branding": "bg-[#c5a882]",
+    "Typography": "bg-[#c5a882]",
+    "Accessibility": "bg-[#a0c4d9]",
+    "UI/UX": "bg-[#a0c4d9]",
+    "default": "bg-[#c5a882]"
+  };
+  return colors[tag] || colors.default;
+};
+
+// Helper function to get category from tags
+const getPostCategory = (tags: string[]): string => {
+  if (tags.some(tag => ["Minimalism", "Branding", "Typography", "Best Practices"].includes(tag))) {
+    return "DESIGN";
+  }
+  if (tags.some(tag => ["Trends", "2026"].includes(tag))) {
+    return "NEWS";
+  }
+  if (tags.some(tag => ["Accessibility", "WCAG", "Responsive Design", "CSS", "Mobile First", "Animation", "Performance", "Framer Motion"].includes(tag))) {
+    return "INSIGHTS";
+  }
+  if (tags.some(tag => ["Pulp Fiction", "Story", "Creative"].includes(tag))) {
+    return "PULP FICTION";
+  }
+  return "DESIGN";
+};
+
+// Helper function to get category color
+const getCategoryColor = (category: string) => {
+  const colorMap: { [key: string]: string } = {
+    "DESIGN": "bg-[#ff8c6b]",
+    "NEWS": "bg-[#c5a882]",
+    "INSIGHTS": "bg-[#a0c4d9]",
+    "PULP FICTION": "bg-[#b5a8d4]",
+  };
+  return colorMap[category] || "bg-[#ff8c6b]";
+};
+
+type BlogCardVariant = "homepage" | "listing" | "default";
+
 interface BlogCardProps {
   post: BlogMetadata;
+  variant?: BlogCardVariant;
   index?: number;
 }
 
-const BlogCard: React.FC<BlogCardProps> = ({ post, index = 0 }) => {
-  // Format date
-  const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+const BlogCard: React.FC<BlogCardProps> = ({ post, variant = "default", index = 0 }) => {
+  // Format date based on variant
+  const formattedDate = variant === "listing"
+    ? new Date(post.date).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      })
+    : new Date(post.date).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
 
+  // Homepage variant (used in BlogSection)
+  if (variant === "homepage") {
+    const primaryTag = getPrimaryTag(post.tags);
+    const tagColor = getTagColor(primaryTag);
+
+    return (
+      <motion.div variants={fadeInUp} className="flex justify-center">
+        <Link
+          href={`/blog/${post.slug}`}
+          className="group block bg-transparent overflow-hidden w-full max-w-[374px]"
+        >
+          {/* Image */}
+          <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-100">
+            <Image
+              src={post.coverImage}
+              alt={post.title}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105 rounded-lg"
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            />
+          </div>
+
+          {/* Content */}
+          <div className="pt-6 pr-6 flex flex-col gap-4">
+            {/* Title */}
+            <h3 className="text-lg font-josefin text-gray-900 line-clamp-2 leading-tight group-hover:text-[var(--color-primary)] transition-colors duration-300">
+              {post.title}
+            </h3>
+
+            {/* Tag */}
+            <div>
+              <span
+                className={`inline-block px-4 py-1.5 ${tagColor} text-gray-900 text-xs font-inter-tight uppercase tracking-wider rounded-md`}
+              >
+                {primaryTag}
+              </span>
+            </div>
+          </div>
+        </Link>
+      </motion.div>
+    );
+  }
+
+  // Listing variant (used in BlogListingClient)
+  if (variant === "listing") {
+    const category = getPostCategory(post.tags);
+    const categoryColor = getCategoryColor(category);
+
+    return (
+      <motion.div variants={fadeInUp} className="flex justify-center">
+        <Link href={`/blog/${post.slug}`} className="w-full max-w-[374px]">
+          <div className="bg-transparent overflow-hidden cursor-pointer h-full flex flex-col">
+            {/* Image */}
+            <div className="relative h-48 md:h-56">
+              <Image
+                src={post.coverImage}
+                alt={post.title}
+                fill
+                className="object-cover rounded-lg"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              />
+            </div>
+
+            {/* Content */}
+            <div className="pt-6 pr-6 flex-1 flex flex-col">
+              <span
+                className={`inline-block px-3 py-1 text-white text-xs font-inter-tight font-bold tracking-wider rounded-full mb-4 self-start ${categoryColor}`}
+              >
+                {category}
+              </span>
+
+              <h3 className="text-lg font-josefin text-white mb-3 line-clamp-2 flex-1 leading-tight">
+                {post.title}
+              </h3>
+
+              <div className="text-xs font-josefin text-white/50 mt-auto">
+                {formattedDate} • {post.readTime} min
+              </div>
+            </div>
+          </div>
+        </Link>
+      </motion.div>
+    );
+  }
+
+  // Default variant (original implementation)
   return (
     <motion.div
       variants={fadeInUp}
@@ -79,4 +223,4 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index = 0 }) => {
   );
 };
 
-export default BlogCard;
+export default React.memo(BlogCard);

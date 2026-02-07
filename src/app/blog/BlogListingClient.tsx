@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { createStaggerContainer } from "@/utils/animations";
+import { createStaggerContainer, fadeInUp } from "@/utils/animations";
+import BlogCard from "@/components/blog/BlogCard";
 import type { BlogMetadata } from "@/types/blog";
 
 interface BlogListingClientProps {
@@ -43,17 +44,10 @@ const getCategoryColor = (category: string) => {
   return colorMap[category] || "bg-[#ff8c6b]";
 };
 
-// Fade in up animation variant
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.4, ease: [0.43, 0.13, 0.23, 0.96] as const },
-  },
-};
+// Fixed categories array outside component
+const CATEGORIES = ["ALL", "DESIGN", "NEWS", "PULP FICTION", "INSIGHTS"] as const;
 
-export default function BlogListingClient({ posts }: BlogListingClientProps) {
+function BlogListingClient({ posts }: BlogListingClientProps) {
   const headerRef = React.useRef(null);
   const featuredRef = React.useRef(null);
   const gridRef = React.useRef(null);
@@ -69,21 +63,20 @@ export default function BlogListingClient({ posts }: BlogListingClientProps) {
     window.scrollTo(0, 0);
   }, []);
 
-  // Fixed categories
-  const categories = ["ALL", "DESIGN", "NEWS", "PULP FICTION", "INSIGHTS"];
+  // Filter posts by selected category - memoized for performance
+  const filteredPosts = useMemo(() => {
+    if (selectedCategory === "ALL") {
+      return posts;
+    }
+    return posts.filter((post) => {
+      const postCategory = getPostCategory(post.tags);
+      return postCategory === selectedCategory;
+    });
+  }, [posts, selectedCategory]);
 
-  // Filter posts by selected category
-  const filteredPosts =
-    selectedCategory === "ALL"
-      ? posts
-      : posts.filter((post) => {
-        const postCategory = getPostCategory(post.tags);
-        return postCategory === selectedCategory;
-      });
-
-  // Featured post is the first one
-  const featuredPost = filteredPosts[0];
-  const remainingPosts = filteredPosts.slice(1);
+  // Featured post is the first one - memoized for performance
+  const featuredPost = useMemo(() => filteredPosts[0], [filteredPosts]);
+  const remainingPosts = useMemo(() => filteredPosts.slice(1), [filteredPosts]);
 
   return (
     <main className="min-h-screen w-screen bg-black px-6 md:px-12 py-24 md:py-36">
@@ -125,7 +118,7 @@ export default function BlogListingClient({ posts }: BlogListingClientProps) {
               FILTER WORK
             </p>
             <div className="flex flex-wrap gap-3">
-              {categories.map((category) => (
+              {CATEGORIES.map((category) => (
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
@@ -218,46 +211,7 @@ export default function BlogListingClient({ posts }: BlogListingClientProps) {
             animate={isGridInView ? "visible" : "hidden"}
           >
             {remainingPosts.map((post) => (
-              <motion.div key={post.slug} variants={fadeInUp} className="flex justify-center">
-                <Link href={`/blog/${post.slug}`} className="w-full max-w-[374px]">
-                  <div className="bg-transparent overflow-hidden cursor-pointer h-full flex flex-col">
-                    {/* Image */}
-                    <div className="relative h-48 md:h-56">
-                      <Image
-                        src={post.coverImage}
-                        alt={post.title}
-                        fill
-                        className="object-cover rounded-lg"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      />
-                    </div>
-
-                    {/* Content */}
-                    <div className="pt-6 pr-6 flex-1 flex flex-col">
-                      <span
-                        className={`inline-block px-3 py-1 text-white text-xs font-inter-tight font-bold tracking-wider rounded-full mb-4 self-start ${getCategoryColor(
-                          getPostCategory(post.tags)
-                        )}`}
-                      >
-                        {getPostCategory(post.tags)}
-                      </span>
-
-                      <h3 className="text-lg font-josefin text-white mb-3 line-clamp-2 flex-1 leading-tight">
-                        {post.title}
-                      </h3>
-
-                      <div className="text-xs font-josefin text-white/50 mt-auto">
-                        {new Date(post.date).toLocaleDateString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                          year: "numeric",
-                        })}{" "}
-                        • {post.readTime} min
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
+              <BlogCard key={post.slug} post={post} variant="listing" />
             ))}
           </motion.div>
         )}
@@ -278,3 +232,5 @@ export default function BlogListingClient({ posts }: BlogListingClientProps) {
     </main>
   );
 }
+
+export default React.memo(BlogListingClient);

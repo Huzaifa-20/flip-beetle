@@ -2,10 +2,9 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { fadeInUp } from "@/utils/animations";
+import BlogCard from "@/components/blog/BlogCard";
 import type { BlogMetadata } from "@/types/blog";
 
 interface BlogSectionProps {
@@ -15,27 +14,6 @@ interface BlogSectionProps {
 const BlogSection: React.FC<BlogSectionProps> = ({ posts }) => {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
-
-  // Get primary tag for each post
-  const getPrimaryTag = (tags: string[]) => {
-    return tags[0] || "Article";
-  };
-
-  // Get tag color based on tag name
-  const getTagColor = (tag: string) => {
-    const colors: { [key: string]: string } = {
-      "News": "bg-[#ff8c6b]",
-      "Web Design": "bg-[#ff8c6b]",
-      "Trends": "bg-[#ff8c6b]",
-      "Case Study": "bg-[#ffb5a0]",
-      "Branding": "bg-[#c5a882]",
-      "Typography": "bg-[#c5a882]",
-      "Accessibility": "bg-[#a0c4d9]",
-      "UI/UX": "bg-[#a0c4d9]",
-      "default": "bg-[#c5a882]"
-    };
-    return colors[tag] || colors.default;
-  };
 
   return (
     <section
@@ -84,51 +62,13 @@ const BlogSection: React.FC<BlogSectionProps> = ({ posts }) => {
             },
           }}
         >
-          {posts.slice(0, 4).map((post) => {
-            const primaryTag = getPrimaryTag(post.tags);
-            const tagColor = getTagColor(primaryTag);
-
-            return (
-              <motion.div key={post.slug} variants={fadeInUp} className="flex justify-center">
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="group block bg-transparent overflow-hidden w-full max-w-[374px]"
-                >
-                  {/* Image */}
-                  <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-100">
-                    <Image
-                      src={post.coverImage}
-                      alt={post.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105 rounded-lg"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    />
-                  </div>
-
-                  {/* Content */}
-                  <div className="pt-6 pr-6 flex flex-col gap-4">
-                    {/* Title */}
-                    <h3 className="text-lg font-josefin text-gray-900 line-clamp-2 leading-tight group-hover:text-[var(--color-primary)] transition-colors duration-300">
-                      {post.title}
-                    </h3>
-
-                    {/* Tag */}
-                    <div>
-                      <span
-                        className={`inline-block px-4 py-1.5 ${tagColor} text-gray-900 text-xs font-inter-tight uppercase tracking-wider rounded-md`}
-                      >
-                        {primaryTag}
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
-            );
-          })}
+          {posts.slice(0, 4).map((post) => (
+            <BlogCard key={post.slug} post={post} variant="homepage" />
+          ))}
         </motion.div>
       </div>
     </section>
   );
 };
 
-export default BlogSection;
+export default React.memo(BlogSection);

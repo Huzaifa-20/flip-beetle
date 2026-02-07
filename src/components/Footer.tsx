@@ -4,25 +4,26 @@ import React from "react";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 
+// Constant arrays moved outside component for performance
+const NAVIGATION_LINKS = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "#about" },
+  { name: "Services", href: "#services" },
+  { name: "Clients", href: "#clients" },
+  { name: "Contact", href: "#contact" },
+] as const;
+
+const SOCIAL_LINKS = [
+  { name: "Instagram", href: "https://instagram.com" },
+  { name: "Facebook", href: "https://facebook.com" },
+  { name: "Twitter (X)", href: "https://twitter.com" },
+  { name: "LinkedIn", href: "https://linkedin.com" },
+  { name: "Telegram", href: "https://telegram.org" },
+] as const;
+
 const Footer = () => {
   const pathname = usePathname();
   const isBlogPage = pathname?.startsWith("/blog");
-
-  const navigationLinks = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Clients", href: "#clients" },
-    { name: "Contact", href: "#contact" },
-  ];
-
-  const socialLinks = [
-    { name: "Instagram", href: "https://instagram.com" },
-    { name: "Facebook", href: "https://facebook.com" },
-    { name: "Twitter (X)", href: "https://twitter.com" },
-    { name: "LinkedIn", href: "https://linkedin.com" },
-    { name: "Telegram", href: "https://telegram.org" },
-  ];
 
   // Use black background for blog pages, primary color for others
   const bgColor = isBlogPage ? "bg-black" : "bg-primary";
@@ -61,7 +62,7 @@ const Footer = () => {
                 Navigate
               </h3>
               <ul className="space-y-3">
-                {navigationLinks.map((link) => (
+                {NAVIGATION_LINKS.map((link) => (
                   <li key={link.name}>
                     <a
                       href={link.href}
@@ -80,7 +81,7 @@ const Footer = () => {
                 Social & Stuff
               </h3>
               <ul className="space-y-3">
-                {socialLinks.map((link) => (
+                {SOCIAL_LINKS.map((link) => (
                   <li key={link.name}>
                     <a
                       href={link.href}
@@ -141,4 +142,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default React.memo(Footer);

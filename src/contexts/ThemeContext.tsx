@@ -20,11 +20,21 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [isAlternateTheme, setIsAlternateTheme] = useState(false);
   const pathname = usePathname();
 
-  // Reset theme to green when navigating to homepage
+  // Reset theme to green only when navigating to homepage AND at the top of the page
+  // This allows ScrollThemeController to handle theme changes when scrolled down
   useEffect(() => {
     if (pathname === "/") {
-      setCurrentTheme("green");
-      setIsAlternateTheme(false);
+      // Small delay to ensure DOM is ready and ScrollThemeController can run
+      const timer = setTimeout(() => {
+        // Only reset if we're near the top of the page
+        if (window.scrollY < 100) {
+          setCurrentTheme("green");
+          setIsAlternateTheme(false);
+        }
+        // If scrolled down, let ScrollThemeController handle the theme
+      }, 50);
+
+      return () => clearTimeout(timer);
     }
   }, [pathname]);
 
