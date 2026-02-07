@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter_Tight } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
-import NavbarAlt from "@/components/NavbarAlt";
+import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { SplashAnimationProvider } from "@/contexts/SplashAnimationContext";
 import ThemeTransition from "@/components/ThemeTransition";
@@ -10,7 +10,7 @@ import ScrollThemeController from "@/components/ScrollThemeController";
 import Footer from "@/components/Footer";
 
 const riposte = localFont({
-  src: "../../public/fonts/RiposteLight.ttf",
+  src: "./fonts/RiposteLight.ttf",
   variable: "--riposte",
   display: "swap",
 });
@@ -39,7 +39,7 @@ export default function RootLayout({
           <SplashAnimationProvider>
             <ThemeTransition />
             <ScrollThemeController />
-            <NavbarAlt />
+            <Navbar />
             {children}
             <Footer />
           </SplashAnimationProvider>

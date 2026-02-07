@@ -73,6 +73,15 @@ body {
   transition: color var(--duration-slow) var(--ease-smooth);
 }
 
+/* Custom Font Utility Classes */
+.riposte {
+  font-family: var(--riposte), serif;
+}
+
+.font-inter-tight {
+  font-family: var(--font-inter-tight), sans-serif;
+}
+
 /* Performance optimization: hint browser about animated elements */
 .will-change-transform {
   will-change: transform;

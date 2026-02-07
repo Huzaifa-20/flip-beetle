@@ -4,8 +4,8 @@ import ServicesAltSection from "@/sections/ServicesAltSection";
 import ProcessSection from "@/sections/ProcessSection";
 import FAQSection from "@/sections/FAQSection";
 import ContactSection from "@/sections/ContactSection";
-import HeroSectionAlt from "@/sections/HeroSectionAlt";
-import AboutSectionAlt from "@/sections/AboutSectionAlt";
+import HeroSection from "@/sections/HeroSection";
+import MissionSection from "@/sections/MissionSection";
 import TextScrollBanner from "@/components/TextScrollBanner";
 import Testimonials from "@/sections/Testimonials";
 import BlogSection from "@/sections/BlogSection";
@@ -17,9 +17,9 @@ export default async function Home() {
 
   return (
     <>
-      <HeroSectionAlt />
-      <AboutSectionAlt />
+      <HeroSection />
       <AboutSection />
+      <MissionSection />
       <ClientsSection />
       <TextScrollBanner />
       <ServicesAltSection />

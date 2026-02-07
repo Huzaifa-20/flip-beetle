@@ -1,90 +1,61 @@
 "use client";
 
 import React from "react";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import {
-  fadeInLeft,
-  scaleIn,
-  fadeInUp,
-  createStaggerContainer,
-  imageHover,
-} from "@/utils/animations";
-import { PARALLAX_SPEEDS, SCROLL_OFFSETS } from "@/utils/parallaxConfig";
+import Link from "next/link";
+import { motion, useInView } from "framer-motion";
+import { fadeInLeft, fadeInRight } from "@/utils/animations";
 
 const AboutSection = () => {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
-  // Parallax scroll setup
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: SCROLL_OFFSETS.SECTION,
-  });
-
-  // Parallax transforms - useTransform handles optimization internally
-  const videoY = useTransform(scrollYProgress, [0, 1], [0, -70 * PARALLAX_SPEEDS.FASTER]);
-
   return (
     <section
       ref={ref}
       data-theme="cream"
-      className="w-screen flex flex-col justify-center items-center my-32 px-12"
+      className="w-screen flex justify-center items-center px-6 md:px-12 py-24 md:py-36"
     >
-      <div className="w-full flex justify-center items-center">
+      <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        {/* Left - Text Content */}
         <motion.div
-          className="flex flex-col"
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={fadeInLeft}
-        // style={{ y: leftTextY }}
+          className="flex flex-col gap-8"
         >
-          <h1 className="text-7xl text-start text-nowrap">Hi, im Sulti</h1>
-          <p className="text-2xl text-start">A freelance Autist</p>
-          <p className="riposte text-lg text-start mt-4">
-            I create comprehensive websites from scratch. Working with me you
-            get memorable, unique websites tailored to your specific needs,
-            hassle-free process and first class service.
+          <p className="max-w-[450px] text-lg riposte leading-relaxed">
+            Flip Beetle is where strategy, design, and technology come together
+            to build brands people believe in — and empower them to grow with
+            purpose.
           </p>
-        </motion.div>
-        <div className="w-full flex justify-center items-center">
-          <motion.div
-            className="flex items-center gap-4"
-            variants={createStaggerContainer(0.1, 0.3)}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            style={{ y: videoY }}
+
+          <Link
+            href="/#about"
+            className="inline-flex items-center gap-2 text-sm md:text-base font-inter-tight uppercase tracking-wider border-b-2 pb-1 w-fit transition-colors duration-300"
           >
-            <motion.div
-              variants={scaleIn}
-              whileHover={imageHover}
-              className="w-[150px] h-[150px] overflow-hidden"
-            >
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-contain"
-              >
-                <source src="/images/Anxious_Beetle.webm" type="video/webm" />
-              </video>
-            </motion.div>
+            MORE ABOUT FLIP BEETLE
+            <span className="text-xl">→</span>
+          </Link>
+        </motion.div>
 
-
-          </motion.div>
-        </div>
+        {/* Right - Video */}
+        <motion.div
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={fadeInRight}
+          className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl"
+        >
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src="/videos/about_us.mp4" type="video/mp4" />
+          </video>
+        </motion.div>
       </div>
-      {/* <motion.p
-        className="w-full max-w-[700px] text-lg riposte text-center mt-12"
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        variants={fadeInUp}
-        style={{ y: bottomTextY }}
-        transition={{ delay: 0.5 }}
-      >
-        Whether you&apos;re an expert, a startup, or a small business,
-        you&apos;re in the right place for a professionally crafted website.
-      </motion.p> */}
     </section>
   );
 };
