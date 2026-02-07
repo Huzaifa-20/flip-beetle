@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Josefin_Sans, Inter_Tight } from "next/font/google";
+import { Inter_Tight } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import NavbarAlt from "@/components/NavbarAlt";
 import { ThemeProvider } from "@/contexts/ThemeContext";
@@ -8,10 +9,9 @@ import ThemeTransition from "@/components/ThemeTransition";
 import ScrollThemeController from "@/components/ScrollThemeController";
 import Footer from "@/components/Footer";
 
-const josefinSans = Josefin_Sans({
-  variable: "--font-josefin",
-  subsets: ["latin"],
-  weight: ["400", "700"],
+const riposte = localFont({
+  src: "../../public/fonts/RiposteLight.ttf",
+  variable: "--riposte",
   display: "swap",
 });
 
@@ -34,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${josefinSans.variable} ${interTight.variable} antialiased`}>
+      <body className={`${riposte.variable} ${interTight.variable} antialiased`}>
         <ThemeProvider>
           <SplashAnimationProvider>
             <ThemeTransition />

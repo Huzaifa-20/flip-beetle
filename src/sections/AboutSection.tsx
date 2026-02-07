@@ -40,7 +40,7 @@ const AboutSection = () => {
         >
           <h1 className="text-7xl text-start text-nowrap">Hi, im Sulti</h1>
           <p className="text-2xl text-start">A freelance Autist</p>
-          <p className="font-josefin text-lg text-start mt-4">
+          <p className="riposte text-lg text-start mt-4">
             I create comprehensive websites from scratch. Working with me you
             get memorable, unique websites tailored to your specific needs,
             hassle-free process and first class service.
@@ -75,7 +75,7 @@ const AboutSection = () => {
         </div>
       </div>
       {/* <motion.p
-        className="w-full max-w-[700px] text-lg font-josefin text-center mt-12"
+        className="w-full max-w-[700px] text-lg riposte text-center mt-12"
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         variants={fadeInUp}

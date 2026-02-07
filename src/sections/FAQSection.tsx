@@ -108,7 +108,7 @@ const FAQSection = () => {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <p className="text-lg font-josefin leading-relaxed mt-4 text-primary/80">
+                    <p className="text-lg riposte leading-relaxed mt-4 text-primary/80">
                       {faq.answer}
                     </p>
                   </motion.div>

@@ -103,7 +103,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, variant = "default", index = 
           {/* Content */}
           <div className="pt-6 pr-6 flex flex-col gap-4">
             {/* Title */}
-            <h3 className="text-lg font-josefin text-gray-900 line-clamp-2 leading-tight group-hover:text-[var(--color-primary)] transition-colors duration-300">
+            <h3 className="text-lg riposte text-gray-900 line-clamp-2 leading-tight group-hover:text-[var(--color-primary)] transition-colors duration-300">
               {post.title}
             </h3>
 
@@ -149,11 +149,11 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, variant = "default", index = 
                 {category}
               </span>
 
-              <h3 className="text-lg font-josefin text-white mb-3 line-clamp-2 flex-1 leading-tight">
+              <h3 className="text-lg riposte text-white mb-3 line-clamp-2 flex-1 leading-tight">
                 {post.title}
               </h3>
 
-              <div className="text-xs font-josefin text-white/50 mt-auto">
+              <div className="text-xs riposte text-white/50 mt-auto">
                 {formattedDate} • {post.readTime} min
               </div>
             </div>
@@ -208,12 +208,12 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, variant = "default", index = 
           </h3>
 
           {/* Excerpt */}
-          <p className="text-lg font-josefin text-[var(--color-text-on-cream)]/80 mb-4 line-clamp-3 leading-relaxed">
+          <p className="text-lg riposte text-[var(--color-text-on-cream)]/80 mb-4 line-clamp-3 leading-relaxed">
             {post.excerpt}
           </p>
 
           {/* Meta Info */}
-          <div className="flex items-center justify-between text-sm font-josefin text-[var(--color-text-on-cream)]/60">
+          <div className="flex items-center justify-between text-sm riposte text-[var(--color-text-on-cream)]/60">
             <span>{formattedDate}</span>
             <span>{post.readTime} min read</span>
           </div>

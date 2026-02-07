@@ -74,7 +74,7 @@ const HeroSection = () => {
                 }}
               />
             </motion.div>
-            <p className="font-josefin whitespace-nowrap text-lg">
+            <p className="riposte whitespace-nowrap text-lg">
               This is you,
               <br />
               anxious to build a
@@ -85,7 +85,7 @@ const HeroSection = () => {
         </div>
       </div>
       <motion.p
-        className="w-full max-w-[800px] text-xl font-josefin text-center"
+        className="w-full max-w-[800px] text-xl riposte text-center"
         initial="hidden"
         animate="visible"
         variants={heroParagraph}

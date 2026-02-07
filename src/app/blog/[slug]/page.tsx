@@ -83,8 +83,8 @@ export default async function ArticlePage({ params }: Props) {
   // Return JSX outside of try/catch to avoid React error
   return (
     <main
-      data-theme="cream"
-      className="min-h-screen w-screen bg-[var(--color-theme-cream)]"
+      data-theme="black"
+      className="min-h-screen w-screen"
     >
       {/* Read Progress Bar */}
       <ReadProgressBar />
@@ -93,7 +93,7 @@ export default async function ArticlePage({ params }: Props) {
       <article className="w-full">
         {/* Breadcrumb */}
         <div className="max-w-6xl mx-auto px-6 pt-32 pb-8">
-          <nav className="flex items-center gap-2 text-sm font-josefin text-[var(--color-text-on-cream)]/60">
+          <nav className="flex items-center gap-2 text-sm riposte text-white/60">
             <Link href="/" className="hover:text-[var(--color-primary)] transition-colors">
               Home
             </Link>
@@ -102,18 +102,18 @@ export default async function ArticlePage({ params }: Props) {
               Journal
             </Link>
             <ChevronRight className="w-4 h-4" />
-            <span className="text-[var(--color-text-on-cream)]">{post.title}</span>
+            <span className="text-white">{post.title}</span>
           </nav>
         </div>
 
         {/* Title & Meta */}
         <div className="max-w-4xl mx-auto px-6 pb-12">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-inter-tight text-[var(--color-text-on-cream)] mb-8 leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-inter-tight text-white mb-8 leading-tight">
             {post.title}
           </h1>
 
           {/* Meta Info */}
-          <div className="flex flex-wrap items-center gap-6 text-[var(--color-text-on-cream)]/60 font-josefin">
+          <div className="flex flex-wrap items-center gap-6 text-white/60 riposte">
             <div className="flex items-center gap-2">
               <Calendar className="w-5 h-5" />
               <span>{formattedDate}</span>
@@ -152,7 +152,7 @@ export default async function ArticlePage({ params }: Props) {
               {post.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-4 py-2 bg-[var(--color-primary)]/10 text-[var(--color-primary)] text-sm font-inter-tight uppercase tracking-wider rounded-full"
+                  className="px-4 py-2 bg-white/10 text-white text-sm font-inter-tight uppercase tracking-wider rounded-full"
                 >
                   {tag}
                 </span>
@@ -165,17 +165,17 @@ export default async function ArticlePage({ params }: Props) {
         <ArticleNavigation prev={prev} next={next} />
 
         {/* CTA Section */}
-        <div className="w-full bg-[var(--color-theme-dark-cream)] py-24">
+        <div className="w-full py-24">
           <div className="max-w-4xl mx-auto px-6 text-center">
-            <h2 className="text-4xl md:text-5xl font-inter-tight text-[var(--color-text-on-dark-cream)] mb-6">
+            <h2 className="text-4xl md:text-5xl font-inter-tight  mb-6">
               Ready to start your project?
             </h2>
-            <p className="text-xl font-josefin text-[var(--color-text-on-dark-cream)]/80 mb-8">
+            <p className="text-xl riposte  mb-8">
               Let&apos;s create something amazing together
             </p>
             <Link
               href="/#contact"
-              className="inline-block px-8 py-4 bg-[var(--color-primary)] text-[var(--color-text-on-green)] font-inter-tight text-lg uppercase tracking-wider rounded-full hover:scale-105 transition-transform duration-300 shadow-lg"
+              className="inline-block px-8 py-4"
             >
               Get In Touch
             </Link>

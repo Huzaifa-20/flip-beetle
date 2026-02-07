@@ -97,7 +97,7 @@ const ProcessSection = () => {
             {processSteps.map((step, index) => (
               <motion.div
                 key={index}
-                className="min-w-[450px] bg-(--color-primary) rounded-3xl p-8 relative"
+                className="min-w-[400px] border border-black rounded-lg p-4 relative"
                 variants={{
                   hidden: { opacity: 0, y: 100 },
                   visible: { opacity: 1, y: 0 },
@@ -106,14 +106,14 @@ const ProcessSection = () => {
               >
                 {/* Card Header */}
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-3xl font-josefin text-white">
+                  <h3 className="text-3xl riposte text-black">
                     {step.number}. {step.title}
                   </h3>
                 </div>
 
                 {/* Card Content */}
-                <div className="bg-(--color-background) rounded-2xl p-6 min-h-[200px]">
-                  <p className="text-gray-800 text-lg font-josefin leading-relaxed">
+                <div className="bg-(--color-background) rounded-lg p-4 min-h-[200px]">
+                  <p className="text-gray-800 text-lg riposte leading-relaxed">
                     {step.description}
                   </p>
                 </div>

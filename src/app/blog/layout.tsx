@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import NavbarAlt from "@/components/NavbarAlt";
 
 export const metadata: Metadata = {
   title: "Journal | Flip Beetle",
@@ -16,5 +17,10 @@ export default function BlogLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <NavbarAlt />
+      {children}
+    </>
+  );
 }

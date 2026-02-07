@@ -25,15 +25,15 @@ const ArticleNavigation: React.FC<ArticleNavigationProps> = ({ prev, next }) => 
           >
             <Link
               href={`/blog/${prev.slug}`}
-              className="block p-6 bg-[var(--color-theme-dark-cream)] rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 h-full"
+              className="block p-6 rounded-2xl h-full"
             >
               <div className="flex items-center gap-3 mb-3">
-                <ArrowLeft className="w-5 h-5 text-[var(--color-primary)]" />
-                <span className="text-sm font-inter-tight uppercase tracking-wider text-[var(--color-text-on-dark-cream)]/60">
+                <ArrowLeft className="w-5 h-5 text-[var(--color-white)]" />
+                <span className="text-sm font-inter-tight uppercase tracking-wider text-white/60">
                   Previous Article
                 </span>
               </div>
-              <h3 className="text-2xl font-inter-tight text-[var(--color-text-on-dark-cream)] line-clamp-2">
+              <h3 className="text-2xl font-inter-tight text-white line-clamp-2">
                 {prev.title}
               </h3>
             </Link>
@@ -50,15 +50,15 @@ const ArticleNavigation: React.FC<ArticleNavigationProps> = ({ prev, next }) => 
           >
             <Link
               href={`/blog/${next.slug}`}
-              className="block p-6 bg-[var(--color-theme-dark-cream)] rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 h-full text-right"
+              className="block p-6 h-full text-right"
             >
               <div className="flex items-center justify-end gap-3 mb-3">
-                <span className="text-sm font-inter-tight uppercase tracking-wider text-[var(--color-text-on-dark-cream)]/60">
+                <span className="text-sm font-inter-tight uppercase tracking-wider text-white/60">
                   Next Article
                 </span>
-                <ArrowRight className="w-5 h-5 text-[var(--color-primary)]" />
+                <ArrowRight className="w-5 h-5 text-[var(--color-white)]" />
               </div>
-              <h3 className="text-2xl font-inter-tight text-[var(--color-text-on-dark-cream)] line-clamp-2">
+              <h3 className="text-2xl font-inter-tight text-white line-clamp-2">
                 {next.title}
               </h3>
             </Link>

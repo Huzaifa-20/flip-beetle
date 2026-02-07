@@ -3,13 +3,16 @@
 import { useEffect, useState, useRef, useMemo } from "react";
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, animate } from "framer-motion";
 import { useSplashAnimation } from "@/contexts/SplashAnimationContext";
+import { useBeetleLogo } from "@/hooks/useBeetleLogo";
 import { PARALLAX_SPEEDS, SCROLL_OFFSETS } from "@/utils/parallaxConfig";
+import Image from "next/image";
 
 const HeroSectionAlt = () => {
   const [progress, setProgress] = useState(0);
   const { setIsSplashComplete } = useSplashAnimation();
   const [showProgressBar, setShowProgressBar] = useState(true);
   const [animationComplete, setAnimationComplete] = useState(false);
+  const beetleLogo = useBeetleLogo();
 
   // Check for reduced motion preference
   const prefersReducedMotion = useMemo(() => {
@@ -275,7 +278,7 @@ const HeroSectionAlt = () => {
                   damping: 20,
                 }}
               >
-                <video
+                {/* <video
                   autoPlay
                   loop
                   muted
@@ -284,7 +287,15 @@ const HeroSectionAlt = () => {
                 >
                   <source src="/images/Anxious_Beetle.webm" type="video/webm" />
                   <source src="/images/Anxious_Beetle.mp4" type="video/mp4" />
-                </video>
+                </video> */}
+                <Image
+                  className="drop-shadow-2xl w-[350px] h-[350px] object-contain"
+                  src={beetleLogo}
+                  alt="Anxious Beetle"
+                  width={350}
+                  height={350}
+                />
+
               </motion.div>
             </div>
 
@@ -330,10 +341,10 @@ const HeroSectionAlt = () => {
             }}
             transition={{ duration: 0.4, delay: 0.2, ease: [0.43, 0.13, 0.23, 0.96] }}
           >
-            <h2 className="text-xl md:text-2xl font-josefin leading-tighter mb-4">
+            <h2 className="text-xl md:text-2xl riposte leading-tighter mb-4">
               THE DIGITAL AGENCY THAT LOVES TO SHOW OFF A THING OR TWO.
             </h2>
-            <p className="text-xl md:text-2xl font-josefin leading-tighter">
+            <p className="text-xl md:text-2xl riposte leading-tighter">
               STARTING WITH YOUR BRAND.
             </p>
           </motion.div>
@@ -350,7 +361,7 @@ const HeroSectionAlt = () => {
             }}
             transition={{ duration: 0.4, delay: 0.2, ease: [0.43, 0.13, 0.23, 0.96] }}
           >
-            <p className="font-josefin text-xs uppercase tracking-wider leading-relaxed">
+            <p className="riposte text-xs uppercase tracking-wider leading-relaxed">
               IMPACTFUL DIGITAL
               <br />
               EXPERIENCES FOR AMBITIOUS

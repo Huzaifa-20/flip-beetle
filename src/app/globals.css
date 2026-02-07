@@ -7,13 +7,13 @@
   --color-secondary: #bc6c25;
 
   /* Font Variables */
-  --font-josefin: var(--font-josefin);
+  --riposte: var(--riposte);
   --font-inter-tight: var(--font-inter-tight);
 
   /* Theme Background Colors */
   --color-theme-green: #606c38;
   --color-theme-cream: #fefae0;
-  --color-theme-black: #1a1a1a;
+  --color-theme-black: #000000;
   --color-theme-dark-cream: #e8dcc4;
 
   /* Theme Text Colors */
@@ -102,7 +102,7 @@ body {
   margin-top: 3rem;
   margin-bottom: 1.5rem;
   line-height: 1.2;
-  color: var(--color-text-on-cream);
+  color: var(--color-text-on-black);
 }
 
 .article-content h2 {
@@ -112,7 +112,7 @@ body {
   margin-top: 3rem;
   margin-bottom: 1.5rem;
   line-height: 1.3;
-  color: var(--color-text-on-cream);
+  color: var(--color-text-on-black);
 }
 
 .article-content h3 {
@@ -122,7 +122,7 @@ body {
   margin-top: 2.5rem;
   margin-bottom: 1rem;
   line-height: 1.4;
-  color: var(--color-text-on-cream);
+  color: var(--color-text-on-black);
 }
 
 .article-content h4 {
@@ -132,20 +132,20 @@ body {
   margin-top: 2rem;
   margin-bottom: 0.75rem;
   line-height: 1.4;
-  color: var(--color-text-on-cream);
+  color: var(--color-text-on-black);
 }
 
 .article-content p {
   font-size: 1.125rem;
-  font-family: var(--font-josefin), serif;
+  font-family: var(--riposte), serif;
   line-height: 1.8;
   margin-bottom: 1.5rem;
-  color: var(--color-text-on-cream);
+  color: var(--color-text-on-black);
 }
 
 .article-content strong {
   font-weight: 700;
-  color: var(--color-text-on-cream);
+  color: var(--color-text-on-black);
 }
 
 .article-content em {
@@ -156,14 +156,14 @@ body {
 .article-content ol {
   padding-left: 2rem;
   margin-bottom: 1.5rem;
-  font-family: var(--font-josefin), serif;
+  font-family: var(--riposte), serif;
 }
 
 .article-content li {
   font-size: 1.125rem;
   line-height: 1.8;
   margin-bottom: 0.75rem;
-  color: var(--color-text-on-cream);
+  color: var(--color-text-on-black);
 }
 
 .article-content ul li {
@@ -180,12 +180,12 @@ body {
   font-style: italic;
   margin-top: 2rem;
   margin-bottom: 2rem;
-  color: var(--color-text-on-cream);
+  color: var(--color-text-on-black);
   opacity: 0.9;
 }
 
 .article-content pre {
-  background-color: rgba(96, 108, 56, 0.1);
+  background-color: rgba(255, 255, 255, 0.05);
   border-radius: 0.75rem;
   padding: 1.5rem;
   overflow-x: auto;
@@ -196,8 +196,8 @@ body {
 .article-content code {
   font-family: 'Courier New', monospace;
   font-size: 0.875rem;
-  color: var(--color-primary);
-  background-color: rgba(96, 108, 56, 0.1);
+  color: #a8b88a;
+  background-color: rgba(255, 255, 255, 0.05);
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
 }
@@ -205,6 +205,7 @@ body {
 .article-content pre code {
   background-color: transparent;
   padding: 0;
+  color: #d4d4d4;
 }
 
 .article-content img {
@@ -216,7 +217,7 @@ body {
 }
 
 .article-content a {
-  color: var(--color-primary);
+  color: #a8b88a;
   text-decoration: underline;
   transition: opacity 0.2s ease;
 }

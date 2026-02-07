@@ -107,7 +107,7 @@ function BlogListingClient({ posts }: BlogListingClientProps) {
 
           <motion.p
             variants={fadeInUp}
-            className="text-lg lg:text-xl font-josefin text-white/70 mb-12 lg:mb-16"
+            className="text-lg lg:text-xl riposte text-white/70 mb-12 lg:mb-16"
           >
             Collection of content we&apos;re passionate about
           </motion.p>
@@ -176,12 +176,12 @@ function BlogListingClient({ posts }: BlogListingClientProps) {
                     {featuredPost.title}
                   </h2>
 
-                  <p className="text-base lg:text-lg font-josefin text-white/70 mb-6 line-clamp-3">
+                  <p className="text-base lg:text-lg riposte text-white/70 mb-6 line-clamp-3">
                     {featuredPost.excerpt}
                   </p>
 
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-josefin text-white/60">
+                    <span className="text-sm riposte text-white/60">
                       {new Date(featuredPost.date).toLocaleDateString("en-US", {
                         month: "long",
                         day: "numeric",
@@ -223,7 +223,7 @@ function BlogListingClient({ posts }: BlogListingClientProps) {
             animate={{ opacity: 1 }}
             className="text-center py-20"
           >
-            <p className="text-2xl font-josefin text-white/60">
+            <p className="text-2xl riposte text-white/60">
               No articles found for this category.
             </p>
           </motion.div>

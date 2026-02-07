@@ -1,9 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { useSplashAnimation } from "@/contexts/SplashAnimationContext";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useBeetleLogo } from "@/hooks/useBeetleLogo";
 import { MENU_ITEMS, SOCIAL_LINKS } from "@/constants/navigation";
 import { MenuVertical } from "@/components/ui/menu-vertical";
 
@@ -14,6 +17,7 @@ const NavbarAlt = () => {
   const [prevScrollY, setPrevScrollY] = useState(0);
   const { isSplashComplete } = useSplashAnimation();
   const { currentTheme } = useTheme();
+  const beetleLogo = useBeetleLogo();
 
   // Determine hamburger icon color based on current theme
   const getHamburgerColor = () => {
@@ -82,7 +86,29 @@ const NavbarAlt = () => {
         }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
       >
-        <div className="w-full flex justify-end items-center py-4 px-12">
+        <div className="w-full flex justify-between items-center py-4 px-12">
+          {/* Logo */}
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{
+              opacity: isSplashComplete ? 1 : 0,
+              y: isSplashComplete ? 0 : -50
+            }}
+            transition={{ duration: 0.5, delay: 0, ease: [0.43, 0.13, 0.23, 0.96] }}
+          >
+            <Link href="/" className="block relative z-10">
+              <Image
+                src={beetleLogo}
+                alt="Flip Beetle Logo"
+                width={70}
+                height={70}
+                priority
+                className="object-contain hover:scale-110 transition-transform duration-300"
+                unoptimized
+              />
+            </Link>
+          </motion.div>
+
           {/* Hamburger Menu Button */}
           <motion.button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -161,7 +187,7 @@ const NavbarAlt = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm font-josefin transition-colors duration-300 uppercase tracking-wider"
+                    className="text-sm riposte transition-colors duration-300 uppercase tracking-wider"
                     style={{ color: getSidebarTextColor() }}
                   >
                     {social.label}

@@ -145,20 +145,20 @@ const ServicesSection = () => {
                 </div>
               </div>
 
-              <p className="text-xl font-josefin">Perfect for:</p>
+              <p className="text-xl riposte">Perfect for:</p>
 
               <div className="flex gap-3 flex-wrap">
                 {service.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-6 py-2 rounded-full border-2 border-primary text-primary font-josefin text-base"
+                    className="px-6 py-2 rounded-full border-2 border-primary text-primary riposte text-base"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
 
-              <p className="text-lg font-josefin leading-relaxed max-w-3xl">
+              <p className="text-lg riposte leading-relaxed max-w-3xl">
                 {service.description}
               </p>
             </motion.div>

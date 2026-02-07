@@ -66,7 +66,7 @@ const Footer = () => {
                   <li key={link.name}>
                     <a
                       href={link.href}
-                      className={`text-lg font-josefin ${hoverColor} transition-colors duration-300`}
+                      className={`text-lg riposte ${hoverColor} transition-colors duration-300`}
                     >
                       {link.name}
                     </a>
@@ -87,7 +87,7 @@ const Footer = () => {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`text-lg font-josefin ${hoverColor} transition-colors duration-300`}
+                      className={`text-lg riposte ${hoverColor} transition-colors duration-300`}
                     >
                       {link.name}
                     </a>
@@ -104,13 +104,13 @@ const Footer = () => {
               <div className="space-y-4">
                 <a
                   href="tel:+1234567890"
-                  className={`block text-lg font-josefin ${hoverColor} transition-colors duration-300`}
+                  className={`block text-lg riposte ${hoverColor} transition-colors duration-300`}
                 >
                   (123) 456-7890
                 </a>
                 <a
                   href="mailto:hello@flipbeetle.com"
-                  className={`block text-lg font-josefin ${hoverColor} transition-colors duration-300 break-words`}
+                  className={`block text-lg riposte ${hoverColor} transition-colors duration-300 break-words`}
                 >
                   hello@flipbeetle.com
                 </a>

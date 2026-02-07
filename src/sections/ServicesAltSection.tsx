@@ -1,0 +1,118 @@
+"use client";
+
+import React from "react";
+import Image from "next/image";
+import { motion, useInView } from "framer-motion";
+import { fadeInUp } from "@/utils/animations";
+
+// Service categories moved outside component for performance
+const SERVICE_CATEGORIES = [
+  {
+    number: "01",
+    title: "BRANDING",
+    services: [
+      "Go-To-Market Strategy",
+      "Brand Strategy",
+      "Visual Identities",
+      "Brand Guidelines",
+      "Logo Creation",
+      "Value Propositions",
+    ],
+  },
+  {
+    number: "02",
+    title: "WEB & APPS",
+    services: [
+      "UX/UI Design",
+      "CMS Implementation",
+      "Web Design",
+      "Development",
+      "Webflow",
+    ],
+  },
+  {
+    number: "03",
+    title: "MARKETING",
+    services: [
+      "Content",
+      "Social",
+      "Paid Media",
+      "Campaigns",
+      "SEO",
+      "Marketing Ops",
+      "Analytics",
+    ],
+  },
+] as const;
+
+const ServicesAltSection = () => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
+
+  return (
+    <section
+      ref={ref}
+      data-theme="cream"
+      className="w-screen bg-[var(--color-theme-cream)] px-6 md:px-12 py-24 md:py-36"
+    >
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16"
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.15,
+              },
+            },
+          }}
+        >
+          {SERVICE_CATEGORIES.map((category) => (
+            <motion.div
+              key={category.number}
+              variants={fadeInUp}
+              className="flex flex-col"
+            >
+              {/* Number */}
+              <p className="text-[var(--color-text-on-cream)]/60 text-sm font-inter-tight mb-8">
+                {category.number}
+              </p>
+
+              {/* Title */}
+              <h2 className="text-[var(--color-text-on-cream)] text-4xl md:text-5xl font-inter-tight font-bold mb-8 tracking-tight">
+                {category.title}
+              </h2>
+
+              {/* Services List */}
+              <ul className="space-y-3 mb-16 flex-1">
+                {category.services.map((service, index) => (
+                  <li
+                    key={index}
+                    className="text-[var(--color-text-on-cream)]/90 text-lg riposte leading-relaxed"
+                  >
+                    {service}
+                  </li>
+                ))}
+              </ul>
+
+              {/* Icon at bottom */}
+              <div className="mt-auto">
+                <Image
+                  src="/images/Anxious_Beetle_Dark.png"
+                  alt="Anxious Beetle"
+                  width={60}
+                  height={60}
+                  className="object-contain"
+                />
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+export default React.memo(ServicesAltSection);

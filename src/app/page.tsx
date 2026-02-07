@@ -1,6 +1,6 @@
 import AboutSection from "@/sections/AboutSection";
 import ClientsSection from "@/sections/ClientsSection";
-import ServicesSection from "@/sections/ServicesSection";
+import ServicesAltSection from "@/sections/ServicesAltSection";
 import ProcessSection from "@/sections/ProcessSection";
 import FAQSection from "@/sections/FAQSection";
 import ContactSection from "@/sections/ContactSection";
@@ -22,7 +22,7 @@ export default async function Home() {
       <AboutSection />
       <ClientsSection />
       <TextScrollBanner />
-      <ServicesSection />
+      <ServicesAltSection />
       <ProcessSection />
       <Testimonials />
       <BlogSection posts={featuredPosts} />
