@@ -1,6 +1,7 @@
 "use client";
 
-import React, { createContext, useContext, useState, useMemo } from "react";
+import React, { createContext, useContext, useState, useMemo, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 interface SplashAnimationContextType {
   isSplashComplete: boolean;
@@ -17,6 +18,14 @@ export function SplashAnimationProvider({
   children: React.ReactNode;
 }) {
   const [isSplashComplete, setIsSplashComplete] = useState(false);
+  const pathname = usePathname();
+
+  // Reset splash animation when navigating to homepage
+  useEffect(() => {
+    if (pathname === "/") {
+      setIsSplashComplete(false);
+    }
+  }, [pathname]);
 
   // Memoize context value to prevent unnecessary re-renders
   const value = useMemo(
