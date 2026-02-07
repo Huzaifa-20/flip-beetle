@@ -28,7 +28,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ posts }) => {
             initial={{ opacity: 0, x: -20 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
             transition={{ duration: 0.5 }}
-            className="text-5xl md:text-6xl lg:text-7xl font-inter-tight uppercase tracking-tight text-[var(--color-text-on-cream)]"
+            className="text-5xl md:text-6xl lg:text-7xl riposte uppercase tracking-tight"
           >
             LATEST
           </motion.h2>
@@ -39,7 +39,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ posts }) => {
           >
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 text-lg md:text-xl font-inter-tight uppercase tracking-wider text-[var(--color-text-on-cream)] hover:text-[var(--color-primary)] transition-colors duration-300"
+              className="inline-flex items-center gap-2 text-lg md:text-xl riposte uppercase tracking-wider "
             >
               VIEW ALL
               <ArrowRight className="w-5 h-5" />

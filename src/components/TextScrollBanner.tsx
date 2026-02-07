@@ -38,7 +38,7 @@ const TextScrollBanner = ({
         style={{ x, rotate: -3 }}
         className="flex whitespace-nowrap"
       >
-        <h2 className="text-[8rem] md:text-[12rem] lg:text-[18rem] font-inter-tight font-bold tracking-tighter">
+        <h2 className="text-[8rem] sm:text-[18rem] riposte font-bold tracking-tighter">
           {repeatedText}
         </h2>
       </motion.div>

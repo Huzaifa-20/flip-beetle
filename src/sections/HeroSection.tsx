@@ -51,6 +51,24 @@ const HeroSection = () => {
     shouldAnimate ? [0, -90 * PARALLAX_SPEEDS.VERY_FAST] : [0, 0]
   );
 
+  // Reversed parallax for mobile left text
+  const bottomTextYReversed = useTransform(
+    scrollYProgress,
+    [0, 1],
+    shouldAnimate ? [0, 40 * PARALLAX_SPEEDS.MEDIUM_FAST] : [0, 0]
+  );
+
+  // Detect if mobile
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640); // sm breakpoint
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   // Create motion values for the initial slide-up offsets
   const leftTextOffset = useMotionValue(40);
   const rightTextOffset = useMotionValue(40);
@@ -79,8 +97,9 @@ const HeroSection = () => {
   }, [progress, leftTextOffset, rightTextOffset]);
 
   // Combined Y transforms that include both initial slide-up and parallax
+  // Left text uses reversed parallax on mobile
   const leftTextCombinedY = useTransform(
-    [leftTextOffset, bottomTextY],
+    [leftTextOffset, isMobile ? bottomTextYReversed : bottomTextY],
     (latest: number[]) => {
       const offset = latest[0];
       const parallax = latest[1];
@@ -218,51 +237,50 @@ const HeroSection = () => {
     <section
       ref={heroRef}
       data-theme="green"
-      className="relative w-screen h-screen flex items-center justify-center overflow-hidden px-12"
+      className="relative w-screen h-screen flex items-center justify-center overflow-hidden px-4 sm:px-6 md:px-8"
     >
       <div className="w-full h-full flex flex-col justify-between">
         {/* Main Content - Large Text with Beetle */}
-        <div className="flex-1 flex items-center justify-center relative pt-20 px-0">
+        <div className="flex-1 flex items-start sm:items-center justify-center relative pt-24 sm:pt-20">
           <div className="relative -mt-12">
             <div className="relative flex items-center justify-center">
               {/* FLIP BEETLE Text - Outlined background with parallax */}
               <motion.div className="relative inline-block" style={{ y: textY }}>
                 <h1
-                  className="text-[8rem] md:text-[12rem] lg:text-[15rem] font-bold text-nowrap"
+                  className="text-[6.5rem] sm:text-[7rem] md:text-[8rem] lg:text-[11rem] xl:text-[14rem] 2xl:text-[16rem] font-bold text-nowrap text-center sm:text-start leading-26 sm:leading-normal"
                   style={{
                     fontFamily: "var(--font-inter-tight)",
-                    WebkitTextStroke: "3px var(--color-background)",
+                    WebkitTextStroke: "2px var(--color-background)",
                     WebkitTextFillColor: "transparent",
                     color: "transparent",
                   }}
                 >
-                  FLIP BEETLE
+                  FLIP <br className="flex sm:hidden" /> BEETLE
                 </h1>
 
                 {/* Filled text (animated overlay) */}
                 <div
                   className="absolute top-0 left-0 h-full overflow-hidden"
                   style={{
-                    width: `${Math.min(progress + 3, 103)}%`,
+                    width: `${Math.min(progress + 3, 100)}%`,
                   }}
                 >
                   <h1
-                    className="text-[8rem] md:text-[12rem] lg:text-[15rem] font-bold text-nowrap"
+                    className="flex text-[6.5rem] sm:text-[7rem] md:text-[8rem] lg:text-[11rem] xl:text-[14rem] 2xl:text-[16rem] font-bold text-nowrap text-center sm:text-start leading-26 sm:leading-normal"
                     style={{
                       fontFamily: "var(--font-inter-tight)",
                       color: "var(--color-background)",
                     }}
                   >
-                    FLIP BEETLE
+                    FLIP <br className="flex sm:hidden" />BEETLE
                   </h1>
                 </div>
               </motion.div>
 
               {/* Beetle - appears after splash complete with parallax */}
               <motion.div
-                className="absolute left-1/2 -translate-x-1/2 z-20"
+                className="w-[380px] h-[380px] sm:w-[350px] sm:h-[350px] absolute left-1/2 -translate-x-1/2 top-[100%] sm:top-[70%] z-20"
                 style={{
-                  top: "70%",
                   y: beetleY,
                 }}
                 initial={{ scale: 0, opacity: 0 }}
@@ -278,16 +296,6 @@ const HeroSection = () => {
                   damping: 20,
                 }}
               >
-                {/* <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="drop-shadow-2xl w-[350px] h-[350px] object-contain"
-                >
-                  <source src="/images/Anxious_Beetle.webm" type="video/webm" />
-                  <source src="/images/Anxious_Beetle.mp4" type="video/mp4" />
-                </video> */}
                 <Image
                   className="drop-shadow-2xl w-[350px] h-[350px] object-contain"
                   src={beetleLogo}
@@ -295,7 +303,6 @@ const HeroSection = () => {
                   width={350}
                   height={350}
                 />
-
               </motion.div>
             </div>
 
@@ -303,10 +310,10 @@ const HeroSection = () => {
             <AnimatePresence>
               {showProgressBar && (
                 <motion.div
-                  className="absolute left-1/2 -translate-x-1/2 w-[600px] max-w-[80vw] h-[12px] rounded-full overflow-hidden"
+                  className="absolute left-1/2 -translate-x-1/2 w-[280px] sm:w-[400px] md:w-[500px] lg:w-[600px] max-w-[85vw] h-[8px] sm:h-[10px] md:h-[12px] rounded-full overflow-hidden"
                   style={{
                     border: "2px solid var(--color-background)",
-                    top: "calc(100% + 3rem)",
+                    top: "calc(100% + 1.5rem)",
                   }}
                   initial={{ opacity: 1 }}
                   animate={{ opacity: 1 }}
@@ -328,10 +335,10 @@ const HeroSection = () => {
         </div>
 
         {/* Bottom Content - appears after splash complete with parallax */}
-        <div className="flex justify-between items-start pb-12 gap-12">
+        <div className="w-[80%] sm:w-full flex flex-col sm:flex-row justify-between items-start pb-6 sm:pb-8 md:pb-12 gap-8 md:gap-12">
           {/* Left Side Text */}
           <motion.div
-            className="max-w-96 riposte"
+            className="max-w-full sm:max-w-96 riposte"
             initial={{ opacity: 0 }}
             animate={{
               opacity: progress >= 100 ? 1 : 0,
@@ -341,17 +348,17 @@ const HeroSection = () => {
             }}
             transition={{ duration: 0.4, delay: 0.2, ease: [0.43, 0.13, 0.23, 0.96] }}
           >
-            <h2 className="text-xl md:text-2xl riposte leading-tighter mb-4">
+            <h2 className="flex text-base sm:text-2xl riposte leading-tighter mb-4">
               THE DIGITAL AGENCY THAT LOVES TO SHOW OFF A THING OR TWO.
             </h2>
-            <p className="text-xl md:text-2xl riposte leading-tighter">
+            <p className="flex text-base sm:text-2xl riposte leading-tighter">
               STARTING WITH YOUR BRAND.
             </p>
           </motion.div>
 
           {/* Right Side Text */}
           <motion.div
-            className="riposte text-right shrink-0"
+            className="riposte text-left sm:text-right shrink-0"
             initial={{ opacity: 0 }}
             animate={{
               opacity: progress >= 100 ? 1 : 0,
@@ -361,7 +368,7 @@ const HeroSection = () => {
             }}
             transition={{ duration: 0.4, delay: 0.2, ease: [0.43, 0.13, 0.23, 0.96] }}
           >
-            <p className="riposte text-xs uppercase tracking-wider leading-relaxed">
+            <p className="hidden sm:flex riposte text-xs uppercase tracking-wide sm:tracking-wider leading-relaxed">
               IMPACTFUL DIGITAL
               <br />
               EXPERIENCES FOR AMBITIOUS

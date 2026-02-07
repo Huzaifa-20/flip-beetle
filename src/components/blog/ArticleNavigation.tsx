@@ -29,11 +29,11 @@ const ArticleNavigation: React.FC<ArticleNavigationProps> = ({ prev, next }) => 
             >
               <div className="flex items-center gap-3 mb-3">
                 <ArrowLeft className="w-5 h-5 text-[var(--color-white)]" />
-                <span className="text-sm font-inter-tight uppercase tracking-wider text-white/60">
+                <span className="text-sm riposte uppercase tracking-wider text-white/60">
                   Previous Article
                 </span>
               </div>
-              <h3 className="text-2xl font-inter-tight text-white line-clamp-2">
+              <h3 className="text-2xl riposte text-white line-clamp-2">
                 {prev.title}
               </h3>
             </Link>
@@ -53,12 +53,12 @@ const ArticleNavigation: React.FC<ArticleNavigationProps> = ({ prev, next }) => 
               className="block p-6 h-full text-right"
             >
               <div className="flex items-center justify-end gap-3 mb-3">
-                <span className="text-sm font-inter-tight uppercase tracking-wider text-white/60">
+                <span className="text-sm riposte uppercase tracking-wider text-white/60">
                   Next Article
                 </span>
                 <ArrowRight className="w-5 h-5 text-[var(--color-white)]" />
               </div>
-              <h3 className="text-2xl font-inter-tight text-white line-clamp-2">
+              <h3 className="text-2xl riposte text-white line-clamp-2">
                 {next.title}
               </h3>
             </Link>

@@ -21,9 +21,9 @@ const AboutSection = () => {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={fadeInLeft}
-          className="flex flex-col gap-8"
+          className="flex flex-col gap-12 order-2 sm:order-1"
         >
-          <p className="max-w-[450px] text-lg riposte leading-relaxed">
+          <p className="max-w-[450px] text-base sm:text-lg riposte">
             Flip Beetle is where strategy, design, and technology come together
             to build brands people believe in — and empower them to grow with
             purpose.
@@ -31,7 +31,7 @@ const AboutSection = () => {
 
           <Link
             href="/#about"
-            className="inline-flex items-center gap-2 text-sm md:text-base font-inter-tight uppercase tracking-wider border-b-2 pb-1 w-fit transition-colors duration-300"
+            className="inline-flex items-center gap-2 text-base sm:text-lg riposte uppercase border-b w-fit transition-colors duration-300"
           >
             MORE ABOUT FLIP BEETLE
             <span className="text-xl">→</span>
@@ -43,7 +43,7 @@ const AboutSection = () => {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={fadeInRight}
-          className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl"
+          className="relative w-full order-1 sm:order-2 aspect-[4/3] rounded-lg overflow-hidden shadow-2xl"
         >
           <video
             autoPlay

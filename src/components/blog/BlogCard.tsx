@@ -110,7 +110,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, variant = "default", index = 
             {/* Tag */}
             <div>
               <span
-                className={`inline-block px-4 py-1.5 ${tagColor} text-gray-900 text-xs font-inter-tight uppercase tracking-wider rounded-md`}
+                className={`inline-block px-4 py-1.5 ${tagColor} text-gray-900 text-xs riposte uppercase tracking-wider rounded-md`}
               >
                 {primaryTag}
               </span>
@@ -144,7 +144,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, variant = "default", index = 
             {/* Content */}
             <div className="pt-6 pr-6 flex-1 flex flex-col">
               <span
-                className={`inline-block px-3 py-1 text-white text-xs font-inter-tight font-bold tracking-wider rounded-full mb-4 self-start ${categoryColor}`}
+                className={`inline-block px-3 py-1 text-white text-xs riposte font-bold tracking-wider rounded-full mb-4 self-start ${categoryColor}`}
               >
                 {category}
               </span>
@@ -194,7 +194,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, variant = "default", index = 
               {post.tags.slice(0, 3).map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1 bg-[var(--color-primary)]/10 text-[var(--color-primary)] text-xs font-inter-tight uppercase tracking-wider rounded-full"
+                  className="px-3 py-1 bg-[var(--color-primary)]/10 text-[var(--color-primary)] text-xs riposte uppercase tracking-wider rounded-full"
                 >
                   {tag}
                 </span>
@@ -203,7 +203,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, variant = "default", index = 
           )}
 
           {/* Title */}
-          <h3 className="text-2xl md:text-3xl font-inter-tight text-[var(--color-text-on-cream)] mb-3 line-clamp-2 group-hover:text-[var(--color-primary)] transition-colors duration-300">
+          <h3 className="text-2xl md:text-3xl riposte text-[var(--color-text-on-cream)] mb-3 line-clamp-2 group-hover:text-[var(--color-primary)] transition-colors duration-300">
             {post.title}
           </h3>
 

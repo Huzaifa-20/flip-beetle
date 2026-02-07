@@ -86,7 +86,7 @@ const Navbar = () => {
         }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
       >
-        <div className="w-full flex justify-between items-center py-4 px-12">
+        <div className="w-full flex justify-between items-center px-4 sm:px-6 md:px-8">
           {/* Logo */}
           <motion.div
             initial={{ opacity: 0, y: -50 }}
@@ -100,10 +100,10 @@ const Navbar = () => {
               <Image
                 src={beetleLogo}
                 alt="Flip Beetle Logo"
-                width={70}
-                height={70}
+                width={60}
+                height={60}
                 priority
-                className="object-contain hover:scale-110 transition-transform duration-300"
+                className="object-contain hover:scale-110 transition-transform duration-300 translate-y-1"
                 unoptimized
               />
             </Link>

@@ -45,20 +45,20 @@ const AnimatedTextSection = ({
   };
 
   return (
-    <div ref={ref} className={`max-w-6xl mx-auto ${className}`}>
+    <div ref={ref} className={`max-w-7xl mx-auto px-4 sm:px-6 ${className}`}>
       {animationType === "fade-in" ? (
         // Simple fade-in animation
         <motion.h2
-          className="text-1xl md:text-2xl lg:text-3xl xl:text-8xl font-inter-tight text-center leading-tight"
+          className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl riposte text-center leading-tight sm:leading-tight md:leading-tight lg:leading-tight"
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={fadeInVariant}
         >
           {words.map((word, index) => (
-            <span key={index} className="inline-block mr-6 relative">
+            <span key={index} className="inline-block mr-2 xs:mr-3 sm:mr-4 md:mr-5 lg:mr-6 relative">
               {index === highlightIndex && highlightWord && (
                 <motion.span
-                  className="absolute inset-0 -mx-2 -my-1 bg-secondary/30 z-0 rounded"
+                  className="absolute inset-0 -mx-1 sm:-mx-2 -my-1 bg-secondary/30 z-0 rounded"
                   initial={{ scaleX: 0 }}
                   animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
                   transition={{
@@ -75,7 +75,7 @@ const AnimatedTextSection = ({
         </motion.h2>
       ) : (
         // Word-by-word animation
-        <h2 className="text-1xl md:text-2xl lg:text-3xl xl:text-8xl font-inter-tight text-center leading-tight">
+        <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl riposte text-center leading-tight sm:leading-tight md:leading-tight lg:leading-tight">
           {words.map((word, index) => (
             <motion.span
               key={index}
@@ -86,11 +86,11 @@ const AnimatedTextSection = ({
                 delay: index * delayPerWord,
                 ease: [0.25, 0.1, 0.25, 1],
               }}
-              className="inline-block mr-6 relative"
+              className="inline-block mr-2 xs:mr-3 sm:mr-4 md:mr-5 lg:mr-6 relative"
             >
               {index === highlightIndex && highlightWord && (
                 <motion.span
-                  className="absolute inset-0 -mx-2 -my-1 bg-secondary/30 z-0 rounded"
+                  className="absolute inset-0 -mx-1 sm:-mx-2 -my-1 bg-secondary/30 z-0 rounded"
                   initial={{ scaleX: 0 }}
                   animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
                   transition={{

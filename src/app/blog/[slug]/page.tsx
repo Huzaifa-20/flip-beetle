@@ -108,7 +108,7 @@ export default async function ArticlePage({ params }: Props) {
 
         {/* Title & Meta */}
         <div className="max-w-4xl mx-auto px-6 pb-12">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-inter-tight text-white mb-8 leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl riposte text-white mb-8 leading-tight">
             {post.title}
           </h1>
 
@@ -152,7 +152,7 @@ export default async function ArticlePage({ params }: Props) {
               {post.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-4 py-2 bg-white/10 text-white text-sm font-inter-tight uppercase tracking-wider rounded-full"
+                  className="px-4 py-2 bg-white/10 text-white text-sm riposte uppercase tracking-wider rounded-full"
                 >
                   {tag}
                 </span>
@@ -167,7 +167,7 @@ export default async function ArticlePage({ params }: Props) {
         {/* CTA Section */}
         <div className="w-full py-24">
           <div className="max-w-4xl mx-auto px-6 text-center">
-            <h2 className="text-4xl md:text-5xl font-inter-tight  mb-6">
+            <h2 className="text-4xl md:text-5xl riposte  mb-6">
               Ready to start your project?
             </h2>
             <p className="text-xl riposte  mb-8">

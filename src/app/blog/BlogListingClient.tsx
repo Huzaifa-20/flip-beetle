@@ -91,14 +91,14 @@ function BlogListingClient({ posts }: BlogListingClientProps) {
         >
           <motion.p
             variants={fadeInUp}
-            className="text-sm font-inter-tight font-semibold text-white/60 tracking-wider mb-4"
+            className="text-sm riposte font-semibold text-white/60 tracking-wider mb-4"
           >
             ARTICLES
           </motion.p>
 
           <motion.h1
             variants={fadeInUp}
-            className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-inter-tight font-bold text-white mb-6 leading-tight"
+            className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl riposte font-bold text-white mb-6 leading-tight"
           >
             NEWS, INSIGHTS,
             <br />
@@ -114,7 +114,7 @@ function BlogListingClient({ posts }: BlogListingClientProps) {
 
           {/* Filter Section */}
           <motion.div variants={fadeInUp}>
-            <p className="text-sm font-inter-tight font-semibold text-white/60 tracking-wider mb-4">
+            <p className="text-sm riposte font-semibold text-white/60 tracking-wider mb-4">
               FILTER WORK
             </p>
             <div className="flex flex-wrap gap-3">
@@ -122,7 +122,7 @@ function BlogListingClient({ posts }: BlogListingClientProps) {
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-6 py-2.5 rounded-full font-inter-tight font-semibold text-sm transition-all duration-300 ${selectedCategory === category
+                  className={`px-6 py-2.5 rounded-full riposte font-semibold text-sm transition-all duration-300 ${selectedCategory === category
                     ? "bg-white text-black"
                     : "bg-white/10 text-white hover:bg-white/20"
                     }`}
@@ -160,11 +160,11 @@ function BlogListingClient({ posts }: BlogListingClientProps) {
                 {/* Content Section */}
                 <div className="p-8 lg:p-12 flex flex-col justify-center">
                   <div className="mb-6">
-                    <span className="inline-block px-4 py-1.5 bg-white text-black text-xs font-inter-tight font-bold tracking-wider rounded-full mb-4">
+                    <span className="inline-block px-4 py-1.5 bg-white text-black text-xs riposte font-bold tracking-wider rounded-full mb-4">
                       FEATURED
                     </span>
                     <span
-                      className={`inline-block ml-2 px-4 py-1.5 text-white text-xs font-inter-tight font-bold tracking-wider rounded-full ${getCategoryColor(
+                      className={`inline-block ml-2 px-4 py-1.5 text-white text-xs riposte font-bold tracking-wider rounded-full ${getCategoryColor(
                         getPostCategory(featuredPost.tags)
                       )}`}
                     >
@@ -172,7 +172,7 @@ function BlogListingClient({ posts }: BlogListingClientProps) {
                     </span>
                   </div>
 
-                  <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-inter-tight font-bold text-white mb-4 lg:mb-6 leading-tight">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl riposte font-bold text-white mb-4 lg:mb-6 leading-tight">
                     {featuredPost.title}
                   </h2>
 
@@ -190,7 +190,7 @@ function BlogListingClient({ posts }: BlogListingClientProps) {
                       • {featuredPost.readTime} min read
                     </span>
                     <Link href={`/blog/${featuredPost.slug}`}>
-                      <span className="text-sm font-inter-tight font-semibold text-white hover:underline cursor-pointer">
+                      <span className="text-sm riposte font-semibold text-white hover:underline cursor-pointer">
                         Read more →
                       </span>
                     </Link>

@@ -39,11 +39,11 @@ const Footer = () => {
           {/* Left Section - Brand & CTA */}
           <div className="col-span-4 max-md:col-span-1">
             <div className="mb-6">
-              <h1 className="text-[4rem] md:text-[5rem] lg:text-[6rem] font-inter-tight leading-none text-background">
+              <h1 className="text-[4rem] md:text-[5rem] lg:text-[6rem] riposte leading-none text-background">
                 FLIP BEETLE
               </h1>
             </div>
-            <h2 className="text-2xl font-inter-tight mb-6 leading-tight max-w-60">
+            <h2 className="text-2xl riposte mb-6 leading-tight max-w-60">
               PARTNER WITH A DIGITAL AGENCY THAT&apos;S AS AMBITIOUS AS YOU ARE.
             </h2>
             <a

@@ -18,16 +18,16 @@ export default async function Home() {
   return (
     <>
       <HeroSection />
-      <AboutSection />
       <MissionSection />
-      <ClientsSection />
+      <AboutSection />
+      {/* <ClientsSection /> */}
       <TextScrollBanner />
       <ServicesAltSection />
       <ProcessSection />
       <Testimonials />
       <BlogSection posts={featuredPosts} />
-      <FAQSection />
-      <ContactSection />
+      {/* <FAQSection />
+      <ContactSection /> */}
     </>
   );
 }

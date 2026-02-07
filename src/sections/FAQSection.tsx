@@ -87,7 +87,7 @@ const FAQSection = () => {
                 onClick={() => toggleFAQ(faq.id)}
                 className="w-full flex justify-between items-center gap-4 text-left group"
               >
-                <h3 className="text-2xl font-inter-tight group-hover:text-secondary transition-colors">
+                <h3 className="text-2xl riposte group-hover:text-secondary transition-colors">
                   {faq.question}
                 </h3>
                 <motion.div

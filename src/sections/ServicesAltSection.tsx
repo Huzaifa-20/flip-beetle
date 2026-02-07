@@ -15,8 +15,6 @@ const SERVICE_CATEGORIES = [
       "Brand Strategy",
       "Visual Identities",
       "Brand Guidelines",
-      "Logo Creation",
-      "Value Propositions",
     ],
   },
   {
@@ -39,8 +37,6 @@ const SERVICE_CATEGORIES = [
       "Paid Media",
       "Campaigns",
       "SEO",
-      "Marketing Ops",
-      "Analytics",
     ],
   },
 ] as const;
@@ -53,11 +49,11 @@ const ServicesAltSection = () => {
     <section
       ref={ref}
       data-theme="cream"
-      className="w-screen bg-[var(--color-theme-cream)] px-6 md:px-12 py-24 md:py-36"
+      className="w-screen px-6 md:px-12 py-24 md:py-36"
     >
       <div className="max-w-7xl mx-auto">
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 sm:gap-16"
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={{
@@ -73,32 +69,34 @@ const ServicesAltSection = () => {
             <motion.div
               key={category.number}
               variants={fadeInUp}
-              className="flex flex-col"
+              className="flex flex-row sm:flex-col justify-between sm:justify-start items-start"
             >
-              {/* Number */}
-              <p className="text-[var(--color-text-on-cream)]/60 text-sm font-inter-tight mb-8">
-                {category.number}
-              </p>
+              <div>
+                {/* Number */}
+                <p className="text-sm sm:text-base riposte mb-5">
+                  {category.number}
+                </p>
 
-              {/* Title */}
-              <h2 className="text-[var(--color-text-on-cream)] text-4xl md:text-5xl font-inter-tight font-bold mb-8 tracking-tight">
-                {category.title}
-              </h2>
+                {/* Title */}
+                <h2 className="text-4xl sm:text-5xl riposte font-bold mb-3">
+                  {category.title}
+                </h2>
 
-              {/* Services List */}
-              <ul className="space-y-3 mb-16 flex-1">
-                {category.services.map((service, index) => (
-                  <li
-                    key={index}
-                    className="text-[var(--color-text-on-cream)]/90 text-lg riposte leading-relaxed"
-                  >
-                    {service}
-                  </li>
-                ))}
-              </ul>
+                {/* Services List */}
+                <ul className="space-y-1 mb-16 flex-1">
+                  {category.services.map((service, index) => (
+                    <li
+                      key={index}
+                      className="text-base sm:text-lg riposte"
+                    >
+                      {service}
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
               {/* Icon at bottom */}
-              <div className="mt-auto">
+              <div className="mt-0 sm:mt-auto translate-y-8 sm:translate-y-0">
                 <Image
                   src="/images/Anxious_Beetle_Dark.png"
                   alt="Anxious Beetle"

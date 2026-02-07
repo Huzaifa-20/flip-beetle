@@ -112,10 +112,10 @@ const ServicesSection = () => {
                     </g>
                   </motion.svg>
                   <div className="relative z-10 text-center">
-                    <p className="text-background text-sm font-inter-tight uppercase">
+                    <p className="text-background text-sm riposte uppercase">
                       From
                     </p>
-                    <p className="text-background text-xl font-inter-tight">
+                    <p className="text-background text-xl riposte">
                       {service.price}
                     </p>
                   </div>
