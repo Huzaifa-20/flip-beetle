@@ -19,7 +19,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ posts }) => {
     <section
       ref={ref}
       data-theme="cream"
-      className="w-screen flex justify-center items-center px-6 md:px-12 py-24 md:py-36 relative"
+      className="w-screen flex justify-center items-center px-6 md:px-12 py-8 md:py-32 relative"
     >
       <div className="max-w-7xl w-full">
         {/* Section Header */}

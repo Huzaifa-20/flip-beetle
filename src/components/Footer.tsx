@@ -67,7 +67,7 @@ const Footer = () => {
           <div className="lg:col-span-7 grid grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 md:gap-12 lg:gap-8 xl:gap-12">
             {/* Navigate Column */}
             <div>
-              <h3 className="font-mono text-xs uppercase mb-6 tracking-wider opacity-60">
+              <h3 className="riposte text-xs uppercase mb-4">
                 NAVIGATE
               </h3>
               <ul className="space-y-3">
@@ -86,7 +86,7 @@ const Footer = () => {
 
             {/* Social Column */}
             <div>
-              <h3 className="font-mono text-xs uppercase mb-6 tracking-wider opacity-60">
+              <h3 className="riposte text-xs uppercase mb-4">
                 SOCIAL & STUFF
               </h3>
               <ul className="space-y-3">
@@ -107,7 +107,7 @@ const Footer = () => {
 
             {/* Contact Column */}
             <div className="col-span-2 lg:col-span-1">
-              <h3 className="font-mono text-xs uppercase mb-6 tracking-wider opacity-60">
+              <h3 className="riposte text-xs uppercase mb-4">
                 CONTACT DEETS
               </h3>
               <div className="space-y-3">

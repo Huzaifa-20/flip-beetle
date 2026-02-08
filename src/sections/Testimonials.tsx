@@ -66,7 +66,7 @@ const thirdColumn = testimonials.slice(6, 9);
 
 const Testimonials = () => {
   return (
-    <section className="my-20 relative py-20">
+    <section className="relative py-20">
       <div className="container z-10 mx-auto px-4">
 
         <AnimatedTextSection sentence="What our users say" animationType="word-by-word" />
