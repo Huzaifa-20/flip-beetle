@@ -139,7 +139,7 @@ const HeroSection = () => {
 
     // Define animation segments with smooth easing
     const segments = [
-      { start: 0, end: 100, duration: 2500, pauseAfter: 200 },
+      { start: 0, end: 100, duration: 1500, pauseAfter: 200 },
     ];
 
     let currentSegment = 0;

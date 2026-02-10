@@ -17,7 +17,7 @@ const AnimatedTextSection = ({
   className = "",
 }: AnimatedTextSectionProps) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const isInView = useInView(ref, { once: true, amount: 0.45 });
 
   // Split text into words
   const words = sentence.split(" ");
@@ -58,7 +58,7 @@ const AnimatedTextSection = ({
             <span key={index} className="inline-block mr-2 xs:mr-3 sm:mr-4 md:mr-5 lg:mr-6 relative">
               {index === highlightIndex && highlightWord && (
                 <motion.span
-                  className="absolute inset-0 -mx-1 sm:-mx-2 -my-1 bg-secondary/30 z-0 rounded"
+                  className="absolute inset-0 -mx-1 sm:-mx-2 -my-1 bg-accent z-0 rounded"
                   initial={{ scaleX: 0 }}
                   animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
                   transition={{
@@ -90,7 +90,7 @@ const AnimatedTextSection = ({
             >
               {index === highlightIndex && highlightWord && (
                 <motion.span
-                  className="absolute inset-0 -mx-1 sm:-mx-2 -my-1 bg-secondary/30 z-0 rounded"
+                  className="absolute inset-0 -mx-1 sm:-mx-2 -my-1 bg-accent z-0 rounded"
                   initial={{ scaleX: 0 }}
                   animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
                   transition={{

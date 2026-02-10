@@ -62,7 +62,7 @@ const ContactSection = () => {
     <section
       ref={ref}
       data-theme="cream"
-      className="w-screen flex flex-col justify-center items-center my-32 px-12"
+      className="w-screen flex flex-col justify-center items-center my-32 px-4 sm:px-6 md:px-8"
     >
       <motion.div
         className="w-full flex flex-col items-center gap-12"
@@ -91,14 +91,14 @@ const ContactSection = () => {
           {/* Contact Form */}
           <motion.form
             onSubmit={handleSubmit}
-            className="flex-2 p-12 border border-black rounded-lg bg-background"
+            className="flex-2 p-4 sm:p-6 md:p-8 border border-black rounded-lg bg-background"
             variants={fadeInLeft}
             style={{ y: formY }}
             transition={{ delay: 0.3 }}
           >
             {/* To Field */}
             <div className="flex items-center gap-4 mb-8">
-              <label className="text-2xl riposte text-black font-bold">To:</label>
+              <label className="text-base sm:text-lg riposte font-bold">To:</label>
               <div className="flex-1">
                 <input
                   type="text"
@@ -111,7 +111,7 @@ const ContactSection = () => {
 
             {/* From Field */}
             <div className="flex items-center gap-4 mb-12">
-              <label className="text-2xl riposte text-black font-bold">From:</label>
+              <label className="text-base sm:text-lg riposte font-bold">From:</label>
               <div className="flex-1">
                 <input
                   type="email"
@@ -126,7 +126,7 @@ const ContactSection = () => {
 
             {/* Message Field */}
             <div className="mb-8">
-              <p className="text-lg riposte text-black mb-2">Dear Daria,</p>
+              <p className="text-base sm:text-lg riposte mb-2">Dear Daria,</p>
               <textarea
                 placeholder="enter your message"
                 value={formData.message}
@@ -157,7 +157,7 @@ const ContactSection = () => {
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                className="px-12 py-4 border border-black text-black text-2xl riposte rounded-lg hover:bg-secondary hover:text-background transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-6 sm:px-12 py-2 sm:py-4 border border-black text-sm sm:text-lg riposte rounded-lg hover:bg-secondary hover:text-background transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 whileHover={{ scale: isSubmitting ? 1 : 1.05 }}
                 whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
               >
