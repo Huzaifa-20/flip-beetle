@@ -57,7 +57,7 @@ const Footer = () => {
             </h2>
             <a
               href="#contact"
-              className="inline-block px-8 py-3 border-2 border-background text-background riposte text-xs sm:text-sm uppercase"
+              className="inline-block px-8 py-3 border riposte text-xs sm:text-sm uppercase rounded-lg"
             >
               CONTACT
             </a>

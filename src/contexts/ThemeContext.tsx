@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useMemo, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
-export type ThemeType = "green" | "cream" | "black" | "dark-cream";
+export type ThemeType = "green" | "cream" | "black";
 
 interface ThemeContextType {
   currentTheme: ThemeType;

@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { fadeInUp } from "@/utils/animations";
+import { useBeetleLogo } from "@/hooks/useBeetleLogo";
 
 // Service categories moved outside component for performance
 const SERVICE_CATEGORIES = [
@@ -42,13 +43,14 @@ const SERVICE_CATEGORIES = [
 ] as const;
 
 const ServicesAltSection = () => {
+  const beetleLogo = useBeetleLogo();
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
     <section
       ref={ref}
-      data-theme="cream"
+      data-theme="black"
       className="w-screen px-6 md:px-12 py-24 md:py-36"
     >
       <div className="max-w-7xl mx-auto">
@@ -98,7 +100,7 @@ const ServicesAltSection = () => {
               {/* Icon at bottom */}
               <div className="mt-0 sm:mt-auto translate-y-8 sm:translate-y-0">
                 <Image
-                  src="/images/Anxious_Beetle_Dark.png"
+                  src={beetleLogo}
                   alt="Anxious Beetle"
                   width={60}
                   height={60}

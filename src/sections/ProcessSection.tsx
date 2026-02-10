@@ -98,7 +98,7 @@ const ProcessSection = () => {
   return (
     <section
       ref={containerRef}
-      data-theme="cream"
+      data-theme="black"
       className="relative"
       style={{ height: isMobile ? 'auto' : `${150 + processSteps.length * 10}vh` }}
     >
@@ -130,7 +130,7 @@ const ProcessSection = () => {
             {processSteps.map((step, index) => (
               <motion.div
                 key={index}
-                className="min-w-[400px] border border-black rounded-lg p-4 relative"
+                className="min-w-[400px] border rounded-lg p-4 relative"
                 variants={{
                   hidden: { opacity: 0, y: 100 },
                   visible: { opacity: 1, y: 0 },
@@ -142,7 +142,7 @@ const ProcessSection = () => {
                     {step.number}. {step.title}
                   </h2>
                 </div>
-                <p className="text-gray-800 text-lg riposte leading-relaxed">
+                <p className="text-lg riposte leading-relaxed">
                   {step.description}
                 </p>
               </motion.div>
@@ -197,7 +197,7 @@ const ProcessSection = () => {
                     prevSlide();
                   }
                 }}
-                className="min-h-[240px] border border-black rounded-lg p-4 pb-12"
+                className="min-h-[240px] border rounded-lg p-4 pb-12"
               >
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-3xl riposte">

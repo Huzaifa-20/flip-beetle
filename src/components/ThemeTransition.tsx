@@ -12,14 +12,12 @@ const themeColors: Record<ThemeType, string> = {
   green: "var(--color-theme-green)",
   cream: "var(--color-theme-cream)",
   black: "var(--color-theme-black)",
-  "dark-cream": "var(--color-theme-dark-cream)",
 };
 
 const themeTextColors: Record<ThemeType, string> = {
   green: "var(--color-text-on-green)",
   cream: "var(--color-text-on-cream)",
   black: "var(--color-text-on-black)",
-  "dark-cream": "var(--color-text-on-dark-cream)",
 };
 
 /**
