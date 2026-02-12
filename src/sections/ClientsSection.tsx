@@ -1,187 +1,76 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import { scaleIn, createStaggerContainer } from "@/utils/animations";
+import React from "react";
+import { InteractiveHoverLinks } from "@/components/ui/interactive-hover-links";
 
-const clientTypes = [
-  // First Row
-  ["Cook", "Freelancer", "Gym Instructor"],
-  // Second Row
-  ["Padel Coach", "Photographer"],
-  // Third Row
-  ["Tech CEO", "Therapist", "Freelancer"],
+const CLIENTS_LINKS = [
+  {
+    heading: "Startups & Founders",
+    subheading: "Launch with confidence—from idea to brand identity",
+    videoSrc: "/clients/Cook_Beetle.webm",
+    href: "#contact",
+  },
+  {
+    heading: "Restaurants & Hospitality",
+    subheading: "Share your passion through branding that brings people in",
+    videoSrc: "/clients/Gym_Beetle.webm",
+    href: "#contact",
+  },
+  {
+    heading: "Fitness & Wellness",
+    subheading: "Grow your community with a digital presence that inspires",
+    videoSrc: "/clients/Cook_Beetle.webm",
+    href: "#contact",
+  },
+  {
+    heading: "Creative Professionals",
+    subheading: "Showcase your work with a portfolio that opens doors",
+    videoSrc: "/clients/Gym_Beetle.webm",
+    href: "#contact",
+  },
+  {
+    heading: "Business Owners",
+    subheading: "Create digital experiences that drive real growth",
+    videoSrc: "/clients/CEO_Beetle.webm",
+    href: "#contact",
+  },
 ];
 
-// Optimized component - shows appropriate beetle video based on client type
-const AnimatedClientVideo = ({ client }: { client: string }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  // Determine which beetle video to show based on client label
-  const getBeetleVideo = (clientLabel: string) => {
-    switch (clientLabel) {
-      case "Cook":
-        return "/clients/Cook_Beetle.webm";
-      // Add more cases here as needed
-      // case "Gym Instructor":
-      //   return "/clients/Gym_Beetle.webm";
-      default:
-        return "/clients/Gym_Beetle.webm";
-    }
-  };
-
-  const handleMouseEnter = () => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {
-        // Ignore play errors (e.g., if user hasn't interacted with page)
-      });
-    }
-  };
-
-  const handleMouseLeave = () => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-    }
-  };
-
-  // Cleanup video on unmount
-  useEffect(() => {
-    return () => {
-      if (videoRef.current) {
-        videoRef.current.pause();
-        videoRef.current.src = "";
-        videoRef.current.load();
-      }
-    };
-  }, []);
-
-  return (
-    <div
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      className="w-[200px] h-[200px] cursor-pointer transition-transform duration-200 hover:scale-105"
-    >
-      <video
-        ref={videoRef}
-        width={200}
-        height={200}
-        loop
-        muted
-        playsInline
-        preload="metadata"
-        className="w-full h-full object-contain"
-      >
-        <source src={getBeetleVideo(client)} type="video/webm" />
-      </video>
-    </div>
-  );
-};
-
 const ClientsSection = () => {
-  const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
-
-  // Parallax scroll setup
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-
-  // Parallax effect - useTransform handles optimization internally
-  const cardY = useTransform(scrollYProgress, [0, 1], [30, -60]);
-
   return (
-    <section
-      ref={ref}
-      data-theme="cream"
-      className="w-screen flex justify-center items-center my-32 px-12 py-36 relative"
-      style={{
-        backgroundImage:
-          "radial-gradient(circle, var(--color-dot-pattern) 1.25px, transparent 1.25px)",
-        backgroundSize: "36px 36px",
-      }}
-    >
-      {/* Top fade overlay */}
-      <div
-        className="absolute top-0 left-0 right-0 h-32 pointer-events-none z-10"
-        style={{
-          background: "linear-gradient(to bottom, var(--color-theme-cream), transparent)"
-        }}
-      />
-      {/* Bottom fade overlay */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10"
-        style={{
-          background: "linear-gradient(to top, var(--color-theme-cream), transparent)"
-        }}
-      />
-      <motion.div
-        className="max-w-[1136px] w-full flex flex-col gap-10 justify-center items-center relative z-20"
-        variants={createStaggerContainer(0.08, 0)}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-      >
-        {/* First Row */}
-        <div className="w-full flex items-center justify-between">
-          {clientTypes[0].map((client, index) => (
-            <motion.div
-              key={`${client}-${index}`}
-              className={`flex flex-col items-center justify-center gap-4 ${index === 1 && "-translate-y-12"}`}
-              variants={scaleIn}
-              style={{ y: cardY }}
-            >
-              <AnimatedClientVideo client={client} />
-              <motion.h1
-                className="text-xl"
-                whileHover={{ color: "var(--color-primary)" }}
-              >
-                {client}
-              </motion.h1>
-            </motion.div>
-          ))}
+    <section data-theme="black" className="w-screen py-20 md:py-32 px-4 sm:px-6 md:px-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Section Header */}
+        <div className="mb-12 md:mb-20">
+          <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl riposte uppercase tracking-tight mb-6">
+            We Work With People,
+            <br />
+            Not Titles
+          </h2>
+          <p className="text-xl md:text-2xl lg:text-3xl riposte max-w-4xl leading-relaxed">
+            Chef or coach. Artist or entrepreneur. Startup founder or business owner. What matters isn&apos;t what you do—it&apos;s the passion behind it.
+            <span className="block mt-4">
+              If you&apos;ve got a vision you believe in, we&apos;d love to help bring it to life.
+            </span>
+          </p>
         </div>
 
-        {/* Second Row */}
-        <div className="w-1/2 flex items-center justify-between">
-          {clientTypes[1].map((client, index) => (
-            <motion.div
-              key={`${client}-${index}`}
-              className="flex flex-col items-center justify-center gap-4"
-              variants={scaleIn}
-              style={{ y: cardY }}
-            >
-              <AnimatedClientVideo client={client} />
-              <motion.h1
-                className="text-xl"
-                whileHover={{ color: "var(--color-primary)" }}
-              >
-                {client}
-              </motion.h1>
-            </motion.div>
-          ))}
-        </div>
+        {/* Interactive Links */}
+        <InteractiveHoverLinks links={CLIENTS_LINKS} />
 
-        {/* Third Row */}
-        <div className="w-full flex items-center justify-between">
-          {clientTypes[2].map((client, index) => (
-            <motion.div
-              key={`${client}-${index}`}
-              className={`flex flex-col items-center justify-center gap-4 ${index === 1 && "translate-y-12"}`}
-              variants={scaleIn}
-              style={{ y: cardY }}
-            >
-              <AnimatedClientVideo client={client} />
-              <motion.h1
-                className="text-xl"
-                whileHover={{ color: "var(--color-primary)" }}
-              >
-                {client}
-              </motion.h1>
-            </motion.div>
-          ))}
+        {/* Bottom CTA */}
+        <div className="mt-16 md:mt-20 text-center">
+          <p className="text-lg md:text-xl riposte mb-6">
+            Ready to bring your vision to life?
+          </p>
+          <a
+            href="#contact"
+            className="inline-block px-8 py-4 border riposte text-sm md:text-base uppercase tracking-wider hover:bg-transparent hover:text-primary transition-all duration-300"
+          >
+            Let&apos;s Talk About Your Vision
+          </a>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };

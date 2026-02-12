@@ -30,7 +30,7 @@ const AboutSection = () => {
           </p>
 
           <Link
-            href="/#about"
+            href="/about"
             className="inline-flex items-center gap-2 text-base sm:text-lg riposte uppercase border-b w-fit transition-colors duration-300"
           >
             MORE ABOUT FLIP BEETLE

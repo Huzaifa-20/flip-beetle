@@ -1,6 +1,5 @@
 import AboutSection from "@/sections/AboutSection";
 import ClientsSection from "@/sections/ClientsSection";
-import ClientsSectionAlt from "@/sections/ClientsSectionAlt";
 import ServicesAltSection from "@/sections/ServicesAltSection";
 import ProcessSection from "@/sections/ProcessSection";
 import FAQSection from "@/sections/FAQSection";
@@ -21,10 +20,9 @@ export default async function Home() {
       <HeroSection />
       <MissionSection />
       <AboutSection />
-      {/* <ClientsSection /> */}
       <TextScrollBanner />
       <ServicesAltSection />
-      <ClientsSectionAlt />
+      <ClientsSection />
       <ProcessSection />
       <Testimonials />
       <BlogSection posts={featuredPosts} />

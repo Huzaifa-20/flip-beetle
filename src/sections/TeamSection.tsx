@@ -1,0 +1,130 @@
+"use client";
+
+import React, { useRef, useState } from "react";
+import Image from "next/image";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import { fadeInUp } from "@/utils/animations";
+
+const TEAM_MEMBERS = [
+  {
+    name: "Huzaifa",
+    role: "CEO",
+    image: "/team/huzaifa.jpg",
+  },
+  {
+    name: "Sultan",
+    role: "Creative Director",
+    image: "/team/sultan.jpg",
+  },
+  {
+    name: "Yumna",
+    role: "Developer",
+    image: "/team/yumna.jpg",
+  },
+] as const;
+
+const TeamSection = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(1); // Default to Pierre Huet (index 1)
+
+  return (
+    <section
+      ref={ref}
+      data-theme="cream"
+      className="w-screen py-24 md:py-36 px-4 sm:px-6 md:px-8"
+    >
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <motion.p
+          className="text-xl md:text-2xl lg:text-3xl riposte mb-16 md:mb-24 max-w-4xl leading-relaxed"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+        >
+          We&apos;re a gritty team that finds meaning in the work, cares about the details,
+          and shows up ready to do it right.
+        </motion.p>
+
+        {/* Team Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
+          {/* Team Members List */}
+          <motion.div
+            className="space-y-0"
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.1,
+                },
+              },
+            }}
+          >
+            {TEAM_MEMBERS.map((member, index) => {
+              const isHovered = hoveredIndex === index;
+
+              return (
+                <motion.div
+                  key={member.name}
+                  variants={fadeInUp}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(1)} // Reset to Pierre Huet
+                  className={`
+                    flex justify-between items-center py-8 px-6 border-t border-[var(--color-text-on-cream)] border-opacity-20
+                    ${isHovered ? "bg-[#b8d4d9]" : "bg-transparent"}
+                    ${index === TEAM_MEMBERS.length - 1 ? "border-b" : ""}
+                    cursor-pointer transition-colors duration-300
+                  `}
+                >
+                  <motion.h3
+                    className="text-2xl md:text-3xl lg:text-4xl riposte font-medium"
+                    animate={{ x: isHovered ? 12 : 0 }}
+                    transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                  >
+                    {member.name}
+                  </motion.h3>
+                  <p className="text-lg md:text-xl riposte text-[var(--color-text-on-cream)] opacity-80">
+                    ({member.role})
+                  </p>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+
+          {/* Team Image */}
+          <motion.div
+            className="relative h-[400px] md:h-[600px] lg:h-full min-h-[500px] rounded-2xl overflow-hidden bg-[var(--color-background)]"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            <AnimatePresence mode="wait">
+              {hoveredIndex !== null && (
+                <motion.div
+                  key={hoveredIndex}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+                  className="absolute inset-0"
+                >
+                  <Image
+                    src={TEAM_MEMBERS[hoveredIndex].image}
+                    alt={TEAM_MEMBERS[hoveredIndex].name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default TeamSection;
