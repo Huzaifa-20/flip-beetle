@@ -8,10 +8,16 @@ import { PARALLAX_SPEEDS, SCROLL_OFFSETS } from "@/utils/parallaxConfig";
 import Image from "next/image";
 
 const HeroSection = () => {
-  const [progress, setProgress] = useState(0);
+  // Check if splash animation has been shown in this browser session
+  const [hasShownSplash, setHasShownSplash] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return sessionStorage.getItem("flipBeetleSplashShown") === "true";
+  });
+
+  const [progress, setProgress] = useState(hasShownSplash ? 100 : 0);
   const { setIsSplashComplete } = useSplashAnimation();
-  const [showProgressBar, setShowProgressBar] = useState(true);
-  const [animationComplete, setAnimationComplete] = useState(false);
+  const [showProgressBar, setShowProgressBar] = useState(!hasShownSplash);
+  const [animationComplete, setAnimationComplete] = useState(hasShownSplash);
   const beetleLogo = useBeetleLogo();
 
   // Check for reduced motion preference
@@ -116,6 +122,13 @@ const HeroSection = () => {
     }
   );
 
+  // If splash has been shown before, immediately set splash as complete
+  useEffect(() => {
+    if (hasShownSplash) {
+      setIsSplashComplete(true);
+    }
+  }, [hasShownSplash, setIsSplashComplete]);
+
   // Manage body overflow - consolidated into single effect
   useEffect(() => {
     const originalOverflow = document.body.style.overflow;
@@ -128,6 +141,11 @@ const HeroSection = () => {
 
   // Animation effect with proper RAF cleanup
   useEffect(() => {
+    // Skip animation if splash has already been shown this session
+    if (hasShownSplash) {
+      return;
+    }
+
     let rafId: number | undefined;
     let cancelled = false;
     const timeoutIds: number[] = [];
@@ -160,6 +178,9 @@ const HeroSection = () => {
             if (cancelled) return;
             setIsSplashComplete(true);
             setAnimationComplete(true);
+            // Mark splash as shown in this browser session
+            sessionStorage.setItem("flipBeetleSplashShown", "true");
+            setHasShownSplash(true);
           }, 400);
           timeoutIds.push(timeout2);
         }, 100);
@@ -231,7 +252,7 @@ const HeroSection = () => {
       }
       timeoutIds.forEach((id) => window.clearTimeout(id));
     };
-  }, [setIsSplashComplete]);
+  }, [setIsSplashComplete, hasShownSplash]);
 
   return (
     <section
