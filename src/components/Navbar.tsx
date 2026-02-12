@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
-import { useSplashAnimation } from "@/contexts/SplashAnimationContext";
+import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useLenis } from "@/contexts/LenisContext";
 import { useBeetleLogo } from "@/hooks/useBeetleLogo";
 import { MENU_ITEMS, SOCIAL_LINKS } from "@/constants/navigation";
 import { MenuVertical } from "@/components/ui/menu-vertical";
@@ -13,17 +13,16 @@ import { MenuVertical } from "@/components/ui/menu-vertical";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
-  const { scrollY } = useScroll();
-  const [prevScrollY, setPrevScrollY] = useState(0);
-  const { isSplashComplete } = useSplashAnimation();
+  const { scrollY } = useLenis();
+  const prevScrollYRef = useRef(0);
   const { currentTheme } = useTheme();
   const beetleLogo = useBeetleLogo();
 
   // Determine hamburger icon color based on current theme
   const getHamburgerColor = () => {
-    // On light backgrounds (cream, dark-cream), use dark color
+    // On light backgrounds (cream), use dark color
     // On dark backgrounds (green, black), use light color
-    return currentTheme === "cream" || currentTheme === "dark-cream"
+    return currentTheme === "cream"
       ? "var(--color-primary)"
       : "var(--color-background)";
   };
@@ -33,8 +32,6 @@ const Navbar = () => {
     switch (currentTheme) {
       case "cream":
         return "var(--color-theme-green)";
-      case "dark-cream":
-        return "var(--color-theme-dark-cream)";
       case "green":
         return "var(--color-theme-cream)";
       case "black":
@@ -52,8 +49,6 @@ const Navbar = () => {
         return "var(--color-background)";
       case "green": // sidebar is cream, needs dark text
         return "var(--color-primary)";
-      case "dark-cream": // sidebar is dark-cream, needs dark text
-        return "var(--color-primary)";
       case "black": // sidebar is black, needs light text
         return "var(--color-background)";
       default:
@@ -61,24 +56,30 @@ const Navbar = () => {
     }
   };
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const isScrollingDown = latest > prevScrollY && latest > 50;
-    const isScrollingUp = latest < prevScrollY;
+  // Track scroll direction and show/hide navbar accordingly
+  // This effect responds to external scroll position from Lenis
+  useEffect(() => {
+    const prevScrollY = prevScrollYRef.current;
+    const isScrollingDown = scrollY > prevScrollY && scrollY > 50;
+    const isScrollingUp = scrollY < prevScrollY;
 
-    if (isScrollingDown) {
-      setHidden(true);
-    } else if (isScrollingUp) {
-      setHidden(false);
-    }
+    // Defer state update to avoid synchronous setState in effect
+    queueMicrotask(() => {
+      if (isScrollingDown) {
+        setHidden(true);
+      } else if (isScrollingUp) {
+        setHidden(false);
+      }
+    });
 
-    setPrevScrollY(latest);
-  });
+    prevScrollYRef.current = scrollY;
+  }, [scrollY]);
 
   return (
     <>
       <motion.div
         className="w-screen flex justify-center fixed top-0 z-50"
-        initial="hidden"
+        initial="visible"
         animate={hidden ? "hidden" : "visible"}
         variants={{
           visible: { y: 0 },
@@ -89,10 +90,10 @@ const Navbar = () => {
         <div className="w-full flex justify-between items-center px-4 sm:px-6 md:px-8">
           {/* Logo */}
           <motion.div
-            initial={{ opacity: 0, y: -50 }}
+            initial={{ opacity: 1, y: 0 }}
             animate={{
-              opacity: isSplashComplete ? 1 : 0,
-              y: isSplashComplete ? 0 : -50
+              opacity: 1,
+              y: 0
             }}
             transition={{ duration: 0.5, delay: 0, ease: [0.43, 0.13, 0.23, 0.96] }}
           >
@@ -113,10 +114,10 @@ const Navbar = () => {
           <motion.button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="flex flex-col gap-1.5 cursor-pointer p-2"
-            initial={{ opacity: 0, y: -50 }}
+            initial={{ opacity: 1, y: 0 }}
             animate={{
-              opacity: isSplashComplete ? 1 : 0,
-              y: isSplashComplete ? 0 : -50
+              opacity: 1,
+              y: 0
             }}
             transition={{ duration: 0.5, delay: 0, ease: [0.43, 0.13, 0.23, 0.96] }}
             whileHover={{ scale: 1.1 }}

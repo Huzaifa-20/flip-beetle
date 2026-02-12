@@ -1,15 +1,22 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import Lenis from "lenis";
 
-export default function SmoothScroll({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+interface LenisContextType {
+  scrollY: number;
+}
+
+const LenisContext = createContext<LenisContextType>({
+  scrollY: 0,
+});
+
+export const useLenis = () => useContext(LenisContext);
+
+export function LenisProvider({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
   const rafRef = useRef<number | null>(null);
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     // Add lenis class to HTML element
@@ -17,8 +24,8 @@ export default function SmoothScroll({
 
     // Initialize Lenis with smooth scroll settings
     lenisRef.current = new Lenis({
-      duration: 1.5, // Duration of scroll animation (higher = slower/more sluggish)
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Smooth easing function
+      duration: 1.5,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
@@ -28,9 +35,10 @@ export default function SmoothScroll({
       autoResize: true,
     });
 
-    // Integration with Framer Motion: dispatch custom scroll events
-    lenisRef.current.on("scroll", () => {
-      // Dispatch a scroll event so Framer Motion can detect it
+    // Update scroll position for components
+    lenisRef.current.on("scroll", (e: { scroll: number }) => {
+      setScrollY(e.scroll);
+      // Dispatch scroll event for other integrations
       window.dispatchEvent(new Event("scroll"));
     });
 
@@ -52,5 +60,9 @@ export default function SmoothScroll({
     };
   }, []);
 
-  return <>{children}</>;
+  return (
+    <LenisContext.Provider value={{ scrollY }}>
+      {children}
+    </LenisContext.Provider>
+  );
 }
