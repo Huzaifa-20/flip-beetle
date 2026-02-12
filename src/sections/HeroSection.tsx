@@ -370,10 +370,10 @@ const HeroSection = () => {
             transition={{ duration: 0.4, delay: 0.2, ease: [0.43, 0.13, 0.23, 0.96] }}
           >
             <h2 className="flex text-base sm:text-2xl riposte leading-tighter mb-4">
-              THE DIGITAL AGENCY THAT LOVES TO SHOW OFF A THING OR TWO.
+              THE DIGITAL AGENCY THAT TURNS BOLD VISIONS INTO BRANDS WORTH REMEMBERING.
             </h2>
             <p className="flex text-base sm:text-2xl riposte leading-tighter">
-              STARTING WITH YOUR BRAND.
+              STARTING WITH YOURS.
             </p>
           </motion.div>
 

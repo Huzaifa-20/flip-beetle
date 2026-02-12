@@ -6,8 +6,8 @@ const MissionSection = () => {
       data-theme="cream"
     >
       <AnimatedTextSection
-        sentence="We partner with ambitious brands to create digital experiences that feel true and drive momentum."
-        highlightWord="ambitious"
+        sentence="GREAT BRANDS AREN'T BUILT FROM TEMPLATES. THEY'RE BUILT FROM UNDERSTANDING—YOUR VISION, YOUR AUDIENCE, YOUR GOALS. WE COMBINE HUMAN-CENTERED DESIGN WITH STRATEGIC EXPERTISE TO TURN THAT UNDERSTANDING INTO BRANDS THAT MATTER."
+        highlightWord="UNDERSTANDING"
         animationType="word-by-word"
       />
     </div>

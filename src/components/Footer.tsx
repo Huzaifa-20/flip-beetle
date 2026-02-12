@@ -53,7 +53,7 @@ const Footer = () => {
               </h1>
             </div>
             <h2 className="text-xl sm:text-2xl md:text-3xl riposte mb-8 sm:mb-10 max-w-[500px]">
-              Partner with a creative agency that&apos;s ambitious as you are.
+              Your vision. Our craft. Let&apos;s build something meaningful together.
             </h2>
             <a
               href="#contact"
