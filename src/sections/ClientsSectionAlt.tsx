@@ -38,8 +38,8 @@ const CLIENTS_LINKS = [
 
 const ClientsSectionAlt = () => {
   return (
-    <section data-theme="black" className="w-screen py-20 md:py-32">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+    <section data-theme="black" className="w-screen py-20 md:py-32 px-4 sm:px-6 md:px-8">
+      <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="mb-12 md:mb-20">
           <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl riposte uppercase tracking-tight mb-6">

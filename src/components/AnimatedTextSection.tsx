@@ -23,7 +23,7 @@ const AnimatedTextSection = ({
   const words = sentence.split(" ");
 
   // Calculate delay for each word (word-by-word animation)
-  const totalDuration = 0.9;
+  const totalDuration = 1.5;
   const delayPerWord = totalDuration / words.length;
 
   // Find the index of the highlight word

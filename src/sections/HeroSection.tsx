@@ -132,12 +132,12 @@ const HeroSection = () => {
   // Manage body overflow - consolidated into single effect
   useEffect(() => {
     const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = animationComplete ? "unset" : "hidden";
+    document.body.style.overflow = (animationComplete || hasShownSplash) ? "unset" : "hidden";
 
     return () => {
       document.body.style.overflow = originalOverflow;
     };
-  }, [animationComplete]);
+  }, [animationComplete, hasShownSplash]);
 
   // Animation effect with proper RAF cleanup
   useEffect(() => {
@@ -329,7 +329,7 @@ const HeroSection = () => {
 
             {/* Progress Bar - positioned below text */}
             <AnimatePresence>
-              {showProgressBar && (
+              {showProgressBar && !hasShownSplash && (
                 <motion.div
                   className="absolute left-1/2 -translate-x-1/2 w-[280px] sm:w-[400px] md:w-[500px] lg:w-[600px] max-w-[85vw] h-[8px] sm:h-[10px] md:h-[12px] rounded-full overflow-hidden"
                   style={{
