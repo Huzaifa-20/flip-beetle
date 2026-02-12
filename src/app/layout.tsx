@@ -8,6 +8,7 @@ import { SplashAnimationProvider } from "@/contexts/SplashAnimationContext";
 import ThemeTransition from "@/components/ThemeTransition";
 import ScrollThemeController from "@/components/ScrollThemeController";
 import Footer from "@/components/Footer";
+import SmoothScroll from "@/components/SmoothScroll";
 
 const riposte = localFont({
   src: "./fonts/RiposteLight.ttf",
@@ -37,11 +38,13 @@ export default function RootLayout({
       <body className={`${riposte.variable} ${interTight.variable} antialiased`}>
         <ThemeProvider>
           <SplashAnimationProvider>
-            <ThemeTransition />
-            <ScrollThemeController />
-            <Navbar />
-            {children}
-            <Footer />
+            <SmoothScroll>
+              <ThemeTransition />
+              <ScrollThemeController />
+              <Navbar />
+              {children}
+              <Footer />
+            </SmoothScroll>
           </SplashAnimationProvider>
         </ThemeProvider>
       </body>
