@@ -11,7 +11,7 @@ export const useBeetleLogo = (): string => {
 
   // Cream background -> use dark beetle
   // Green/Black background -> use light beetle
-  return currentTheme === "cream" || currentTheme === "dark-cream"
+  return currentTheme === "cream"
     ? "/images/Anxious_Beetle_Dark.png"
     : "/images/Anxious_Beetle_Light.png";
 };
