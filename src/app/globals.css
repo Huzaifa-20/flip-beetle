@@ -109,6 +109,37 @@ body {
   margin: 0;
   padding: 0;
   transition: color var(--duration-slow) var(--ease-smooth);
+  cursor: url('/images/Beetle-Cursor-Final.png') 48 27, auto;
+}
+
+/* Custom cursor for interactive elements */
+a,
+button,
+input[type="submit"],
+input[type="button"],
+.cursor-pointer {
+  cursor: url('/images/Beetle-Cursor-Final.png') 48 27, pointer;
+}
+
+/* Hide default cursor and show custom */
+* {
+  cursor: url('/images/Beetle-Cursor-Final.png') 48 27, auto !important;
+}
+
+/* Hero section uses circular cursor */
+section#hero-section,
+section#hero-section *,
+section#hero-section a,
+section#hero-section button {
+  cursor: url('/images/circular-cursor.png') 16 16, auto !important;
+}
+
+/* Exclude navbar from custom cursor - must override universal selector */
+#navbar,
+#navbar *,
+#navbar a,
+#navbar button {
+  cursor: default !important;
 }
 
 /* Custom Font Utility Classes */

@@ -2,6 +2,7 @@
 
 import React from "react";
 import { usePathname } from "next/navigation";
+import Button from "@/components/ui/Button";
 
 // Constant arrays moved outside component for performance
 const NAVIGATION_LINKS = [
@@ -55,12 +56,13 @@ const Footer = () => {
             <h2 className="text-xl sm:text-2xl md:text-3xl riposte mb-8 sm:mb-10 max-w-[500px]">
               Your vision. Our craft. Let&apos;s build something meaningful together.
             </h2>
-            <a
+            <Button
               href="#contact"
-              className="inline-block px-8 py-3 border riposte text-xs sm:text-sm uppercase rounded-lg"
+              variant="outlined"
+              theme={isBlogPage ? "black" : "green"}
             >
               CONTACT
-            </a>
+            </Button>
           </div>
 
           {/* Right Section - Three Columns */}

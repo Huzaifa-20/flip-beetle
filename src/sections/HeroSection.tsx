@@ -3,9 +3,8 @@
 import { useEffect, useState, useRef, useMemo } from "react";
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, animate } from "framer-motion";
 import { useSplashAnimation } from "@/contexts/SplashAnimationContext";
-import { useBeetleLogo } from "@/hooks/useBeetleLogo";
+import { useTheme } from "@/contexts/ThemeContext";
 import { PARALLAX_SPEEDS, SCROLL_OFFSETS } from "@/utils/parallaxConfig";
-import Image from "next/image";
 
 const HeroSection = () => {
   // Check if splash animation has been shown in this browser session
@@ -18,7 +17,8 @@ const HeroSection = () => {
   const { setIsSplashComplete } = useSplashAnimation();
   const [showProgressBar, setShowProgressBar] = useState(!hasShownSplash);
   const [animationComplete, setAnimationComplete] = useState(hasShownSplash);
-  const beetleLogo = useBeetleLogo();
+  const { currentTheme } = useTheme();
+  const [shouldLoadDarkBeetle, setShouldLoadDarkBeetle] = useState(hasShownSplash);
 
   // Check for reduced motion preference
   const prefersReducedMotion = useMemo(() => {
@@ -254,8 +254,21 @@ const HeroSection = () => {
     };
   }, [setIsSplashComplete, hasShownSplash]);
 
+  // Lazy load dark beetle after animation completes
+  useEffect(() => {
+    if (progress >= 100 && !shouldLoadDarkBeetle) {
+      // Wait 1 second after animation completes to load dark beetle
+      const timer = setTimeout(() => {
+        setShouldLoadDarkBeetle(true);
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [progress, shouldLoadDarkBeetle]);
+
   return (
     <section
+      id="hero-section"
       ref={heroRef}
       data-theme="green"
       className="relative w-screen h-screen flex items-center justify-center overflow-hidden px-4 sm:px-6 md:px-8"
@@ -317,13 +330,41 @@ const HeroSection = () => {
                   damping: 20,
                 }}
               >
-                <Image
-                  className="drop-shadow-2xl w-[350px] h-[350px] object-contain"
-                  src={beetleLogo}
-                  alt="Anxious Beetle"
+                {/* Dark Beetle Video - Lazy loaded */}
+                {shouldLoadDarkBeetle && (
+                  <motion.video
+                    className="drop-shadow-2xl w-[350px] h-[350px] object-contain absolute inset-0"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                    width={350}
+                    height={350}
+                    initial={{ opacity: currentTheme === "cream" ? 1 : 0 }}
+                    animate={{ opacity: currentTheme === "cream" ? 1 : 0 }}
+                    transition={{ duration: 0.1, ease: "easeInOut" }}
+                  >
+                    <source src="/images/Flip_Beetle_Dark.webm" type="video/webm" />
+                  </motion.video>
+                )}
+
+                {/* Light Beetle Video - Loaded immediately */}
+                <motion.video
+                  className="drop-shadow-2xl w-[350px] h-[350px] object-contain absolute inset-0"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="auto"
                   width={350}
                   height={350}
-                />
+                  initial={{ opacity: currentTheme === "cream" ? 0 : 1 }}
+                  animate={{ opacity: currentTheme === "cream" ? 0 : 1 }}
+                  transition={{ duration: 0.1, ease: "easeInOut" }}
+                >
+                  <source src="/images/Flip_Beetle_Light.webm" type="video/webm" />
+                </motion.video>
               </motion.div>
             </div>
 
@@ -356,10 +397,10 @@ const HeroSection = () => {
         </div>
 
         {/* Bottom Content - appears after splash complete with parallax */}
-        <div className="w-[80%] sm:w-full flex flex-col sm:flex-row justify-between items-start pb-6 sm:pb-8 md:pb-12 gap-8 md:gap-12">
+        <div className="w-[80%] sm:w-full flex flex-col sm:flex-row justify-between items-start pb-6 gap-8 md:gap-12">
           {/* Left Side Text */}
           <motion.div
-            className="max-w-full sm:max-w-96 riposte"
+            className="max-w-full sm:max-w-60 md:max-w-72 lg:max-w-80 xl:max-w-96 riposte"
             initial={{ opacity: 0 }}
             animate={{
               opacity: progress >= 100 ? 1 : 0,
@@ -369,10 +410,10 @@ const HeroSection = () => {
             }}
             transition={{ duration: 0.4, delay: 0.2, ease: [0.43, 0.13, 0.23, 0.96] }}
           >
-            <h2 className="flex text-base sm:text-2xl riposte leading-tighter mb-4">
-              THE DIGITAL AGENCY THAT TURNS BOLD VISIONS INTO BRANDS WORTH REMEMBERING.
+            <h2 className="flex text-base md:text-2xl riposte font-medium mb-4">
+              THE CREATIVE AGENCY THAT TURNS VISIONS INTO UNFORGETTABLE BRANDS.
             </h2>
-            <p className="flex text-base sm:text-2xl riposte leading-tighter">
+            <p className="flex text-base md:text-2xl riposte font-medium">
               STARTING WITH YOURS.
             </p>
           </motion.div>
@@ -390,11 +431,11 @@ const HeroSection = () => {
             transition={{ duration: 0.4, delay: 0.2, ease: [0.43, 0.13, 0.23, 0.96] }}
           >
             <p className="hidden sm:flex riposte text-xs uppercase tracking-wide sm:tracking-wider leading-relaxed">
-              IMPACTFUL DIGITAL
+              POWERFUL DIGITAL
               <br />
-              EXPERIENCES FOR AMBITIOUS
+              EXPERIENCES TO ELEVATE
               <br />
-              BRANDS
+              YOUR BRANDS
             </p>
           </motion.div>
         </div>

@@ -5,6 +5,7 @@ import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { fadeInUp, fadeInLeft } from "@/utils/animations";
 import { PARALLAX_SPEEDS, SCROLL_OFFSETS } from "@/utils/parallaxConfig";
 import AnimatedTextSection from "@/components/AnimatedTextSection";
+import Button from "@/components/ui/Button";
 
 const ContactSection = () => {
   const ref = React.useRef(null);
@@ -60,6 +61,7 @@ const ContactSection = () => {
 
   return (
     <section
+      id="contact"
       ref={ref}
       data-theme="cream"
       className="w-screen flex flex-col justify-center items-center my-32 px-4 sm:px-6 md:px-8"
@@ -154,15 +156,15 @@ const ContactSection = () => {
 
             {/* Submit Button */}
             <div className="flex items-center justify-between">
-              <motion.button
+              <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="px-6 sm:px-12 py-2 sm:py-4 border border-black text-sm sm:text-lg riposte rounded-lg hover:bg-secondary hover:text-background transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                whileHover={{ scale: isSubmitting ? 1 : 1.05 }}
-                whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
+                variant="outlined"
+                theme="cream"
+                className="px-6! sm:px-12! py-2! sm:py-4! text-sm! sm:text-lg!"
               >
                 {isSubmitting ? "SENDING..." : "SEND EMAIL"}
-              </motion.button>
+              </Button>
 
               <p className="riposte text-black/70 text-sm italic">
                 *I will respond during 24 hours
