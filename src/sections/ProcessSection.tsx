@@ -8,39 +8,39 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 const processSteps = [
   {
     number: "1",
-    title: "ACQUAINTANCE",
+    title: "DISCOVERY",
     description:
-      "We start with a friendly call focused on your business's unique goals, audience, and needs. This conversation helps me see how I can best assist you",
+      "We dig into what makes your business tick. Your vision, your audience, your goals. No cookie-cutter questionnaires here—just real conversation about where you are and where you're headed. This is where we figure out if we're the right fit.",
   },
   {
     number: "2",
-    title: "QUOTATION",
+    title: "STRATEGY",
     description:
-      "After the initial meeting, I'll create a custom proposal outlining the project plan and pricing. If everything aligns with your vision and expectations, we move forward",
+      "Time to map it out. We analyze your competition, study your market, and identify what'll make you stand out. This isn't guesswork—it's strategic thinking backed by research. We build the blueprint before we build the brand.",
   },
   {
     number: "3",
-    title: "RESEARCH",
+    title: "DESIGN",
     description:
-      "Competitor website research, the Personas method and Jobs-to-be-Done approach. These tools help me understand your customers' motivations and needs.",
+      "This is where it gets visual. We craft designs that don't just look good—they work. Every color, every font, every pixel has a purpose. We iterate with you until it feels right, not just looks right.",
   },
   {
     number: "4",
-    title: "DESIGN",
+    title: "BUILD",
     description:
-      "Creating wireframes and high-fidelity designs that bring your vision to life. We iterate based on your feedback to ensure every detail is perfect.",
+      "Clean code. Fast loading. Works everywhere. We build sites that don't just function—they perform. Mobile-first, accessibility-minded, and optimized for the real world where your users actually live.",
   },
   {
     number: "5",
-    title: "DEVELOPMENT",
+    title: "REFINE",
     description:
-      "Building your website with clean, maintainable code. Using modern technologies to ensure speed, responsiveness, and seamless user experience.",
+      "We test everything. Desktop, mobile, tablet. Chrome, Safari, Firefox. We catch the bugs before your users do. We tweak the details you didn't know mattered. This is where good becomes great.",
   },
   {
     number: "6",
     title: "LAUNCH",
     description:
-      "Final testing, deployment, and training. I'll make sure you're comfortable managing your new website and provide ongoing support as needed.",
+      "Go time. We deploy, we monitor, we make sure everything's running smooth. Then we show you how to manage it yourself—no technical degree required. You own your site. We just help you run it.",
   },
 ];
 
@@ -106,7 +106,7 @@ const ProcessSection = () => {
       <div className={`${isMobile ? 'hidden' : 'sticky'} top-0 h-screen flex items-center overflow-hidden`}>
         <div className="w-full px-6 md:px-12">
           <AnimatedTextSection
-            sentence="START YOUR JOURNEY WITH US"
+            sentence="HOW WE WORK TOGETHER"
             animationType="word-by-word"
           />
 
@@ -156,7 +156,7 @@ const ProcessSection = () => {
         <div className="py-12 px-8">
           <div className="mb-12">
             <AnimatedTextSection
-              sentence="From start to end, we go through a process"
+              sentence="HOW WE WORK TOGETHER"
               animationType="word-by-word"
             />
           </div>

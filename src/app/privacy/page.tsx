@@ -1,13 +1,22 @@
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy | Flip Beetle",
-  description: "Our commitment to protecting your privacy and data.",
-};
+import { useEffect } from "react";
+import { useLenis } from "@/contexts/LenisContext";
 
 export default function PrivacyPage() {
+  const { lenis } = useLenis();
+
+  // Scroll to top when page loads
+  useEffect(() => {
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [lenis]);
+
   return (
-    <div className="min-h-screen bg-[var(--color-theme-cream)] pt-32 pb-16 px-4 sm:px-6 md:px-8">
+    <section data-theme="cream" className="min-h-screen w-screen pt-32 pb-16 px-4 sm:px-6 md:px-8">
       <article className="max-w-4xl mx-auto">
         <h1 className="text-5xl md:text-7xl font-bold mb-8 text-[var(--color-primary)] font-[var(--font-inter-tight)]">
           Privacy Policy
@@ -19,15 +28,15 @@ export default function PrivacyPage() {
 
         <div className="space-y-8 text-[var(--color-primary)] riposte text-lg leading-relaxed">
           {/* Introduction */}
-          <section>
+          <div>
             <p>
               At Flip Beetle, we take your privacy seriously. This policy explains what information we collect,
               how we use it, and your rights regarding your data. If you have questions, reach out—we're here to help.
             </p>
-          </section>
+          </div>
 
           {/* What We Collect */}
-          <section>
+          <div>
             <h2 className="text-3xl font-bold mb-4 font-[var(--font-inter-tight)]">
               What Information We Collect
             </h2>
@@ -58,10 +67,10 @@ export default function PrivacyPage() {
               <li>Pages you visit and how long you stay</li>
               <li>Referring website</li>
             </ul>
-          </section>
+          </div>
 
           {/* How We Use It */}
-          <section>
+          <div>
             <h2 className="text-3xl font-bold mb-4 font-[var(--font-inter-tight)]">
               How We Use Your Information
             </h2>
@@ -76,10 +85,10 @@ export default function PrivacyPage() {
             <p>
               We don't sell your data. We don't share it with advertisers. We use it to do our job and nothing else.
             </p>
-          </section>
+          </div>
 
           {/* Cookies */}
-          <section>
+          <div>
             <h2 className="text-3xl font-bold mb-4 font-[var(--font-inter-tight)]">
               Cookies and Tracking
             </h2>
@@ -95,10 +104,10 @@ export default function PrivacyPage() {
             <p>
               You can disable cookies in your browser settings, but some features of our site may not work properly if you do.
             </p>
-          </section>
+          </div>
 
           {/* Third-Party Services */}
-          <section>
+          <div>
             <h2 className="text-3xl font-bold mb-4 font-[var(--font-inter-tight)]">
               Third-Party Services
             </h2>
@@ -115,10 +124,10 @@ export default function PrivacyPage() {
               These services have their own privacy policies. We choose partners who respect your privacy,
               but we encourage you to review their policies as well.
             </p>
-          </section>
+          </div>
 
           {/* Data Security */}
-          <section>
+          <div>
             <h2 className="text-3xl font-bold mb-4 font-[var(--font-inter-tight)]">
               How We Protect Your Data
             </h2>
@@ -127,10 +136,10 @@ export default function PrivacyPage() {
               This includes encryption, secure servers, and limiting access to your data to only those who need it.
               That said, no method of transmission over the internet is 100% secure, and we can't guarantee absolute security.
             </p>
-          </section>
+          </div>
 
           {/* Your Rights */}
-          <section>
+          <div>
             <h2 className="text-3xl font-bold mb-4 font-[var(--font-inter-tight)]">
               Your Rights
             </h2>
@@ -145,10 +154,10 @@ export default function PrivacyPage() {
             <p>
               To exercise any of these rights, just email us. We'll respond promptly.
             </p>
-          </section>
+          </div>
 
           {/* Children's Privacy */}
-          <section>
+          <div>
             <h2 className="text-3xl font-bold mb-4 font-[var(--font-inter-tight)]">
               Children's Privacy
             </h2>
@@ -156,10 +165,10 @@ export default function PrivacyPage() {
               Our services are not directed to anyone under 18. We don't knowingly collect information from children.
               If we discover we've inadvertently collected such data, we'll delete it immediately.
             </p>
-          </section>
+          </div>
 
           {/* Changes */}
-          <section>
+          <div>
             <h2 className="text-3xl font-bold mb-4 font-[var(--font-inter-tight)]">
               Changes to This Policy
             </h2>
@@ -168,10 +177,10 @@ export default function PrivacyPage() {
               date at the top of this page. If we make significant changes, we'll let you know via email or
               a notice on our website.
             </p>
-          </section>
+          </div>
 
           {/* Contact */}
-          <section>
+          <div>
             <h2 className="text-3xl font-bold mb-4 font-[var(--font-inter-tight)]">
               Questions?
             </h2>
@@ -190,9 +199,9 @@ export default function PrivacyPage() {
             <p className="mt-2">
               We're real people, and we'll get back to you.
             </p>
-          </section>
+          </div>
         </div>
       </article>
-    </div>
+    </section>
   );
 }

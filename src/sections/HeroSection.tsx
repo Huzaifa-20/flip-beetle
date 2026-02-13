@@ -20,6 +20,10 @@ const HeroSection = () => {
   const { currentTheme } = useTheme();
   const [shouldLoadDarkBeetle, setShouldLoadDarkBeetle] = useState(hasShownSplash);
 
+  // Refs for beetle videos to control playback speed
+  const darkBeetleRef = useRef<HTMLVideoElement>(null);
+  const lightBeetleRef = useRef<HTMLVideoElement>(null);
+
   // Check for reduced motion preference
   const prefersReducedMotion = useMemo(() => {
     if (typeof window === "undefined") return false;
@@ -266,6 +270,16 @@ const HeroSection = () => {
     }
   }, [progress, shouldLoadDarkBeetle]);
 
+  // Set playback speed for beetle videos
+  useEffect(() => {
+    if (darkBeetleRef.current) {
+      darkBeetleRef.current.playbackRate = 1.5;
+    }
+    if (lightBeetleRef.current) {
+      lightBeetleRef.current.playbackRate = 1.5;
+    }
+  }, [shouldLoadDarkBeetle]);
+
   return (
     <section
       id="hero-section"
@@ -333,6 +347,7 @@ const HeroSection = () => {
                 {/* Dark Beetle Video - Lazy loaded */}
                 {shouldLoadDarkBeetle && (
                   <motion.video
+                    ref={darkBeetleRef}
                     className="drop-shadow-2xl w-[350px] h-[350px] object-contain absolute inset-0"
                     autoPlay
                     loop
@@ -351,6 +366,7 @@ const HeroSection = () => {
 
                 {/* Light Beetle Video - Loaded immediately */}
                 <motion.video
+                  ref={lightBeetleRef}
                   className="drop-shadow-2xl w-[350px] h-[350px] object-contain absolute inset-0"
                   autoPlay
                   loop

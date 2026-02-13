@@ -9,6 +9,7 @@ const NAVIGATION_LINKS = [
   { name: "Homepage", href: "/" },
   { name: "About", href: "/about" },
   { name: "Blog", href: "/blog" },
+  { name: "Contact", href: "/contact" },
 ] as const;
 
 const SOCIAL_LINKS = [

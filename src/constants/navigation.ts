@@ -15,13 +15,11 @@ export interface SocialLink extends NavItem {
 export const MENU_ITEMS: NavItem[] = [
   { label: "HOME", href: "/" },
   { label: "ABOUT", href: "/about" },
-  { label: "WORK", href: "#work" },
-  { label: "JOURNAL", href: "/blog" },
-  { label: "CONTACT", href: "#contact" },
+  { label: "BLOG", href: "/blog" },
+  { label: "CONTACT", href: "/contact" },
 ];
 
 export const SOCIAL_LINKS: SocialLink[] = [
   { label: "LINKEDIN", href: "https://linkedin.com" },
-  { label: "TWITTER", href: "https://twitter.com" },
   { label: "INSTAGRAM", href: "https://instagram.com" },
 ];
