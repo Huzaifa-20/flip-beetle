@@ -14,39 +14,33 @@ interface FAQItem {
 const faqs: FAQItem[] = [
   {
     id: "faq-1",
-    question: "How long does it take to build a website?",
+    question: "How long until we're live?",
     answer:
-      "The timeline varies depending on the project scope and complexity. A simple landing page typically takes 2-3 weeks, while a multi-page website can take 4-6 weeks. I'll provide you with a detailed timeline after understanding your specific requirements.",
+      "Most projects land between 3-6 weeks, depending on scope. But here's the thing—we're not watching the clock, we're building something that works. Rush jobs get rushed results. We move fast where it counts and take our time where it matters. You'll have a clear timeline from day one.",
   },
   {
     id: "faq-2",
-    question: "What do I need to provide to get started?",
+    question: "What if I don't have content ready?",
     answer:
-      "To get started, I'll need your brand guidelines (colors, fonts, logos), content (text and images), and a clear understanding of your goals. Don't worry if you don't have everything ready—I can guide you through the process and help with content creation if needed.",
+      "Perfect. Most people don't. We'll help you figure out what story you're telling and how to tell it. Bring your vision, your vibe, and what makes you different. We'll handle the rest—from writing copy that actually sounds like you to sourcing visuals that don't look like stock photo hell.",
   },
   {
     id: "faq-3",
-    question: "Do you offer ongoing support and maintenance?",
+    question: "Do you only work with certain industries?",
     answer:
-      "Yes! I offer ongoing support and maintenance packages to ensure your website stays up-to-date, secure, and performing optimally. This includes regular updates, bug fixes, and minor content changes as needed.",
+      "We build for people, not industries. Whether you're flipping burgers or flipping houses, coaching athletes or crafting jewelry—if you've got a vision worth sharing, we're in. Good design doesn't care about your job title.",
   },
   {
     id: "faq-4",
-    question: "Will my website be mobile-friendly?",
+    question: "Will this look good on mobile?",
     answer:
-      "Absolutely! All websites I create are fully responsive and optimized for all devices—from smartphones to tablets to desktop computers. Mobile-first design is a standard practice to ensure your site looks great everywhere.",
+      "It better. Over half your visitors are on their phones right now. Every site we build is designed mobile-first, which means it's not just 'responsive'—it's built to look stunning and work perfectly on whatever screen your audience is holding.",
   },
   {
     id: "faq-5",
-    question: "Can I update the website content myself?",
+    question: "Can I make updates myself later?",
     answer:
-      "Yes! I can integrate a user-friendly content management system (CMS) that allows you to easily update text, images, and other content without any technical knowledge. I'll also provide training on how to use it.",
-  },
-  {
-    id: "faq-6",
-    question: "What is your payment structure?",
-    answer:
-      "I typically work with a 50% upfront deposit to begin the project, with the remaining 50% due upon completion and before the website goes live. For larger projects, we can arrange a milestone-based payment plan.",
+      "Absolutely. We'll set you up with a system that doesn't require a computer science degree to figure out. Change text, swap images, add new pages—all without calling us. (Though we're here if you need us.) You own your site, so you should be able to control it.",
   },
 ];
 
@@ -108,7 +102,7 @@ const FAQSection = () => {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <p className="text-lg riposte leading-relaxed mt-4 text-primary/80">
+                    <p className="text-lg riposte leading-relaxed mt-4">
                       {faq.answer}
                     </p>
                   </motion.div>
