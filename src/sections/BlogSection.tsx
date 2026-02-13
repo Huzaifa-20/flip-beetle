@@ -39,10 +39,10 @@ const BlogSection: React.FC<BlogSectionProps> = ({ posts }) => {
           >
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 text-base sm:text-lg riposte uppercase tracking-wider "
+              className="group inline-flex items-center gap-2 text-base sm:text-lg riposte uppercase border-b w-fit transition-colors duration-300 hover:text-accent"
             >
               VIEW ALL
-              <ArrowRight className="w-5 h-5" />
+              <span className="text-xl transition-transform duration-300 group-hover:translate-x-1">→</span>
             </Link>
           </motion.div>
         </div>

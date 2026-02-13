@@ -72,8 +72,9 @@ const ContactSection = () => {
         animate={isInView ? "visible" : "hidden"}
       >
         <AnimatedTextSection
-          sentence="READY TO START? LET'S CONNECT!"
+          sentence="LET'S BUILD SOMETHING REMARKABLE"
           animationType="word-by-word"
+          highlightWord="REMARKABLE"
         />
 
         {/* Description */}
@@ -83,9 +84,9 @@ const ContactSection = () => {
           style={{ y: descriptionY }}
           transition={{ delay: 0.2 }}
         >
-          Whether you&apos;re curious about creating a new website or have questions on
-          where to begin, I&apos;m here to help. Tell me about your business, your vision, or
-          any ideas you have in mind—I&apos;d love to bring them to life.
+          Have a project in mind? We&apos;re ready to partner with you. Tell us about your vision,
+          your goals, or the challenge you&apos;re looking to solve—and let&apos;s create something
+          that makes an impact together.
         </motion.p>
 
         {/* Form Section */}
@@ -104,7 +105,7 @@ const ContactSection = () => {
               <div className="flex-1">
                 <input
                   type="text"
-                  value="webdesignwithdaria@gmail.com"
+                  value="hello@flipbeetle.com"
                   readOnly
                   className="w-full bg-transparent border-b border-black text-black riposte text-lg pb-2 outline-none"
                 />
@@ -128,9 +129,9 @@ const ContactSection = () => {
 
             {/* Message Field */}
             <div className="mb-8">
-              <p className="text-base sm:text-lg riposte mb-2">Dear Daria,</p>
+              <p className="text-base sm:text-lg riposte mb-2">Hey Flip Beetle,</p>
               <textarea
-                placeholder="enter your message"
+                placeholder="tell us about your project, vision, or what you're looking to create"
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 required
@@ -165,10 +166,6 @@ const ContactSection = () => {
               >
                 {isSubmitting ? "SENDING..." : "SEND EMAIL"}
               </Button>
-
-              <p className="riposte text-black/70 text-sm italic">
-                *I will respond during 24 hours
-              </p>
             </div>
 
             {/* Status Messages */}

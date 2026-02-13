@@ -31,10 +31,10 @@ const AboutSection = () => {
 
           <Link
             href="/about"
-            className="inline-flex items-center gap-2 text-base sm:text-lg riposte uppercase border-b w-fit transition-colors duration-300"
+            className="group inline-flex items-center gap-2 text-base sm:text-lg riposte uppercase border-b w-fit transition-colors duration-300 hover:text-accent"
           >
             MORE ABOUT FLIP BEETLE
-            <span className="text-xl">→</span>
+            <span className="text-xl transition-transform duration-300 group-hover:translate-x-1">→</span>
           </Link>
         </motion.div>
 

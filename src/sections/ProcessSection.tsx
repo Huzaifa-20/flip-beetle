@@ -106,11 +106,11 @@ const ProcessSection = () => {
       <div className={`${isMobile ? 'hidden' : 'sticky'} top-0 h-screen flex items-center overflow-hidden`}>
         <div className="w-full px-6 md:px-12">
           <AnimatedTextSection
-            sentence="From start to end, we go through a process"
+            sentence="START YOUR JOURNEY WITH US"
             animationType="word-by-word"
           />
 
-          <div className="h-24" />
+          <div className="h-12" />
 
           <motion.div
             ref={cardsRef}

@@ -2,171 +2,115 @@
 
 import React from "react";
 import Image from "next/image";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import { fadeInLeft, fadeInRight } from "@/utils/animations";
-import { PARALLAX_SPEEDS } from "@/utils/parallaxConfig";
-import AnimatedTextSection from "@/components/AnimatedTextSection";
+import { motion, useInView } from "framer-motion";
+import { fadeInUp } from "@/utils/animations";
+import { useBeetleLogo } from "@/hooks/useBeetleLogo";
 
-interface Service {
-  id: string;
-  price: string;
-  title: string;
-  image: string;
-  imageWidth: number;
-  imageHeight: number;
-  tags: string[];
-  description: string;
-}
-
-const services: Service[] = [
+// Service categories moved outside component for performance
+const SERVICE_CATEGORIES = [
   {
-    id: "landing-page",
-    price: "$1 500",
-    title: "Landing page",
-    image: "/images/Landing_Page.svg",
-    imageWidth: 528.26,
-    imageHeight: 442.82,
-    tags: ["startups", "service providers", "small businesses"],
-    description:
-      "A fully built one page with a focused goal—like promoting a single product, service, or event. It's ideal for those who want a simple, compelling introduction that drives immediate action.",
+    number: "01",
+    title: "BRANDING",
+    services: [
+      "Go-To-Market Strategy",
+      "Brand Strategy",
+      "Visual Identities",
+      "Brand Guidelines",
+    ],
   },
   {
-    id: "multi-page",
-    price: "$2 000",
-    title: "Multi-page websites",
-    image: "/images/Landing_Page.svg", // You can replace with actual multi-page image
-    imageWidth: 528.26,
-    imageHeight: 442.82,
-    tags: ["established businesses", "growing brands", "professionals"],
-    description:
-      "A fully developed website that provides detailed information about multiple services, builds client trust, and helps establish a strong online presence for your business.",
+    number: "02",
+    title: "DESIGN",
+    services: [
+      "UI/UX Design",
+      "Responsive Design",
+      "Prototyping",
+      "Design Systems",
+    ],
   },
-];
+  {
+    number: "03",
+    title: "DEVELOPMENT",
+    services: [
+      "Website Development",
+      "Interactive Web Experiences",
+      "Content Management Systems",
+      "Digital Media Solutions",
+    ],
+  },
+] as const;
 
-const ServicesSection = () => {
+const ServicesSection = ({ theme }: { theme?: string }) => {
+  const beetleLogo = useBeetleLogo();
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-
-  // Price badge rotation - useTransform handles optimization internally
-  const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
 
   return (
     <section
       ref={ref}
-      data-theme="cream"
-      className="w-screen flex justify-center items-center my-32 px-12"
+      data-theme={theme ? theme : "black"}
+      className="w-screen px-6 md:px-12 py-24 md:py-36"
     >
-      <div className="w-full flex flex-col gap-20 justify-start items-center">
-        <AnimatedTextSection
-          sentence="Ways we can help you get on the right track"
-          highlightWord="right"
-          animationType="fade-in"
-        />
-
-        {services.map((service, index) => (
-          <motion.div
-            key={service.id}
-            className="w-full flex justify-start items-start gap-10"
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-          >
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 sm:gap-16"
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.15,
+              },
+            },
+          }}
+        >
+          {SERVICE_CATEGORIES.map((category) => (
             <motion.div
-              className="relative"
-              variants={fadeInLeft}
-              transition={{ delay: 0.3 + index * 0.2 }}
-            // style={{ y: imageY }}
+              key={category.number}
+              variants={fadeInUp}
+              className="flex flex-row sm:flex-col justify-between sm:justify-start items-start"
             >
-              {/* Price Badge */}
-              <div className="absolute -left-8 top-8 z-10">
-                <div className="relative flex items-center justify-center w-32 h-32">
-                  <motion.svg
-                    viewBox="0 0 100 100"
-                    className="absolute inset-0 w-full h-full"
-                    style={{ rotate }}
-                  >
-                    {/* Create scalloped badge - 24 scallops around the circle */}
-                    <g>
-                      {/* Base circle */}
-                      <circle cx="50" cy="50" r="38" fill="var(--color-badge-rose)" />
-                      {/* Scallops around the edge */}
-                      {[...Array(24)].map((_, i) => {
-                        const angle = (i * 360) / 24;
-                        const rad = (angle * Math.PI) / 180;
-                        const x = 50 + Math.cos(rad) * 38;
-                        const y = 50 + Math.sin(rad) * 38;
-                        return (
-                          <circle
-                            key={i}
-                            cx={x}
-                            cy={y}
-                            r="3.8"
-                            fill="var(--color-badge-rose)"
-                          />
-                        );
-                      })}
-                    </g>
-                  </motion.svg>
-                  <div className="relative z-10 text-center">
-                    <p className="text-background text-sm riposte uppercase">
-                      From
-                    </p>
-                    <p className="text-background text-xl riposte">
-                      {service.price}
-                    </p>
-                  </div>
-                </div>
+              <div>
+                {/* Number */}
+                <p className="text-sm sm:text-base riposte mb-5">
+                  {category.number}
+                </p>
+
+                {/* Title */}
+                <h2 className="text-4xl sm:text-5xl riposte font-bold mb-3">
+                  {category.title}
+                </h2>
+
+                {/* Services List */}
+                <ul className="space-y-1 mb-16 flex-1">
+                  {category.services.map((service, index) => (
+                    <li
+                      key={index}
+                      className="text-base sm:text-lg riposte"
+                    >
+                      {service}
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              <Image
-                src={service.image}
-                alt={service.title}
-                width={service.imageWidth}
-                height={service.imageHeight}
-              />
+              {/* Icon at bottom */}
+              <div className="mt-0 sm:mt-auto translate-y-8 sm:translate-y-0">
+                <Image
+                  src={beetleLogo}
+                  alt="Anxious Beetle"
+                  width={60}
+                  height={60}
+                  className="object-contain"
+                />
+              </div>
             </motion.div>
-
-            <motion.div
-              className="flex flex-col items-start gap-6"
-              variants={fadeInRight}
-              transition={{ delay: 0.5 + index * 0.2 }}
-            // style={{ y: textY }}
-            >
-              <div className="flex items-center gap-4">
-                <h1 className="text-6xl text-start text-nowrap">
-                  {service.title}
-                </h1>
-                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-secondary/30">
-                  <span className="text-secondary text-2xl font-bold">?</span>
-                </div>
-              </div>
-
-              <p className="text-xl riposte">Perfect for:</p>
-
-              <div className="flex gap-3 flex-wrap">
-                {service.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-6 py-2 rounded-full border-2 border-primary text-primary riposte text-base"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              <p className="text-lg riposte leading-relaxed max-w-3xl">
-                {service.description}
-              </p>
-            </motion.div>
-          </motion.div>
-        ))}
+          ))}
+        </motion.div>
       </div>
     </section>
   );
 };
 
-export default ServicesSection;
+export default React.memo(ServicesSection);

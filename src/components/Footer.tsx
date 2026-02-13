@@ -7,26 +7,13 @@ import Button from "@/components/ui/Button";
 // Constant arrays moved outside component for performance
 const NAVIGATION_LINKS = [
   { name: "Homepage", href: "/" },
-  { name: "Work", href: "#work" },
-  { name: "About", href: "#about" },
-  { name: "Latest", href: "/blog" },
-  { name: "Careers", href: "#careers" },
+  { name: "About", href: "/about" },
+  { name: "Blog", href: "/blog" },
 ] as const;
 
 const SOCIAL_LINKS = [
-  { name: "Twitter (X)", href: "https://twitter.com" },
   { name: "Instagram", href: "https://instagram.com" },
   { name: "LinkedIn", href: "https://linkedin.com" },
-  { name: "Dribbble", href: "https://dribbble.com" },
-  { name: "Behance", href: "https://behance.com" },
-] as const;
-
-const LOCATIONS = [
-  "FLORIDA",
-  "ARGENTINA",
-  "GERMANY",
-  "POLAND",
-  "FRANCE",
 ] as const;
 
 const Footer = () => {
@@ -37,7 +24,6 @@ const Footer = () => {
   const bgColor = isBlogPage ? "bg-black" : "bg-primary";
   const textColor = isBlogPage ? "text-white" : "text-background";
   const hoverColor = isBlogPage ? "hover:opacity-70" : "hover:opacity-70";
-  const accentColor = isBlogPage ? "text-gray-400" : "text-background/60";
 
   return (
     <footer className={`w-screen min-h-screen ${bgColor} ${textColor} px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-20 flex flex-col justify-between`}>
@@ -114,16 +100,16 @@ const Footer = () => {
               </h3>
               <div className="space-y-3">
                 <a
-                  href="tel:+14079999999"
+                  href="tel:+971581620977"
                   className={`block text-lg sm:text-xl riposte transition-opacity duration-300 ${hoverColor}`}
                 >
-                  (407) 99-JUICE
+                  (+971) 58 1620977
                 </a>
                 <a
                   href="mailto:newbiz@juice.agency"
                   className={`block text-lg sm:text-xl riposte transition-opacity duration-300 ${hoverColor} wrap-break-word`}
                 >
-                  newbiz@juice.agency
+                  newbiz@telltalestudios
                 </a>
               </div>
             </div>
@@ -134,11 +120,8 @@ const Footer = () => {
         <div className="flex flex-col gap-4 sm:gap-6">
           {/* Locations Section */}
           <div className="flex flex-col sm:flex-row sm:items-end gap-2 sm:gap-4">
-            <p className="font-mono text-xs uppercase tracking-wider">
-              WE&apos;RE GRITTY AF
-            </p>
-            <p className={`font-mono text-xs uppercase tracking-wider ${accentColor}`}>
-              {LOCATIONS.join(", ")}
+            <p className="font-mono text-xs uppercase">
+              SCROLL BACK UP & CONTACT US
             </p>
           </div>
 

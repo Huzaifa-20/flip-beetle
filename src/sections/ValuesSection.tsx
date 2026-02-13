@@ -6,34 +6,34 @@ import Image from "next/image";
 
 const VALUES = [
   {
-    title: "GRITTY",
-    description: "We work together to achieve our goals and support each other along the way.",
-    icon: "/values/gritty.svg",
+    title: "PEOPLE CENTRIC",
+    description: "We believe in people, not titles. Every project starts with understanding your story, your vision, and what matters most to you.",
+    icon: "/values/human-first.svg",
   },
   {
-    title: "AUTHENTICITY",
-    description: "We put our customers first and strive to exceed their expectations.",
-    icon: "/values/authenticity.svg",
+    title: "CRAFT & QUALITY",
+    description: "We're obsessed with the details. From the first sketch to the final pixel, we pour our hearts into creating work that stands out and lasts.",
+    icon: "/values/craft.svg",
   },
   {
-    title: "COMMUNITY",
-    description: "We believe in building lasting relationships and supporting our community.",
-    icon: "/values/community.svg",
+    title: "BOLD & CONFIDENT",
+    description: "We're not afraid to push boundaries. Great design requires courage, and we're here to help you make a statement that turns heads.",
+    icon: "/values/bold.svg",
   },
   {
-    title: "PASSION",
-    description: "We are passionate about what we do and committed to delivering excellence.",
-    icon: "/values/passion.svg",
+    title: "PARTNERSHIP",
+    description: "Your success is our success. We work alongside you as true partners, not just vendors, building something meaningful together.",
+    icon: "/values/partnership.svg",
   },
   {
-    title: "INNOVATION",
-    description: "We embrace creativity and continuously push boundaries to deliver innovative solutions.",
-    icon: "/values/innovation.svg",
+    title: "IMPACT-DRIVEN",
+    description: "We don't just build pretty websites. We create digital experiences that drive real results and help your business grow.",
+    icon: "/values/impact.svg",
   },
   {
-    title: "INTEGRITY",
-    description: "We maintain transparency and honesty in everything we do, building trust with every interaction.",
-    icon: "/values/integrity.svg",
+    title: "AUTHENTIC & HONEST",
+    description: "No jargon, no fluff. We tell it like it is, deliver on our promises, and build trust through transparency.",
+    icon: "/values/authentic.svg",
   },
 ] as const;
 
@@ -98,7 +98,7 @@ const ValuesSection = () => {
                 </h3>
 
                 {/* Icon/Illustration */}
-                <div className="relative w-full h-[200px] md:h-[250px] mb-8 md:mb-10 flex items-center justify-center">
+                <div className="hidden relative w-full h-[200px] md:h-[250px] mb-8 md:mb-10 flex items-center justify-center">
                   <div className="relative w-[180px] h-[180px] md:w-[220px] md:h-[220px]">
                     <Image
                       src={value.icon}

@@ -78,6 +78,7 @@ const Navbar = () => {
   return (
     <>
       <motion.div
+        id="navbar"
         className="w-screen flex justify-center fixed top-0 z-50"
         initial="visible"
         animate={hidden ? "hidden" : "visible"}

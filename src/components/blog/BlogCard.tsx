@@ -39,9 +39,6 @@ const getPostCategory = (tags: string[]): string => {
   if (tags.some(tag => ["Accessibility", "WCAG", "Responsive Design", "CSS", "Mobile First", "Animation", "Performance", "Framer Motion"].includes(tag))) {
     return "INSIGHTS";
   }
-  if (tags.some(tag => ["Pulp Fiction", "Story", "Creative"].includes(tag))) {
-    return "PULP FICTION";
-  }
   return "DESIGN";
 };
 
@@ -51,7 +48,6 @@ const getCategoryColor = (category: string) => {
     "DESIGN": "bg-[var(--color-tag-coral)]",
     "NEWS": "bg-[var(--color-tag-tan)]",
     "INSIGHTS": "bg-[var(--color-tag-light-blue)]",
-    "PULP FICTION": "bg-[var(--color-tag-purple)]",
   };
   return colorMap[category] || "bg-[var(--color-tag-coral)]";
 };

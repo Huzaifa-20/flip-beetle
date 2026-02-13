@@ -2,7 +2,7 @@ import AnimatedTextSection from "@/components/AnimatedTextSection";
 
 const MissionSection = () => {
   return (
-    <div className="w-full h-full mt-16 mb-0 sm:mt-32 sm:mb-0"
+    <div className="w-full h-full mt-16 mb-0 sm:my-32 sm:mb-0"
       data-theme="cream"
     >
       <AnimatedTextSection

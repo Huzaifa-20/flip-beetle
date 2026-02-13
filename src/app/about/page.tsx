@@ -1,9 +1,9 @@
 import React from "react";
-import MissionSection from "@/sections/MissionSection";
-import ServicesAltSection from "@/sections/ServicesAltSection";
+import ServicesSection from "@/sections/ServicesSection";
 import TeamSection from "@/sections/TeamSection";
 import ValuesSection from "@/sections/ValuesSection";
 import AnimatedTextSection from "@/components/AnimatedTextSection";
+import ContactSection from "@/sections/ContactSection";
 
 const AboutPage = () => {
   return (
@@ -13,20 +13,15 @@ const AboutPage = () => {
         <div className="max-w-7xl mx-auto">
           <AnimatedTextSection
             sentence="WE'RE A TEAM THAT BELIEVES GREAT WORK COMES FROM GENUINE PARTNERSHIP, STRATEGIC THINKING, AND AN UNWAVERING COMMITMENT TO YOUR SUCCESS."
-            highlightWord="PARTNERSHIP"
+            highlightWord="PARTNERSHIP,"
             animationType="word-by-word"
           />
         </div>
       </section>
-
-      {/* Team Section */}
       <TeamSection />
-
-      {/* Services Section */}
-      <ServicesAltSection />
-
-      {/* Values Section */}
+      <ServicesSection theme="cream" />
       <ValuesSection />
+      <ContactSection />
     </main>
   );
 };

@@ -26,10 +26,6 @@ const getPostCategory = (tags: string[]): string => {
   if (tags.some(tag => ["Accessibility", "WCAG", "Responsive Design", "CSS", "Mobile First", "Animation", "Performance", "Framer Motion"].includes(tag))) {
     return "INSIGHTS";
   }
-  // Pulp Fiction: Creative content, stories
-  if (tags.some(tag => ["Pulp Fiction", "Story", "Creative"].includes(tag))) {
-    return "PULP FICTION";
-  }
   return "DESIGN"; // default
 };
 
@@ -39,13 +35,12 @@ const getCategoryColor = (category: string) => {
     "DESIGN": "bg-[var(--color-tag-coral)]",
     "NEWS": "bg-[var(--color-tag-tan)]",
     "INSIGHTS": "bg-[var(--color-tag-light-blue)]",
-    "PULP FICTION": "bg-[var(--color-tag-purple)]",
   };
   return colorMap[category] || "bg-[var(--color-tag-coral)]";
 };
 
 // Fixed categories array outside component
-const CATEGORIES = ["ALL", "DESIGN", "NEWS", "PULP FICTION", "INSIGHTS"] as const;
+const CATEGORIES = ["ALL", "DESIGN", "NEWS", "INSIGHTS"] as const;
 
 function BlogListingClient({ posts }: BlogListingClientProps) {
   const headerRef = React.useRef(null);
@@ -160,11 +155,11 @@ function BlogListingClient({ posts }: BlogListingClientProps) {
                 {/* Content Section */}
                 <div className="p-8 lg:p-12 flex flex-col justify-center">
                   <div className="mb-6">
-                    <span className="inline-block px-4 py-1.5 bg-white text-black text-xs riposte font-bold tracking-wider rounded-full mb-4">
+                    <span className="inline-block px-4 py-1.5 text-xs riposte font-bold tracking-wider rounded-full mb-4">
                       FEATURED
                     </span>
                     <span
-                      className={`inline-block ml-2 px-4 py-1.5 text-white text-xs riposte font-bold tracking-wider rounded-full ${getCategoryColor(
+                      className={`inline-block ml-2 px-4 py-1.5 text-xs riposte font-bold tracking-wider rounded-full ${getCategoryColor(
                         getPostCategory(featuredPost.tags)
                       )}`}
                     >
@@ -172,16 +167,16 @@ function BlogListingClient({ posts }: BlogListingClientProps) {
                     </span>
                   </div>
 
-                  <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl riposte font-bold text-white mb-4 lg:mb-6 leading-tight">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl riposte font-bold mb-4 lg:mb-6 leading-tight">
                     {featuredPost.title}
                   </h2>
 
-                  <p className="text-base lg:text-lg riposte text-white/70 mb-6 line-clamp-3">
+                  <p className="text-base lg:text-lg riposte mb-6 line-clamp-3">
                     {featuredPost.excerpt}
                   </p>
 
                   <div className="flex items-center justify-between">
-                    <span className="text-sm riposte text-white/60">
+                    <span className="text-sm riposte">
                       {new Date(featuredPost.date).toLocaleDateString("en-US", {
                         month: "long",
                         day: "numeric",
@@ -189,10 +184,12 @@ function BlogListingClient({ posts }: BlogListingClientProps) {
                       })}{" "}
                       • {featuredPost.readTime} min read
                     </span>
-                    <Link href={`/blog/${featuredPost.slug}`}>
-                      <span className="text-sm riposte font-semibold text-white hover:underline cursor-pointer">
-                        Read more →
-                      </span>
+                    <Link
+                      href={`/blog/${featuredPost.slug}`}
+                      className="group inline-flex items-center gap-2 text-sm riposte border-b w-fit transition-colors duration-300 hover:text-accent"
+                    >
+                      View All
+                      <span className="text-xl transition-transform duration-300 group-hover:translate-x-1">→</span>
                     </Link>
                   </div>
                 </div>

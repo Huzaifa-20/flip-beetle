@@ -8,17 +8,17 @@ import { fadeInUp } from "@/utils/animations";
 const TEAM_MEMBERS = [
   {
     name: "Huzaifa",
-    role: "CEO",
+    role: "Tech",
     image: "/team/huzaifa.jpg",
   },
   {
     name: "Sultan",
-    role: "Creative Director",
+    role: "Art",
     image: "/team/sultan.jpg",
   },
   {
     name: "Yumna",
-    role: "Developer",
+    role: "Design",
     image: "/team/yumna.jpg",
   },
 ] as const;
@@ -26,7 +26,7 @@ const TEAM_MEMBERS = [
 const TeamSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(1); // Default to Pierre Huet (index 1)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(0);
 
   return (
     <section
@@ -42,8 +42,8 @@ const TeamSection = () => {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
         >
-          We&apos;re a gritty team that finds meaning in the work, cares about the details,
-          and shows up ready to do it right.
+          We&apos;re a team that finds meaning in the work, cares about the craft,
+          and shows up ready to create something remarkable.
         </motion.p>
 
         {/* Team Grid */}
@@ -70,10 +70,10 @@ const TeamSection = () => {
                   key={member.name}
                   variants={fadeInUp}
                   onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(1)} // Reset to Pierre Huet
+                  onMouseLeave={() => setHoveredIndex(0)}
                   className={`
-                    flex justify-between items-center py-8 px-6 border-t border-[var(--color-text-on-cream)] border-opacity-20
-                    ${isHovered ? "bg-[#b8d4d9]" : "bg-transparent"}
+                    flex justify-between items-center py-8 px-6 border-t border-(--theme-text-color) border-opacity-20
+                    ${isHovered ? "bg-(--color-accent)" : "bg-transparent"}
                     ${index === TEAM_MEMBERS.length - 1 ? "border-b" : ""}
                     cursor-pointer transition-colors duration-300
                   `}
@@ -81,11 +81,11 @@ const TeamSection = () => {
                   <motion.h3
                     className="text-2xl md:text-3xl lg:text-4xl riposte font-medium"
                     animate={{ x: isHovered ? 12 : 0 }}
-                    transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                    transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
                   >
                     {member.name}
                   </motion.h3>
-                  <p className="text-lg md:text-xl riposte text-[var(--color-text-on-cream)] opacity-80">
+                  <p className="text-lg md:text-xl riposte opacity-80">
                     ({member.role})
                   </p>
                 </motion.div>
@@ -98,7 +98,7 @@ const TeamSection = () => {
             className="relative h-[400px] md:h-[600px] lg:h-full min-h-[500px] rounded-2xl overflow-hidden bg-[var(--color-background)]"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <AnimatePresence mode="wait">
               {hoveredIndex !== null && (
@@ -107,7 +107,7 @@ const TeamSection = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+                  transition={{ duration: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
                   className="absolute inset-0"
                 >
                   <Image

@@ -43,7 +43,7 @@ const ClientsSection = () => {
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="mb-12 md:mb-14">
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl riposte uppercase tracking-tight mb-6">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl riposte uppercase mb-6">
             We Work With People,
             <br />
             Not Titles
@@ -65,7 +65,7 @@ const ClientsSection = () => {
             Ready to bring your vision to life?
           </p>
           <Button href="#contact" variant="outlined" theme="black">
-            Let&apos;s Talk About Your Vision
+            Let&apos;s Talk
           </Button>
         </div>
       </div>

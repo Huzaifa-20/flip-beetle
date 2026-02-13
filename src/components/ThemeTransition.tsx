@@ -6,12 +6,12 @@ import { useTheme, ThemeType } from "@/contexts/ThemeContext";
 
 /**
  * Theme color mappings
- * Now using CSS variable references for better maintainability
+ * Using actual hex values since Framer Motion can't animate CSS variables
  */
 const themeColors: Record<ThemeType, string> = {
-  green: "var(--color-theme-green)",
-  cream: "var(--color-theme-cream)",
-  black: "var(--color-theme-black)",
+  green: "#606c38",
+  cream: "#fefae0",
+  black: "#000000",
 };
 
 const themeTextColors: Record<ThemeType, string> = {

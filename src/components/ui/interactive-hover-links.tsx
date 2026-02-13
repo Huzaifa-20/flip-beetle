@@ -97,13 +97,13 @@ function Link({ heading, videoSrc, subheading, href }: LinkProps) {
       onMouseLeave={handleMouseLeave}
       initial="initial"
       whileHover="whileHover"
-      className="w-full group relative flex items-center justify-between border-b py-4 transition-colors duration-500 hover:border-primary md:py-8"
+      className="w-full group relative flex items-center justify-between border-b py-4 transition-colors duration-500 hover:border-accent md:py-8"
     >
       <div>
-        <span className="relative z-10 block text-4xl font-bold transition-colors duration-500 group-hover:text-primary md:text-6xl riposte">
+        <span className="relative z-10 block text-4xl sm:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl transition-colors duration-500 group-hover:text-accent riposte">
           {heading}
         </span>
-        <span className="relative z-10 mt-2 block text-base transition-colors duration-500 group-hover:text-primary riposte">
+        <span className="relative z-10 mt-2 block text-base sm:text-lg transition-colors duration-500 group-hover:text-accent riposte">
           {subheading}
         </span>
       </div>
@@ -154,7 +154,7 @@ function Link({ heading, videoSrc, subheading, href }: LinkProps) {
           }}
           className="relative z-10 p-4"
         >
-          <ArrowRight className="size-8 md:size-12" />
+          <ArrowRight className="size-8 md:size-12 stroke-accent" />
         </motion.div>
       </div>
     </motion.a>
