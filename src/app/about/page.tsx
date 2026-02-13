@@ -1,11 +1,25 @@
-import React from "react";
+"use client";
+
+import React, { useEffect } from "react";
 import ServicesSection from "@/sections/ServicesSection";
 import TeamSection from "@/sections/TeamSection";
 import ValuesSection from "@/sections/ValuesSection";
 import AnimatedTextSection from "@/components/AnimatedTextSection";
 import ContactSection from "@/sections/ContactSection";
+import { useLenis } from "@/contexts/LenisContext";
 
 const AboutPage = () => {
+  const { lenis } = useLenis();
+
+  // Scroll to top when page loads
+  useEffect(() => {
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [lenis]);
+
   return (
     <main className="w-screen overflow-x-hidden">
       {/* Hero Section */}
