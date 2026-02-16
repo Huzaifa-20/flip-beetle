@@ -1,39 +1,51 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 
 const VALUES = [
   {
     title: "PEOPLE CENTRIC",
-    description: "We believe in people, not titles. Every project starts with understanding your story, your vision, and what matters most to you.",
-    icon: "/values/human-first.svg",
+    description: "People over titles. Your story drives everything we create.",
+    icon: "/values/People_Centric.png",
+    width: { mobile: 180, desktop: 180 },
+    height: { mobile: 180, desktop: 180 },
   },
   {
     title: "CRAFT & QUALITY",
-    description: "We're obsessed with the details. From the first sketch to the final pixel, we pour our hearts into creating work that stands out and lasts.",
-    icon: "/values/craft.svg",
+    description: "Every pixel matters. We're obsessed with the details.",
+    icon: "/values/Craft_&_Quality.png",
+    width: { mobile: 230, desktop: 160 },
+    height: { mobile: 230, desktop: 160 },
   },
   {
     title: "BOLD & CONFIDENT",
-    description: "We're not afraid to push boundaries. Great design requires courage, and we're here to help you make a statement that turns heads.",
-    icon: "/values/bold.svg",
+    description: "Pushing boundaries. Making statements that turn heads.",
+    icon: "/values/Bold_&_Confident.png",
+    width: { mobile: 180, desktop: 250 },
+    height: { mobile: 180, desktop: 250 },
   },
   {
     title: "PARTNERSHIP",
-    description: "Your success is our success. We work alongside you as true partners, not just vendors, building something meaningful together.",
-    icon: "/values/partnership.svg",
+    description: "Your success is ours. Partners, not vendors.",
+    icon: "/values/Partnership.png",
+    width: { mobile: 180, desktop: 300 },
+    height: { mobile: 180, desktop: 250 },
   },
   {
     title: "IMPACT-DRIVEN",
-    description: "We don't just build pretty websites. We create digital experiences that drive real results and help your business grow.",
-    icon: "/values/impact.svg",
+    description: "Real results, not just pretty pixels.",
+    icon: "/values/Impact_Driven.png",
+    width: { mobile: 180, desktop: 230 },
+    height: { mobile: 180, desktop: 230 },
   },
   {
     title: "AUTHENTIC & HONEST",
-    description: "No jargon, no fluff. We tell it like it is, deliver on our promises, and build trust through transparency.",
-    icon: "/values/authentic.svg",
+    description: "No jargon. Just honest work and transparency.",
+    icon: "/values/Authentic_&_Honest.png",
+    width: { mobile: 200, desktop: 250 },
+    height: { mobile: 200, desktop: 250 },
   },
 ] as const;
 
@@ -93,24 +105,38 @@ const ValuesSection = () => {
                 whileHover={{ scale: isDragging ? 1 : 1.02 }}
               >
                 {/* Value Title */}
-                <h3 className="text-2xl md:text-3xl riposte font-bold mb-8 md:mb-12 text-[var(--color-text-on-dark-cream)]">
+                <h3 className="text-2xl md:text-3xl riposte font-bold mb-8 md:mb-12">
                   {value.title}
                 </h3>
 
                 {/* Icon/Illustration */}
-                <div className="hidden relative w-full h-[200px] md:h-[250px] mb-8 md:mb-10 flex items-center justify-center">
-                  <div className="relative w-[180px] h-[180px] md:w-[220px] md:h-[220px]">
+                <div className="relative w-full h-[180px] md:h-[220px] mb-6 md:mb-8 flex items-center justify-center select-none">
+                  <div
+                    className="relative md:hidden">
                     <Image
                       src={value.icon}
                       alt={value.title}
-                      fill
-                      className="object-contain"
+                      width={value.width.desktop}
+                      height={value.height.desktop}
+                      draggable={false}
+                    />
+                  </div>
+                  <div
+                    className="relative hidden md:block"
+
+                  >
+                    <Image
+                      src={value.icon}
+                      alt={value.title}
+                      width={value.width.desktop}
+                      height={value.height.desktop}
+                      draggable={false}
                     />
                   </div>
                 </div>
 
                 {/* Description */}
-                <p className="text-base md:text-lg riposte leading-relaxed text-[var(--color-text-on-dark-cream)]">
+                <p className="text-base md:text-lg riposte leading-relaxed">
                   {value.description}
                 </p>
               </motion.div>

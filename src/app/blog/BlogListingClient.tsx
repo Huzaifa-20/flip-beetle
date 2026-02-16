@@ -74,7 +74,7 @@ function BlogListingClient({ posts }: BlogListingClientProps) {
   const remainingPosts = useMemo(() => filteredPosts.slice(1), [filteredPosts]);
 
   return (
-    <main className="min-h-screen w-screen bg-black px-6 md:px-12 py-24 md:py-36">
+    <main data-theme="black" className="min-h-screen w-screen bg-black px-6 md:px-12 py-24 md:py-36">
       <div className="mx-auto">
         {/* Header Section */}
         <motion.div

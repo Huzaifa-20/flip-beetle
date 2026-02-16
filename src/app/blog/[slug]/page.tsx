@@ -7,6 +7,7 @@ import { ChevronRight, Clock, Calendar } from "lucide-react";
 import ReadProgressBar from "@/components/blog/ReadProgressBar";
 import ArticleContent from "@/components/blog/ArticleContent";
 import ArticleNavigation from "@/components/blog/ArticleNavigation";
+import ScrollToTop from "@/components/blog/ScrollToTop";
 import {
   getAllPosts,
   getPostBySlug,
@@ -86,6 +87,9 @@ export default async function ArticlePage({ params }: Props) {
       data-theme="black"
       className="min-h-screen w-screen"
     >
+      {/* Scroll to top on page load */}
+      <ScrollToTop />
+
       {/* Read Progress Bar */}
       <ReadProgressBar />
 
@@ -93,12 +97,12 @@ export default async function ArticlePage({ params }: Props) {
       <article className="w-full">
         {/* Breadcrumb */}
         <div className="max-w-6xl mx-auto px-6 pt-32 pb-8">
-          <nav className="flex items-center gap-2 text-sm riposte text-white/60">
-            <Link href="/" className="hover:text-[var(--color-primary)] transition-colors">
+          <nav className="flex items-center gap-2 text-sm riposte text-white/70">
+            <Link href="/" className="hover:text-[var(--color-accent)] transition-colors">
               Home
             </Link>
             <ChevronRight className="w-4 h-4" />
-            <Link href="/blog" className="hover:text-[var(--color-primary)] transition-colors">
+            <Link href="/blog" className="hover:text-[var(--color-accent)] transition-colors">
               Journal
             </Link>
             <ChevronRight className="w-4 h-4" />
@@ -108,12 +112,12 @@ export default async function ArticlePage({ params }: Props) {
 
         {/* Title & Meta */}
         <div className="max-w-4xl mx-auto px-6 pb-12">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl riposte text-white mb-8 leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl riposte mb-8 leading-tight text-white">
             {post.title}
           </h1>
 
           {/* Meta Info */}
-          <div className="flex flex-wrap items-center gap-6 text-white/60 riposte">
+          <div className="flex flex-wrap items-center gap-6 riposte text-white/70">
             <div className="flex items-center gap-2">
               <Calendar className="w-5 h-5" />
               <span>{formattedDate}</span>
@@ -152,7 +156,7 @@ export default async function ArticlePage({ params }: Props) {
               {post.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-4 py-2 bg-white/10 text-white text-sm riposte uppercase tracking-wider rounded-full"
+                  className="px-4 py-2 text-sm riposte uppercase tracking-wider rounded-full bg-white/10 text-white/80"
                 >
                   {tag}
                 </span>
@@ -167,15 +171,15 @@ export default async function ArticlePage({ params }: Props) {
         {/* CTA Section */}
         <div className="w-full py-24">
           <div className="max-w-4xl mx-auto px-6 text-center">
-            <h2 className="text-4xl md:text-5xl riposte  mb-6">
+            <h2 className="text-4xl md:text-5xl riposte text-white mb-6">
               Ready to start your project?
             </h2>
-            <p className="text-xl riposte  mb-8">
+            <p className="text-xl riposte text-white/80 mb-8">
               Let&apos;s create something amazing together
             </p>
             <Link
-              href="/#contact"
-              className="inline-block px-8 py-4"
+              href="/contact"
+              className="inline-block px-8 py-4 bg-white text-black riposte font-semibold rounded-lg hover:bg-white/90 transition-colors"
             >
               Get In Touch
             </Link>

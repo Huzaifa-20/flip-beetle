@@ -145,11 +145,11 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, variant = "default", index = 
                 {category}
               </span>
 
-              <h3 className="text-lg riposte mb-3 line-clamp-2 flex-1 leading-tight">
+              <h3 className="text-lg riposte mb-3 line-clamp-2 flex-1 leading-tight text-white">
                 {post.title}
               </h3>
 
-              <div className="text-xs riposte mt-auto">
+              <div className="text-xs riposte mt-auto text-white/70">
                 {formattedDate} • {post.readTime} min
               </div>
             </div>

@@ -10,37 +10,37 @@ const processSteps = [
     number: "1",
     title: "DISCOVERY",
     description:
-      "We dig into what makes your business tick. Your vision, your audience, your goals. No cookie-cutter questionnaires here—just real conversation about where you are and where you're headed. This is where we figure out if we're the right fit.",
+      "We dig into your business, vision, and goals. Real conversation, no cookie-cutter questionnaires.",
   },
   {
     number: "2",
     title: "STRATEGY",
     description:
-      "Time to map it out. We analyze your competition, study your market, and identify what'll make you stand out. This isn't guesswork—it's strategic thinking backed by research. We build the blueprint before we build the brand.",
+      "We analyze your competition and market. Strategic thinking backed by research, not guesswork.",
   },
   {
     number: "3",
     title: "DESIGN",
     description:
-      "This is where it gets visual. We craft designs that don't just look good—they work. Every color, every font, every pixel has a purpose. We iterate with you until it feels right, not just looks right.",
+      "Designs that work, not just look good. Every pixel has a purpose.",
   },
   {
     number: "4",
     title: "BUILD",
     description:
-      "Clean code. Fast loading. Works everywhere. We build sites that don't just function—they perform. Mobile-first, accessibility-minded, and optimized for the real world where your users actually live.",
+      "Clean code. Fast loading. Works everywhere. Mobile-first and accessible.",
   },
   {
     number: "5",
     title: "REFINE",
     description:
-      "We test everything. Desktop, mobile, tablet. Chrome, Safari, Firefox. We catch the bugs before your users do. We tweak the details you didn't know mattered. This is where good becomes great.",
+      "We test everything across all devices and browsers. Catching bugs before your users do.",
   },
   {
     number: "6",
     title: "LAUNCH",
     description:
-      "Go time. We deploy, we monitor, we make sure everything's running smooth. Then we show you how to manage it yourself—no technical degree required. You own your site. We just help you run it.",
+      "We deploy and show you how to manage it. You own your site, we help you run it.",
   },
 ];
 
