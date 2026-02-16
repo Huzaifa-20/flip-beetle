@@ -12,7 +12,6 @@ const SERVICE_CATEGORIES = [
     number: "01",
     title: "BRANDING",
     services: [
-      "Go-To-Market Strategy",
       "Brand Strategy",
       "Visual Identities",
       "Brand Guidelines",

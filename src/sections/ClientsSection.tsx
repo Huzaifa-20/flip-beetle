@@ -49,7 +49,7 @@ const ClientsSection = () => {
             Not Titles
           </h2>
           <p className="text-base sm:text-lg riposte max-w-4xl leading-relaxed">
-            Chef or coach. Artist or entrepreneur. Startup founder or business owner. What matters isn&apos;t what you do—it&apos;s the passion behind it.
+            Chef or coach. Artist or entrepreneur. Startup founder or business owner. What matters isn&apos;t what you do, it&apos;s the passion behind it.
             <span className="block mt-4">
               If you&apos;ve got a vision you believe in, we&apos;d love to help bring it to life.
             </span>

@@ -425,7 +425,7 @@ const HeroSection = () => {
               <br />
               EXPERIENCES TO ELEVATE
               <br />
-              YOUR BRANDS
+              YOUR BRAND
             </p>
           </motion.div>
         </div>

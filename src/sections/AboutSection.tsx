@@ -25,7 +25,7 @@ const AboutSection = () => {
         >
           <p className="max-w-[450px] text-base sm:text-lg riposte">
             Flip Beetle is where strategy, design, and technology come together
-            to build brands people believe in — and empower them to grow with
+            to build brands people believe in and empower them to grow with
             purpose.
           </p>
 

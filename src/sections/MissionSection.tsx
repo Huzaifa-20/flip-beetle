@@ -6,7 +6,7 @@ const MissionSection = () => {
       data-theme="cream"
     >
       <AnimatedTextSection
-        sentence="GREAT BRANDS AREN'T BUILT FROM TEMPLATES. THEY'RE BUILT FROM UNDERSTANDING — YOUR VISION, YOUR AUDIENCE, YOUR GOALS."
+        sentence="GREAT BRANDS AREN'T BUILT FROM TEMPLATES. THEY'RE BUILT FROM UNDERSTANDING YOUR VISION, YOUR AUDIENCE, YOUR GOALS."
         highlightWord="UNDERSTANDING"
         animationType="word-by-word"
       />

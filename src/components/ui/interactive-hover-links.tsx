@@ -90,7 +90,6 @@ function Link({ heading, videoSrc, subheading, href }: LinkProps) {
 
   return (
     <motion.a
-      href={href}
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
@@ -136,27 +135,6 @@ function Link({ heading, videoSrc, subheading, href }: LinkProps) {
           <source src={videoSrc} type="video/webm" />
         </video>
       </motion.div>
-      <div className="overflow-hidden">
-        <motion.div
-          variants={{
-            initial: {
-              x: "100%",
-              opacity: 0,
-            },
-            whileHover: {
-              x: "0%",
-              opacity: 1,
-            },
-          }}
-          transition={{
-            duration: 0.4,
-            ease: [0.43, 0.13, 0.23, 0.96],
-          }}
-          className="relative z-10 p-4"
-        >
-          <ArrowRight className="size-8 md:size-12 stroke-accent" />
-        </motion.div>
-      </div>
     </motion.a>
   );
 }
