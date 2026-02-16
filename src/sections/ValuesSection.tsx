@@ -116,8 +116,8 @@ const ValuesSection = () => {
                     <Image
                       src={value.icon}
                       alt={value.title}
-                      width={value.width.desktop}
-                      height={value.height.desktop}
+                      width={value.width.mobile}
+                      height={value.height.mobile}
                       draggable={false}
                     />
                   </div>
