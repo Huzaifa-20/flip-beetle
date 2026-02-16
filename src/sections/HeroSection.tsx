@@ -20,10 +20,6 @@ const HeroSection = () => {
   const { currentTheme } = useTheme();
   const [shouldLoadDarkBeetle, setShouldLoadDarkBeetle] = useState(hasShownSplash);
 
-  // Refs for beetle videos to control playback speed
-  const darkBeetleRef = useRef<HTMLVideoElement>(null);
-  const lightBeetleRef = useRef<HTMLVideoElement>(null);
-
   // Check for reduced motion preference
   const prefersReducedMotion = useMemo(() => {
     if (typeof window === "undefined") return false;
@@ -270,16 +266,6 @@ const HeroSection = () => {
     }
   }, [progress, shouldLoadDarkBeetle]);
 
-  // Set playback speed for beetle videos
-  useEffect(() => {
-    if (darkBeetleRef.current) {
-      darkBeetleRef.current.playbackRate = 1.5;
-    }
-    if (lightBeetleRef.current) {
-      lightBeetleRef.current.playbackRate = 1.5;
-    }
-  }, [shouldLoadDarkBeetle]);
-
   return (
     <section
       id="hero-section"
@@ -344,43 +330,31 @@ const HeroSection = () => {
                   damping: 20,
                 }}
               >
-                {/* Dark Beetle Video - Lazy loaded */}
+                {/* Dark Beetle GIF - Lazy loaded */}
                 {shouldLoadDarkBeetle && (
-                  <motion.video
-                    ref={darkBeetleRef}
+                  <motion.img
+                    src="/images/Flip_Beetle_Dark.gif"
+                    alt="Flip Beetle Dark"
                     className="drop-shadow-2xl w-[350px] h-[350px] object-contain absolute inset-0"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="auto"
                     width={350}
                     height={350}
                     initial={{ opacity: currentTheme === "cream" ? 1 : 0 }}
                     animate={{ opacity: currentTheme === "cream" ? 1 : 0 }}
                     transition={{ duration: 0.1, ease: "easeInOut" }}
-                  >
-                    <source src="/images/Flip_Beetle_Dark.webm" type="video/webm" />
-                  </motion.video>
+                  />
                 )}
 
-                {/* Light Beetle Video - Loaded immediately */}
-                <motion.video
-                  ref={lightBeetleRef}
+                {/* Light Beetle GIF - Loaded immediately */}
+                <motion.img
+                  src="/images/Flip_Beetle_Light.gif"
+                  alt="Flip Beetle Light"
                   className="drop-shadow-2xl w-[350px] h-[350px] object-contain absolute inset-0"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  preload="auto"
                   width={350}
                   height={350}
                   initial={{ opacity: currentTheme === "cream" ? 0 : 1 }}
                   animate={{ opacity: currentTheme === "cream" ? 0 : 1 }}
                   transition={{ duration: 0.1, ease: "easeInOut" }}
-                >
-                  <source src="/images/Flip_Beetle_Light.webm" type="video/webm" />
-                </motion.video>
+                />
               </motion.div>
             </div>
 
