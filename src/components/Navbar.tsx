@@ -9,6 +9,7 @@ import { useLenis } from "@/contexts/LenisContext";
 import { useBeetleLogo } from "@/hooks/useBeetleLogo";
 import { MENU_ITEMS, SOCIAL_LINKS } from "@/constants/navigation";
 import { MenuVertical } from "@/components/ui/menu-vertical";
+import { getSidebarColors } from "@/utils/themeColors";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,43 +19,8 @@ const Navbar = () => {
   const { currentTheme } = useTheme();
   const beetleLogo = useBeetleLogo();
 
-  // Determine hamburger icon color based on current theme
-  const getHamburgerColor = () => {
-    // On light backgrounds (cream), use dark color
-    // On dark backgrounds (green, black), use light color
-    return currentTheme === "cream"
-      ? "var(--color-primary)"
-      : "var(--color-background)";
-  };
-
-  // Determine sidebar background color based on current theme
-  const getSidebarBgColor = () => {
-    switch (currentTheme) {
-      case "cream":
-        return "var(--color-theme-green)";
-      case "green":
-        return "var(--color-theme-cream)";
-      case "black":
-        return "var(--color-theme-black)";
-      default:
-        return "var(--color-theme-black)";
-    }
-  };
-
-  // Determine sidebar text color for contrast
-  // Logic is inverted from theme because sidebar background is opposite
-  const getSidebarTextColor = () => {
-    switch (currentTheme) {
-      case "cream": // sidebar is green, needs light text
-        return "var(--color-background)";
-      case "green": // sidebar is cream, needs dark text
-        return "var(--color-primary)";
-      case "black": // sidebar is black, needs light text
-        return "var(--color-background)";
-      default:
-        return "var(--color-background)";
-    }
-  };
+  // Get centralized theme colors for sidebar
+  const { background: sidebarBg, text: sidebarText, hamburger: hamburgerColor } = getSidebarColors(currentTheme);
 
   // Track scroll direction and show/hide navbar accordingly
   // This effect responds to external scroll position from Lenis
@@ -106,7 +72,8 @@ const Navbar = () => {
                 height={60}
                 priority
                 className="object-contain hover:scale-110 transition-transform duration-300 translate-y-1"
-                unoptimized
+                sizes="60px"
+                quality={95}
               />
             </Link>
           </motion.div>
@@ -126,15 +93,15 @@ const Navbar = () => {
           >
             <span
               className="w-8 h-0.5 transition-all duration-300"
-              style={{ backgroundColor: getHamburgerColor() }}
+              style={{ backgroundColor: hamburgerColor }}
             ></span>
             <span
               className="w-8 h-0.5 transition-all duration-300"
-              style={{ backgroundColor: getHamburgerColor() }}
+              style={{ backgroundColor: hamburgerColor }}
             ></span>
             <span
               className="w-8 h-0.5 transition-all duration-300"
-              style={{ backgroundColor: getHamburgerColor() }}
+              style={{ backgroundColor: hamburgerColor }}
             ></span>
           </motion.button>
         </div>
@@ -156,7 +123,7 @@ const Navbar = () => {
             {/* Drawer */}
             <motion.div
               className="fixed right-0 top-0 h-screen w-[85vw] xs:w-[75vw] sm:w-[400px] md:w-[450px] lg:w-[500px] max-w-full z-70 flex flex-col justify-between py-8 sm:py-10 md:py-12 px-5 sm:px-6 md:px-8 transition-colors duration-500"
-              style={{ backgroundColor: getSidebarBgColor() }}
+              style={{ backgroundColor: sidebarBg }}
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
@@ -166,7 +133,7 @@ const Navbar = () => {
               <button
                 onClick={() => setIsMenuOpen(false)}
                 className="absolute top-6 sm:top-7 md:top-8 right-5 sm:right-8 md:right-12 text-3xl sm:text-4xl transition-colors duration-300 cursor-pointer hover:scale-110 active:scale-95"
-                style={{ color: getSidebarTextColor() }}
+                style={{ color: sidebarText }}
                 aria-label="Close menu"
               >
                 ×
@@ -176,7 +143,7 @@ const Navbar = () => {
               <nav className="mt-16 sm:mt-18 md:mt-20">
                 <MenuVertical
                   menuItems={MENU_ITEMS}
-                  color={getSidebarTextColor()}
+                  color={sidebarText}
                   skew={-1}
                   onItemClick={() => setIsMenuOpen(false)}
                 />
@@ -191,7 +158,7 @@ const Navbar = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-xs sm:text-sm riposte transition-colors duration-300 uppercase tracking-wider hover:opacity-70"
-                    style={{ color: getSidebarTextColor() }}
+                    style={{ color: sidebarText }}
                   >
                     {social.label}
                   </a>

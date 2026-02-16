@@ -8,31 +8,31 @@ const CLIENTS_LINKS = [
   {
     heading: "Startups & Founders",
     subheading: "Launch with confidence—from idea to brand identity",
-    videoSrc: "/clients/Founder_Beetle.webm",
+    videoSrc: "/clients/Founder_Beetle.gif",
     href: "#contact",
   },
   {
     heading: "Restaurants & Hospitality",
     subheading: "Share your passion through branding that brings people in",
-    videoSrc: "/clients/Cook_Beetle.webm",
+    videoSrc: "/clients/Cook_Beetle.gif",
     href: "#contact",
   },
   {
     heading: "Fitness & Wellness",
     subheading: "Grow your community with a digital presence that inspires",
-    videoSrc: "/clients/Gym_Beetle.webm",
+    videoSrc: "/clients/Gym_Beetle.gif",
     href: "#contact",
   },
   {
     heading: "Creative Professionals",
     subheading: "Showcase your work with a portfolio that opens doors",
-    videoSrc: "/clients/Flourist_Beetle.webm",
+    videoSrc: "/clients/Flourist_Beetle.gif",
     href: "#contact",
   },
   {
     heading: "Business Owners",
     subheading: "Create digital experiences that drive real growth",
-    videoSrc: "/clients/CEO_Beetle.webm",
+    videoSrc: "/clients/CEO_Beetle.gif",
     href: "#contact",
   },
 ];
@@ -73,4 +73,4 @@ const ClientsSection = () => {
   );
 };
 
-export default ClientsSection;
+export default React.memo(ClientsSection);

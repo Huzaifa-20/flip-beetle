@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef, useMemo } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, animate } from "framer-motion";
 import { useSplashAnimation } from "@/contexts/SplashAnimationContext";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -434,4 +434,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default React.memo(HeroSection);

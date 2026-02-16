@@ -6,14 +6,20 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { fadeInUp } from "@/utils/animations";
 import type { BlogMetadata } from "@/types/blog";
+import { getPrimaryTag, getTagColor, getPostCategory, getCategoryColor as getBlogCategoryColor } from "@/utils/blogHelpers";
 
-// Helper function to get primary tag
-const getPrimaryTag = (tags: string[]) => {
-  return tags[0] || "Article";
+// Map category to color classes for Tailwind
+const getCategoryColor = (category: string) => {
+  const colorMap: { [key: string]: string } = {
+    "DESIGN": "bg-[var(--color-tag-coral)]",
+    "NEWS": "bg-[var(--color-tag-tan)]",
+    "INSIGHTS": "bg-[var(--color-tag-light-blue)]",
+  };
+  return colorMap[category] || "bg-[var(--color-tag-coral)]";
 };
 
-// Helper function to get tag color
-const getTagColor = (tag: string) => {
+// Map tag to Tailwind color classes
+const getTagColorClass = (tag: string) => {
   const colors: { [key: string]: string } = {
     "News": "bg-[var(--color-tag-coral)]",
     "Web Design": "bg-[var(--color-tag-coral)]",
@@ -28,28 +34,14 @@ const getTagColor = (tag: string) => {
   return colors[tag] || colors.default;
 };
 
-// Helper function to get category from tags
-const getPostCategory = (tags: string[]): string => {
-  if (tags.some(tag => ["Minimalism", "Branding", "Typography", "Best Practices"].includes(tag))) {
-    return "DESIGN";
-  }
-  if (tags.some(tag => ["Trends", "2026"].includes(tag))) {
-    return "NEWS";
-  }
-  if (tags.some(tag => ["Accessibility", "WCAG", "Responsive Design", "CSS", "Mobile First", "Animation", "Performance", "Framer Motion"].includes(tag))) {
-    return "INSIGHTS";
-  }
+// Convert post category to display format
+const formatCategory = (tags: string[]): string => {
+  const category = getPostCategory(tags);
+  // Map from utility category to display category
+  if (category === "design" || category === "branding") return "DESIGN";
+  if (category === "trends") return "NEWS";
+  if (category === "development" || category === "accessibility") return "INSIGHTS";
   return "DESIGN";
-};
-
-// Helper function to get category color
-const getCategoryColor = (category: string) => {
-  const colorMap: { [key: string]: string } = {
-    "DESIGN": "bg-[var(--color-tag-coral)]",
-    "NEWS": "bg-[var(--color-tag-tan)]",
-    "INSIGHTS": "bg-[var(--color-tag-light-blue)]",
-  };
-  return colorMap[category] || "bg-[var(--color-tag-coral)]";
 };
 
 type BlogCardVariant = "homepage" | "listing" | "default";
@@ -77,7 +69,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, variant = "default", index = 
   // Homepage variant (used in BlogSection)
   if (variant === "homepage") {
     const primaryTag = getPrimaryTag(post.tags);
-    const tagColor = getTagColor(primaryTag);
+    const tagColor = getTagColorClass(primaryTag);
 
     return (
       <motion.div variants={fadeInUp} className="flex justify-center">
@@ -119,7 +111,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, variant = "default", index = 
 
   // Listing variant (used in BlogListingClient)
   if (variant === "listing") {
-    const category = getPostCategory(post.tags);
+    const category = formatCategory(post.tags);
     const categoryColor = getCategoryColor(category);
 
     return (

@@ -1,8 +1,9 @@
 "use client";
 
 import { useMotionValue, motion, useSpring, useTransform } from "framer-motion";
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 interface InteractiveHoverLinksProps {
   links?: typeof INTERACTIVE_LINKS;
@@ -31,7 +32,6 @@ interface LinkProps {
 
 function Link({ heading, videoSrc, subheading, href }: LinkProps) {
   const ref = useRef<HTMLAnchorElement | null>(null);
-  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -60,45 +60,21 @@ function Link({ heading, videoSrc, subheading, href }: LinkProps) {
     y.set(yPct);
   };
 
-  const handleMouseEnter = () => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {
-        // Ignore play errors (e.g., if user hasn't interacted with page)
-      });
-    }
-  };
-
   const handleMouseLeave = () => {
     x.set(0);
     y.set(0);
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-    }
   };
-
-  // Cleanup video on unmount
-  useEffect(() => {
-    return () => {
-      if (videoRef.current) {
-        videoRef.current.pause();
-        videoRef.current.src = "";
-        videoRef.current.load();
-      }
-    };
-  }, []);
 
   return (
     <motion.a
       ref={ref}
       onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       initial="initial"
       whileHover="whileHover"
-      className="w-full group relative flex items-center justify-between border-b py-4 transition-colors duration-500 hover:border-accent md:py-8"
+      className="w-full group relative flex flex-col md:flex-row items-start md:items-center justify-between border-b py-4 transition-colors duration-500 hover:border-accent md:py-8"
     >
-      <div>
+      <div className="flex-1">
         <span className="relative z-10 block text-4xl sm:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl transition-colors duration-500 group-hover:text-accent riposte">
           {heading}
         </span>
@@ -115,26 +91,39 @@ function Link({ heading, videoSrc, subheading, href }: LinkProps) {
           translateY: "-50%",
         }}
         variants={{
-          initial: { scale: 0, rotate: "-12.5deg" },
-          whileHover: { scale: 1, rotate: "12.5deg" },
+          initial: { scale: 0, rotate: "-12.5deg", opacity: 0 },
+          whileHover: { scale: 1, rotate: "12.5deg", opacity: 1 },
         }}
         transition={{
           duration: 0.5,
           ease: [0.43, 0.13, 0.23, 0.96],
         }}
-        className="absolute z-0"
+        className="absolute z-0 md:block hidden"
       >
-        <video
-          ref={videoRef}
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          className="w-[200px] h-[200px] rounded-lg object-cover"
-        >
-          <source src={videoSrc} type="video/webm" />
-        </video>
+        <Image
+          src={videoSrc}
+          alt={heading}
+          width={videoSrc.includes('Gym_Beetle') ? 240 : 200}
+          height={videoSrc.includes('Gym_Beetle') ? 240 : 200}
+          className="rounded-lg object-cover"
+          sizes="(max-width: 768px) 0px, 240px"
+          quality={90}
+        />
       </motion.div>
+
+      {/* Static image for mobile - always visible */}
+      <div className="relative ml-auto mt-4 z-10 md:hidden block">
+        <Image
+          src={videoSrc}
+          alt={heading}
+          width={videoSrc.includes('Gym_Beetle') ? 220 : 180}
+          height={videoSrc.includes('Gym_Beetle') ? 220 : 180}
+          className="rounded-lg object-cover shadow-lg"
+          sizes="(max-width: 768px) 220px, 0px"
+          quality={90}
+          priority={false}
+        />
+      </div>
     </motion.a>
   );
 }

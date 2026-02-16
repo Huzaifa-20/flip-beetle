@@ -42,8 +42,6 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
     // Update scroll position for components
     lenisRef.current.on("scroll", (e: { scroll: number }) => {
       setScrollY(e.scroll);
-      // Dispatch scroll event for other integrations
-      window.dispatchEvent(new Event("scroll"));
     });
 
     // Handle anchor link clicks for smooth scrolling

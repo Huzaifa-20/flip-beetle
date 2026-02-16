@@ -24,8 +24,87 @@ const interTight = Inter_Tight({
 });
 
 export const metadata: Metadata = {
-  title: "Flip Beetle",
-  description: "Get a digital presence, flip right side up",
+  metadataBase: new URL('https://flipbeetle.com'),
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+  },
+  title: {
+    default: "Flip Beetle | Creative Digital Agency",
+    template: "%s | Flip Beetle"
+  },
+  description: "The creative agency that turns visions into unforgettable brands. We create powerful digital experiences to elevate your brand, starting with yours.",
+  keywords: [
+    "digital agency",
+    "creative agency",
+    "web design",
+    "branding",
+    "digital experiences",
+    "brand strategy",
+    "web development",
+    "UI/UX design",
+    "creative studio",
+    "design agency"
+  ],
+  authors: [{ name: "Flip Beetle" }],
+  creator: "Flip Beetle",
+  publisher: "Flip Beetle",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "/",
+    siteName: "Flip Beetle",
+    title: "Flip Beetle | Creative Digital Agency",
+    description: "The creative agency that turns visions into unforgettable brands. We create powerful digital experiences to elevate your brand.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Flip Beetle - Creative Digital Agency",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Flip Beetle | Creative Digital Agency",
+    description: "The creative agency that turns visions into unforgettable brands. We create powerful digital experiences to elevate your brand.",
+    images: ["/og-image.png"],
+    creator: "@flipbeetle",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    // Add your verification tokens here when available
+    // google: 'your-google-verification-code',
+    // yandex: 'your-yandex-verification-code',
+  },
+  icons: {
+    icon: [
+      { url: '/icon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/icon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/icon-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-512x512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
 };
 
 export default function RootLayout({

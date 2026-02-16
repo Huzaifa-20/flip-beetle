@@ -4,6 +4,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion";
 import AnimatedTextSection from "@/components/AnimatedTextSection";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 
 const processSteps = [
   {
@@ -11,36 +12,54 @@ const processSteps = [
     title: "DISCOVERY",
     description:
       "We dig into your business, vision, and goals. Real conversation, no cookie-cutter questionnaires.",
+    icon: "/process/Discovery.png",
+    width: { mobile: 210, desktop: 250 },
+    height: { mobile: 210, desktop: 250 },
   },
   {
     number: "2",
     title: "STRATEGY",
     description:
       "We analyze your competition and market. Strategic thinking backed by research, not guesswork.",
+    icon: "/process/Strategy.png",
+    width: { mobile: 210, desktop: 250 },
+    height: { mobile: 210, desktop: 250 },
   },
   {
     number: "3",
     title: "DESIGN",
     description:
       "Designs that work, not just look good. Every pixel has a purpose.",
+    icon: "/process/Design.png",
+    width: { mobile: 210, desktop: 250 },
+    height: { mobile: 210, desktop: 250 },
   },
   {
     number: "4",
     title: "BUILD",
     description:
       "Clean code. Fast loading. Works everywhere. Mobile-first and accessible.",
+    icon: "/process/Build.png",
+    width: { mobile: 250, desktop: 280 },
+    height: { mobile: 250, desktop: 280 },
   },
   {
     number: "5",
     title: "REFINE",
     description:
       "We test everything across all devices and browsers. Catching bugs before your users do.",
+    icon: "/process/Refine.png",
+    width: { mobile: 210, desktop: 250 },
+    height: { mobile: 210, desktop: 250 },
   },
   {
     number: "6",
     title: "LAUNCH",
     description:
       "We deploy and show you how to manage it. You own your site, we help you run it.",
+    icon: "/process/Launch.png",
+    width: { mobile: 250, desktop: 280 },
+    height: { mobile: 250, desktop: 280 },
   },
 ];
 
@@ -130,7 +149,7 @@ const ProcessSection = () => {
             {processSteps.map((step, index) => (
               <motion.div
                 key={index}
-                className="min-w-[400px] border rounded-lg p-4 relative"
+                className="min-w-[400px] border rounded-lg p-8 relative"
                 variants={{
                   hidden: { opacity: 0, y: 100 },
                   visible: { opacity: 1, y: 0 },
@@ -142,6 +161,20 @@ const ProcessSection = () => {
                     {step.number}. {step.title}
                   </h2>
                 </div>
+
+                {/* Icon/Illustration */}
+                <div className="relative w-full h-[200px] mb-6 flex items-center justify-center select-none">
+                  <div className="relative">
+                    <Image
+                      src={step.icon}
+                      alt={step.title}
+                      width={step.width.desktop}
+                      height={step.height.desktop}
+                      draggable={false}
+                    />
+                  </div>
+                </div>
+
                 <p className="text-lg riposte leading-relaxed">
                   {step.description}
                 </p>
@@ -162,7 +195,7 @@ const ProcessSection = () => {
           </div>
 
           {/* Carousel Container */}
-          <div className="min-h-[240px] relative">
+          <div className="min-h-[420px] relative">
             <AnimatePresence initial={false} mode="wait" custom={direction}>
               <motion.div
                 key={currentIndex}
@@ -197,13 +230,27 @@ const ProcessSection = () => {
                     prevSlide();
                   }
                 }}
-                className="min-h-[240px] border rounded-lg p-4 pb-12"
+                className="min-h-[420px] border rounded-lg p-6 pb-12"
               >
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center justify-between mb-6">
                   <h3 className="text-3xl riposte">
                     {processSteps[currentIndex].number}. {processSteps[currentIndex].title}
                   </h3>
                 </div>
+
+                {/* Icon/Illustration */}
+                <div className="relative w-full h-[180px] mb-6 flex items-center justify-center select-none">
+                  <div className="relative">
+                    <Image
+                      src={processSteps[currentIndex].icon}
+                      alt={processSteps[currentIndex].title}
+                      width={processSteps[currentIndex].width.mobile}
+                      height={processSteps[currentIndex].height.mobile}
+                      draggable={false}
+                    />
+                  </div>
+                </div>
+
                 <p className="text-base riposte">
                   {processSteps[currentIndex].description}
                 </p>
@@ -254,4 +301,4 @@ const ProcessSection = () => {
   );
 };
 
-export default ProcessSection;
+export default React.memo(ProcessSection);
