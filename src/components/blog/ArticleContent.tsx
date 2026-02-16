@@ -41,6 +41,7 @@ const ArticleContent: React.FC<ArticleContentProps> = ({ htmlContent }) => {
       {/* Rich Text Content - Sanitized to prevent XSS */}
       <div
         className="article-content text-white"
+        style={{ color: '#fefae0' }}
         dangerouslySetInnerHTML={{ __html: sanitizedContent }}
       />
     </motion.article>
