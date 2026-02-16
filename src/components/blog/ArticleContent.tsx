@@ -38,9 +38,16 @@ const ArticleContent: React.FC<ArticleContentProps> = ({ htmlContent }) => {
       animate={isInView ? "visible" : "hidden"}
       className="max-w-4xl mx-auto px-6 py-12"
     >
+      {/* Force all text to be visible */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        .article-content-wrapper * {
+          color: #fefae0 !important;
+        }
+      `}} />
+
       {/* Rich Text Content - Sanitized to prevent XSS */}
       <div
-        className="article-content text-white"
+        className="article-content-wrapper article-content text-white"
         style={{ color: '#fefae0' }}
         dangerouslySetInnerHTML={{ __html: sanitizedContent }}
       />
