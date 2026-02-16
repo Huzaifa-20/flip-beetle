@@ -9,16 +9,19 @@ const TEAM_MEMBERS = [
   {
     name: "Huzaifa",
     role: "Tech",
+    bio: "'Turning caffeine into clean code...",
     image: "/team/huzaifa.jpg",
   },
   {
     name: "Sultan",
     role: "Art",
+    bio: "'Probably sketching something right now...",
     image: "/team/sultan.jpg",
   },
   {
     name: "Yumna",
     role: "Design",
+    bio: "'UX is just empathy with better fonts...",
     image: "/team/yumna.jpg",
   },
 ] as const;
@@ -32,7 +35,7 @@ const TeamSection = () => {
     <section
       ref={ref}
       data-theme="cream"
-      className="w-screen py-24 md:py-36 px-4 sm:px-6 md:px-8"
+      className="w-screen py-24 px-4 sm:px-6 md:px-8"
     >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
@@ -78,13 +81,18 @@ const TeamSection = () => {
                     cursor-pointer transition-colors duration-300
                   `}
                 >
-                  <motion.h3
-                    className="text-2xl md:text-3xl lg:text-4xl riposte font-medium"
-                    animate={{ x: isHovered ? 12 : 0 }}
-                    transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-                  >
-                    {member.name}
-                  </motion.h3>
+                  <div className="flex flex-col gap-2">
+                    <motion.h3
+                      className="text-2xl md:text-3xl lg:text-4xl riposte font-medium"
+                      animate={{ x: isHovered ? 12 : 0 }}
+                      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                    >
+                      {member.name}
+                      <p className="text-sm md:text-base riposte opacity-70">
+                        {member.bio}
+                      </p>
+                    </motion.h3>
+                  </div>
                   <p className="text-lg md:text-xl riposte opacity-80">
                     ({member.role})
                   </p>
