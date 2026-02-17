@@ -403,7 +403,7 @@ const HeroSection = () => {
             <h2 className="flex text-base md:text-2xl riposte font-medium mb-4">
               THE CREATIVE AGENCY THAT TURNS VISIONS INTO UNFORGETTABLE BRANDS.
             </h2>
-            <p className="flex justify-center sm:justify-left text-base md:text-2xl riposte font-medium">
+            <p className="flex justify-center sm:justify-start text-base md:text-2xl riposte font-medium">
               STARTING WITH YOURS.
             </p>
           </motion.div>
