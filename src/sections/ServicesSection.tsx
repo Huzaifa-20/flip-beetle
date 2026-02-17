@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { fadeInUp } from "@/utils/animations";
 import { useBeetleLogo } from "@/hooks/useBeetleLogo";
+import Button from "@/components/ui/Button";
 
 // Service categories moved outside component for performance
 const SERVICE_CATEGORIES = [
@@ -50,7 +51,7 @@ const ServicesSection = ({ theme }: { theme?: string }) => {
       data-theme={theme ? theme : "black"}
       className="w-screen px-6 md:px-12 py-16 md:py-36"
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto flex flex-col gap-16 sm:gap-12 items-center">
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 sm:gap-16"
           initial="hidden"
@@ -107,6 +108,9 @@ const ServicesSection = ({ theme }: { theme?: string }) => {
             </motion.div>
           ))}
         </motion.div>
+        <Button href="#contact" variant="outlined" theme="black">
+          Reach out
+        </Button>
       </div>
     </section>
   );
