@@ -13,7 +13,7 @@ const AboutSection = () => {
     <section
       ref={ref}
       data-theme="cream"
-      className="w-screen flex justify-center items-center px-6 md:px-12 py-24 md:py-36"
+      className="w-screen flex justify-center items-center px-6 md:px-12 py-16 md:py-36"
     >
       <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         {/* Left - Text Content */}

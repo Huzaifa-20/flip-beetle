@@ -186,7 +186,7 @@ const ProcessSection = () => {
 
       {/* Mobile: Carousel */}
       {isMobile && (
-        <div className="py-12 px-8">
+        <div className="py-16 px-8">
           <div className="mb-12">
             <AnimatedTextSection
               sentence="HOW WE WORK TOGETHER"
@@ -263,7 +263,7 @@ const ProcessSection = () => {
               className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 bg-white border border-black rounded-full p-2 shadow-lg hover:bg-gray-100 transition-colors"
               aria-label="Previous slide"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="w-5 h-5 text-black" />
             </button>
             <button
               onClick={nextSlide}
@@ -280,10 +280,23 @@ const ProcessSection = () => {
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentIndex
-                  ? 'bg-black w-8'
-                  : 'bg-black/30 hover:bg-black/50'
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentIndex ? 'w-8' : ''
                   }`}
+                style={{
+                  backgroundColor: index === currentIndex
+                    ? 'var(--theme-text-color)'
+                    : 'color-mix(in srgb, var(--theme-text-color) 30%, transparent)',
+                }}
+                onMouseEnter={(e) => {
+                  if (index !== currentIndex) {
+                    e.currentTarget.style.backgroundColor = 'color-mix(in srgb, var(--theme-text-color) 50%, transparent)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (index !== currentIndex) {
+                    e.currentTarget.style.backgroundColor = 'color-mix(in srgb, var(--theme-text-color) 30%, transparent)';
+                  }
+                }}
                 aria-label={`Go to slide ${index + 1}`}
               />
             ))}
@@ -291,7 +304,7 @@ const ProcessSection = () => {
 
           {/* Progress Text */}
           <div className="text-center mt-4">
-            <span className="text-sm riposte text-black/60">
+            <span className="text-sm riposte" style={{ color: 'color-mix(in srgb, var(--theme-text-color) 60%, transparent)' }}>
               {currentIndex + 1} / {processSteps.length}
             </span>
           </div>

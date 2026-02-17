@@ -23,7 +23,7 @@ const AboutPage = () => {
   return (
     <main className="w-screen overflow-x-hidden">
       {/* Hero Section */}
-      <section data-theme="cream" className="w-screen py-24 md:py-36 px-4 sm:px-6 md:px-8">
+      <section data-theme="cream" className="w-screen py-16 mt-[60px] md:py-36 px-4 sm:px-6 md:px-8">
         <div className="max-w-7xl mx-auto">
           <AnimatedTextSection
             sentence="WE BELIEVE GREAT WORK COMES FROM TRUE PARTNERSHIP, SMART STRATEGY, AND TOTAL COMMITMENT TO YOUR SUCCESS"

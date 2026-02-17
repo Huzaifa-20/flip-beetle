@@ -35,7 +35,7 @@ const TeamSection = () => {
     <section
       ref={ref}
       data-theme="cream"
-      className="w-screen py-24 px-4 sm:px-6 md:px-8"
+      className="w-screen py-16 md:py-24 px-4 sm:px-6 md:px-8"
     >
       <div className="max-w-7xl mx-auto">
         {/* Header */}

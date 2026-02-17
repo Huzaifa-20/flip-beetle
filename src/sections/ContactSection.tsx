@@ -64,7 +64,7 @@ const ContactSection = () => {
       id="contact"
       ref={ref}
       data-theme="cream"
-      className="w-screen flex flex-col justify-center items-center my-32 px-4 sm:px-6 md:px-8"
+      className="w-screen flex flex-col justify-center items-center pt-16 pb-28 md:py-32 px-4 sm:px-6 md:px-8"
     >
       <motion.div
         className="w-full flex flex-col items-center gap-12"
@@ -90,7 +90,7 @@ const ContactSection = () => {
         </motion.p>
 
         {/* Form Section */}
-        <div className="w-full max-w-[800px] flex justify-center items-start gap-12">
+        <div className="w-full max-w-[800px] flex justify-center items-start">
           {/* Contact Form */}
           <motion.form
             onSubmit={handleSubmit}

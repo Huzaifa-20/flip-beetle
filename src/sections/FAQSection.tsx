@@ -57,7 +57,7 @@ const FAQSection = () => {
     <section
       ref={ref}
       data-theme="cream"
-      className="w-screen flex justify-center items-center my-32 px-4 sm:px-6 md:px-8"
+      className="w-screen flex justify-center items-center py-16 md:py-32 px-4 sm:px-6 md:px-8"
     >
       <div className="w-full max-w-4xl flex flex-col gap-12 justify-start items-center">
         <AnimatedTextSection

@@ -39,7 +39,7 @@ const CLIENTS_LINKS = [
 
 const ClientsSection = () => {
   return (
-    <section id="work" data-theme="black" className="w-screen py-20 md:py-32 px-4 sm:px-6 md:px-8">
+    <section id="work" data-theme="black" className="w-screen py-16 md:py-32 px-4 sm:px-6 md:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="mb-12 md:mb-14">

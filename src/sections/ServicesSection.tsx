@@ -48,7 +48,7 @@ const ServicesSection = ({ theme }: { theme?: string }) => {
     <section
       ref={ref}
       data-theme={theme ? theme : "black"}
-      className="w-screen px-6 md:px-12 py-24 md:py-36"
+      className="w-screen px-6 md:px-12 py-16 md:py-36"
     >
       <div className="max-w-7xl mx-auto">
         <motion.div
@@ -64,7 +64,7 @@ const ServicesSection = ({ theme }: { theme?: string }) => {
             },
           }}
         >
-          {SERVICE_CATEGORIES.map((category) => (
+          {SERVICE_CATEGORIES.map((category, index) => (
             <motion.div
               key={category.number}
               variants={fadeInUp}
@@ -82,7 +82,7 @@ const ServicesSection = ({ theme }: { theme?: string }) => {
                 </h2>
 
                 {/* Services List */}
-                <ul className="space-y-1 mb-16 flex-1">
+                <ul className={`space-y-1 ${index === 2 ? "mb-0" : "mb-16"} flex-1`}>
                   {category.services.map((service, index) => (
                     <li
                       key={index}

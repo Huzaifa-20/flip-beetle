@@ -9,15 +9,15 @@ const VALUES = [
     title: "PEOPLE CENTRIC",
     description: "People over titles. Your story drives everything we create.",
     icon: "/values/people_centric.png",
-    width: { mobile: 180, desktop: 180 },
-    height: { mobile: 180, desktop: 180 },
+    width: { mobile: 150, desktop: 180 },
+    height: { mobile: 150, desktop: 180 },
   },
   {
     title: "CRAFT & QUALITY",
     description: "Every pixel matters. We're obsessed with the details.",
     icon: "/values/craft_&_quality.png",
-    width: { mobile: 230, desktop: 160 },
-    height: { mobile: 230, desktop: 160 },
+    width: { mobile: 150, desktop: 160 },
+    height: { mobile: 150, desktop: 160 },
   },
   {
     title: "BOLD & CONFIDENT",
@@ -30,8 +30,8 @@ const VALUES = [
     title: "PARTNERSHIP",
     description: "Your success is ours. Partners, not vendors.",
     icon: "/values/partnership.png",
-    width: { mobile: 180, desktop: 300 },
-    height: { mobile: 180, desktop: 250 },
+    width: { mobile: 200, desktop: 300 },
+    height: { mobile: 200, desktop: 300 },
   },
   {
     title: "IMPACT-DRIVEN",
@@ -59,7 +59,7 @@ const ValuesSection = () => {
     <section
       ref={ref}
       data-theme="cream"
-      className="w-screen py-24 md:py-36 px-4 sm:px-6 md:px-8 overflow-hidden"
+      className="w-screen py-16 md:py-36 px-4 sm:px-6 md:px-8 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
