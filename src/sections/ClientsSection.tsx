@@ -12,7 +12,7 @@ const CLIENTS_LINKS = [
     href: "#contact",
   },
   {
-    heading: "Restaurants & Hospitality",
+    heading: "Hospitality",
     subheading: "Share your passion through branding that brings people in",
     videoSrc: "/clients/Cook_Beetle.gif",
     href: "#contact",
