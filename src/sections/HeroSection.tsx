@@ -387,10 +387,10 @@ const HeroSection = () => {
         </div>
 
         {/* Bottom Content - appears after splash complete with parallax */}
-        <div className="w-[80%] sm:w-full flex flex-col sm:flex-row justify-between items-start pb-6 gap-8 md:gap-12">
+        <div className="w-full flex flex-col sm:flex-row justify-between items-start pb-6 gap-8 md:gap-12">
           {/* Left Side Text */}
           <motion.div
-            className="max-w-full sm:max-w-60 md:max-w-72 lg:max-w-80 xl:max-w-96 riposte"
+            className="max-w-full sm:max-w-60 md:max-w-72 lg:max-w-80 xl:max-w-96 text-center sm:text-left riposte"
             initial={{ opacity: 0 }}
             animate={{
               opacity: progress >= 100 ? 1 : 0,
@@ -403,7 +403,7 @@ const HeroSection = () => {
             <h2 className="flex text-base md:text-2xl riposte font-medium mb-4">
               THE CREATIVE AGENCY THAT TURNS VISIONS INTO UNFORGETTABLE BRANDS.
             </h2>
-            <p className="flex text-base md:text-2xl riposte font-medium">
+            <p className="flex justify-center sm:justify-left text-base md:text-2xl riposte font-medium">
               STARTING WITH YOURS.
             </p>
           </motion.div>

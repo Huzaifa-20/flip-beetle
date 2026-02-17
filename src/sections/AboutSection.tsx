@@ -21,7 +21,7 @@ const AboutSection = () => {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={fadeInLeft}
-          className="flex flex-col gap-12 order-2 sm:order-1"
+          className="flex flex-col gap-6 sm:gap-12 order-2 sm:order-1"
         >
           <p className="max-w-[450px] text-base sm:text-lg riposte">
             Flip Beetle is where strategy, design, and technology come together
