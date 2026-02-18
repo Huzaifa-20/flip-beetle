@@ -105,7 +105,7 @@ const ContactSection = () => {
               <div className="flex-1">
                 <input
                   type="text"
-                  value="hello@flipbeetle.com"
+                  value="flipbeetle"
                   readOnly
                   className="w-full bg-transparent border-b border-black text-black riposte text-lg pb-2 outline-none"
                 />
