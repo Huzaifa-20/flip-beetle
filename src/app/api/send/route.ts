@@ -12,7 +12,7 @@ function escapeHtml(str: string): string {
     .replace(/'/g, "&#039;");
 }
 
-function buildEmailHtml(email: string, message: string): string {
+function buildEmailHtml(email: string, phone: string, message: string): string {
   return `<!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8" /></head>
@@ -43,7 +43,13 @@ function buildEmailHtml(email: string, message: string): string {
                     <p style="margin:0 0 4px;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#8a8a84;">From</p>
                     <a href="mailto:${escapeHtml(email)}" style="font-size:16px;color:#0c0c0c;font-weight:600;text-decoration:none;">${escapeHtml(email)}</a>
                   </td>
-                </tr>
+                </tr>${phone ? `
+                <tr>
+                  <td style="padding:20px 0;border-bottom:1px solid #e0e0db;">
+                    <p style="margin:0 0 4px;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#8a8a84;">Phone</p>
+                    <p style="margin:0;font-size:16px;color:#0c0c0c;">${escapeHtml(phone)}</p>
+                  </td>
+                </tr>` : ""}
                 <tr>
                   <td style="padding-top:20px;">
                     <p style="margin:0 0 4px;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#8a8a84;">Message</p>
@@ -82,7 +88,7 @@ function buildEmailHtml(email: string, message: string): string {
 
 export async function POST(request: Request) {
   try {
-    const { email, message } = await request.json();
+    const { email, phone, message } = await request.json();
 
     if (!email || !message) {
       return NextResponse.json(
@@ -96,7 +102,7 @@ export async function POST(request: Request) {
       to: process.env.RESEND_TO_EMAIL!,
       subject: `New Contact Form Submission from ${email}`,
       replyTo: email,
-      html: buildEmailHtml(email, message),
+      html: buildEmailHtml(email, phone, message),
     });
 
     if (error) {

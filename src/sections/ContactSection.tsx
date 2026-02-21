@@ -26,8 +26,8 @@ const ContactSection = () => {
 
   const [formData, setFormData] = useState({
     email: "",
+    phone: "",
     message: "",
-    agreedToTerms: false,
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -35,11 +35,6 @@ const ContactSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!formData.agreedToTerms) {
-      alert("Please agree to the terms of Privacy Policy");
-      return;
-    }
 
     setIsSubmitting(true);
 
@@ -49,6 +44,7 @@ const ContactSection = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: formData.email,
+          phone: formData.phone,
           message: formData.message,
         }),
       });
@@ -60,7 +56,7 @@ const ContactSection = () => {
       }
 
       setSubmitStatus("success");
-      setFormData({ email: "", message: "", agreedToTerms: false });
+      setFormData({ email: "", phone: "", message: "" });
     } catch (error) {
       setSubmitStatus("error");
       setTimeout(() => setSubmitStatus("idle"), 3000);
@@ -179,7 +175,7 @@ const ContactSection = () => {
                 </div>
 
                 {/* From Field */}
-                <div className="flex items-center gap-4 mb-12">
+                <div className="flex items-center gap-4 mb-8">
                   <label className="text-base sm:text-lg riposte font-bold">From:</label>
                   <div className="flex-1">
                     <input
@@ -188,6 +184,20 @@ const ContactSection = () => {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       required
+                      className="w-full bg-transparent border-b border-black text-black placeholder:text-black/50 riposte text-lg pb-2 outline-none"
+                    />
+                  </div>
+                </div>
+
+                {/* Phone Field */}
+                <div className="flex items-center gap-4 mb-12">
+                  <label className="text-base sm:text-lg riposte font-bold">Phone:</label>
+                  <div className="flex-1">
+                    <input
+                      type="tel"
+                      placeholder="your mobile number"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       className="w-full bg-transparent border-b border-black text-black placeholder:text-black/50 riposte text-lg pb-2 outline-none"
                     />
                   </div>
