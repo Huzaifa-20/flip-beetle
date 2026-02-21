@@ -3,6 +3,83 @@ import { NextResponse } from "next/server";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function buildEmailHtml(email: string, message: string): string {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /></head>
+<body style="margin:0;padding:0;background-color:#f8f8f5;font-family:system-ui,-apple-system,sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f8f8f5;padding:40px 20px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border:1.5px solid #0c0c0c;box-shadow:4px 4px 0 #0c0c0c;">
+
+          <!-- Header -->
+          <tr>
+            <td style="background-color:#0c0c0c;padding:28px 32px;">
+              <h1 style="margin:0;font-size:20px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#f8f8f5;">
+                Flip Beetle
+              </h1>
+              <p style="margin:6px 0 0;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#8a8a84;">
+                New Contact Submission
+              </p>
+            </td>
+          </tr>
+
+          <!-- Details -->
+          <tr>
+            <td style="padding:32px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding-bottom:20px;border-bottom:1px solid #e0e0db;">
+                    <p style="margin:0 0 4px;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#8a8a84;">From</p>
+                    <a href="mailto:${escapeHtml(email)}" style="font-size:16px;color:#0c0c0c;font-weight:600;text-decoration:none;">${escapeHtml(email)}</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding-top:20px;">
+                    <p style="margin:0 0 4px;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#8a8a84;">Message</p>
+                    <p style="margin:0;font-size:15px;line-height:1.7;color:#2a2a27;white-space:pre-wrap;">${escapeHtml(message)}</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Reply Button -->
+          <tr>
+            <td style="padding:0 32px 32px;">
+              <a href="mailto:${escapeHtml(email)}" style="display:inline-block;padding:12px 28px;background-color:#0c0c0c;color:#f8f8f5;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;border:1.5px solid #0c0c0c;">
+                Reply
+              </a>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding:20px 32px;border-top:1px solid #e0e0db;">
+              <p style="margin:0;font-size:11px;color:#8a8a84;letter-spacing:0.5px;">
+                Sent via the Flip Beetle contact form
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+}
+
 export async function POST(request: Request) {
   try {
     const { email, message } = await request.json();
@@ -19,16 +96,7 @@ export async function POST(request: Request) {
       to: process.env.RESEND_TO_EMAIL!,
       subject: `New Contact Form Submission from ${email}`,
       replyTo: email,
-      html: `
-        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #606c38;">New Message from Flip Beetle Contact Form</h2>
-          <hr style="border: 1px solid #dda15e;" />
-          <p><strong>From:</strong> ${email}</p>
-          <div style="background-color: #fefae0; padding: 16px; border-radius: 8px; margin-top: 16px;">
-            <p style="white-space: pre-wrap; margin: 0;">${message}</p>
-          </div>
-        </div>
-      `,
+      html: buildEmailHtml(email, message),
     });
 
     if (error) {

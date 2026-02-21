@@ -206,21 +206,6 @@ const ContactSection = () => {
                   />
                 </div>
 
-                {/* Terms Checkbox */}
-                <div className="flex items-center gap-3 mb-8">
-                  <input
-                    type="checkbox"
-                    id="terms"
-                    checked={formData.agreedToTerms}
-                    onChange={(e) => setFormData({ ...formData, agreedToTerms: e.target.checked })}
-                    className="w-6 h-6 border-2 border-black rounded accent-secondary cursor-pointer"
-                  />
-                  <label htmlFor="terms" className="riposte text-black text-base">
-                    I agree to the terms of{" "}
-                    <span className="text-black underline cursor-pointer">Privacy Policy</span>
-                  </label>
-                </div>
-
                 {/* Error Message */}
                 <AnimatePresence>
                   {submitStatus === "error" && (
