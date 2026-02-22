@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { fadeInUp, fadeInLeft } from "@/utils/animations";
 import { CheckCircle2 } from "lucide-react";
 import { PARALLAX_SPEEDS, SCROLL_OFFSETS } from "@/utils/parallaxConfig";
 import AnimatedTextSection from "@/components/AnimatedTextSection";
 import Button from "@/components/ui/Button";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 
 const ContactSection = () => {
   const ref = React.useRef(null);
@@ -33,8 +34,32 @@ const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileError, setTurnstileError] = useState<string | null>(null);
+  const turnstileRef = useRef<TurnstileInstance | null>(null);
+
+  const handleTurnstileSuccess = useCallback((token: string) => {
+    setTurnstileToken(token);
+    setTurnstileError(null);
+  }, []);
+
+  const handleTurnstileError = useCallback(() => {
+    setTurnstileToken(null);
+    setTurnstileError("Verification failed. Please try again.");
+  }, []);
+
+  const handleTurnstileExpire = useCallback(() => {
+    setTurnstileToken(null);
+    setTurnstileError("Verification expired. Please verify again.");
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!turnstileToken) {
+      setTurnstileError("Please complete the verification challenge.");
+      return;
+    }
 
     setIsSubmitting(true);
 
@@ -46,17 +71,24 @@ const ContactSection = () => {
           email: formData.email,
           phone: formData.phone,
           message: formData.message,
+          turnstileToken,
         }),
       });
 
-      const result = await response.json();
-
       if (!response.ok) {
-        throw new Error(result.error || "Failed to send email");
+        const errorData = await response.json().catch(() => null);
+        if (response.status === 403) {
+          setTurnstileToken(null);
+          turnstileRef.current?.reset();
+          throw new Error(errorData?.error || "Verification failed. Please try again.");
+        }
+        throw new Error(errorData?.error || "Failed to send message");
       }
 
       setSubmitStatus("success");
       setFormData({ email: "", phone: "", message: "" });
+      setTurnstileToken(null);
+      turnstileRef.current?.reset();
     } catch (error) {
       setSubmitStatus("error");
       setTimeout(() => setSubmitStatus("idle"), 3000);
@@ -216,6 +248,24 @@ const ContactSection = () => {
                   />
                 </div>
 
+                {/* Turnstile CAPTCHA */}
+                <div className="space-y-2 mb-8">
+                  <Turnstile
+                    ref={turnstileRef}
+                    siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+                    onSuccess={handleTurnstileSuccess}
+                    onError={handleTurnstileError}
+                    onExpire={handleTurnstileExpire}
+                    options={{
+                      theme: "light",
+                      size: "flexible",
+                    }}
+                  />
+                  {turnstileError && (
+                    <p className="text-secondary text-sm riposte">{turnstileError}</p>
+                  )}
+                </div>
+
                 {/* Error Message */}
                 <AnimatePresence>
                   {submitStatus === "error" && (
@@ -237,7 +287,7 @@ const ContactSection = () => {
                 <div className="flex items-center justify-between">
                   <Button
                     type="submit"
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || !turnstileToken}
                     variant="outlined"
                     theme="cream"
                     className="px-6! sm:px-12! py-2! sm:py-4! text-sm! sm:text-lg!"

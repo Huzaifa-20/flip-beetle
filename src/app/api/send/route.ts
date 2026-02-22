@@ -3,6 +3,26 @@ import { NextResponse } from "next/server";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+interface TurnstileVerifyResponse {
+  success: boolean;
+  "error-codes": string[];
+}
+
+async function verifyTurnstileToken(token: string): Promise<TurnstileVerifyResponse> {
+  const response = await fetch(
+    "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        secret: process.env.TURNSTILE_SECRET_KEY,
+        response: token,
+      }),
+    }
+  );
+  return response.json();
+}
+
 function escapeHtml(str: string): string {
   return str
     .replace(/&/g, "&amp;")
@@ -88,12 +108,28 @@ function buildEmailHtml(email: string, phone: string, message: string): string {
 
 export async function POST(request: Request) {
   try {
-    const { email, phone, message } = await request.json();
+    const { email, phone, message, turnstileToken } = await request.json();
 
     if (!email || !message) {
       return NextResponse.json(
         { error: "Email and message are required" },
         { status: 400 }
+      );
+    }
+
+    if (!turnstileToken) {
+      return NextResponse.json(
+        { error: "CAPTCHA verification is required" },
+        { status: 400 }
+      );
+    }
+
+    const turnstileResult = await verifyTurnstileToken(turnstileToken);
+    if (!turnstileResult.success) {
+      console.error("Turnstile verification failed:", turnstileResult["error-codes"]);
+      return NextResponse.json(
+        { error: "CAPTCHA verification failed. Please try again." },
+        { status: 403 }
       );
     }
 
