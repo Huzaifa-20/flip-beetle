@@ -13,8 +13,8 @@ const NAVIGATION_LINKS = [
 ] as const;
 
 const SOCIAL_LINKS = [
-  { name: "Instagram", href: "https://instagram.com" },
-  { name: "LinkedIn", href: "https://linkedin.com" },
+  { name: "Instagram", href: "https://www.instagram.com/flipbeetle" },
+  // { name: "LinkedIn", href: "https://linkedin.com" },
 ] as const;
 
 const Footer = () => {
@@ -101,16 +101,16 @@ const Footer = () => {
               </h3>
               <div className="space-y-3">
                 <a
-                  href="tel:+971581620977"
+                  href="tel:+971525021443"
                   className={`block text-lg sm:text-xl riposte transition-opacity duration-300 ${hoverColor}`}
                 >
-                  (+971) 58 1620977
+                  (+971) 52 502 1443
                 </a>
                 <a
                   href="mailto:newbiz@juice.agency"
                   className={`block text-lg sm:text-xl riposte transition-opacity duration-300 ${hoverColor} wrap-break-word`}
                 >
-                  newbiz@telltalestudios
+                  flipbeetle@studiocrobe.com
                 </a>
               </div>
             </div>

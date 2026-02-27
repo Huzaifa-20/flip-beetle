@@ -20,6 +20,6 @@ export const MENU_ITEMS: NavItem[] = [
 ];
 
 export const SOCIAL_LINKS: SocialLink[] = [
-  { label: "LINKEDIN", href: "https://linkedin.com" },
-  { label: "INSTAGRAM", href: "https://instagram.com" },
+  // { label: "LINKEDIN", href: "https://linkedin.com" },
+  { label: "INSTAGRAM", href: "https://www.instagram.com/flipbeetle" },
 ];
