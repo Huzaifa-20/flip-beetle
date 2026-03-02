@@ -12,10 +12,6 @@ const NAVIGATION_LINKS = [
   { name: "Contact", href: "/contact" },
 ] as const;
 
-const SOCIAL_LINKS = [
-  { name: "Instagram", href: "https://www.instagram.com/flipbeetle" },
-  // { name: "LinkedIn", href: "https://linkedin.com" },
-] as const;
 
 const Footer = () => {
   const pathname = usePathname();
@@ -79,18 +75,26 @@ const Footer = () => {
                 SOCIAL & STUFF
               </h3>
               <ul className="space-y-3">
-                {SOCIAL_LINKS.map((link) => (
-                  <li key={link.name}>
-                    <a
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`text-lg sm:text-xl riposte transition-opacity duration-300 ${hoverColor}`}
-                    >
-                      {link.name}
-                    </a>
-                  </li>
-                ))}
+                <li>
+                  <a
+                    href="https://www.instagram.com/flipbeetle"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`text-lg sm:text-xl riposte transition-opacity duration-300 ${hoverColor}`}
+                  >
+                    Instagram
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://wa.me/971525021443"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`text-lg sm:text-xl riposte transition-opacity duration-300 ${hoverColor}`}
+                  >
+                    WhatsApp
+                  </a>
+                </li>
               </ul>
             </div>
 
@@ -107,7 +111,7 @@ const Footer = () => {
                   (+971) 52 502 1443
                 </a>
                 <a
-                  href="mailto:newbiz@juice.agency"
+                  href="mailto:flipbeetle@studiocrobe.com"
                   className={`block text-lg sm:text-xl riposte transition-opacity duration-300 ${hoverColor} wrap-break-word`}
                 >
                   flipbeetle@studiocrobe.com
