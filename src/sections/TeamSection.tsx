@@ -122,7 +122,7 @@ const TeamSection = () => {
                     src={TEAM_MEMBERS[hoveredIndex].image}
                     alt={TEAM_MEMBERS[hoveredIndex].name}
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </motion.div>
