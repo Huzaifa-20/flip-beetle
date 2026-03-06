@@ -2,7 +2,9 @@
 
 import React from "react";
 import { InteractiveHoverLinks } from "@/components/ui/interactive-hover-links";
-import Button from "@/components/ui/Button";
+import { motion } from "framer-motion";
+import { getSidebarColors } from "@/utils/themeColors";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const CLIENTS_LINKS = [
   {
@@ -38,6 +40,9 @@ const CLIENTS_LINKS = [
 ];
 
 const ClientsSection = () => {
+  const { currentTheme } = useTheme();
+  const { hamburger: hamburgerColor } = getSidebarColors(currentTheme);
+
   return (
     <section id="work" data-theme="black" className="w-screen py-16 md:py-32 px-4 sm:px-6 md:px-8">
       <div className="max-w-7xl mx-auto">
@@ -64,9 +69,20 @@ const ClientsSection = () => {
           <p className="text-lg md:text-xl riposte mb-6">
             Ready to bring your vision to life?
           </p>
-          <Button href="#contact" variant="outlined" theme="black">
-            Let&apos;s Talk
-          </Button>
+          <motion.a
+            href="https://cal.com/studio-crobe"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-6 md:px-8 py-2 md:py-3 border-2 rounded-lg riposte text-sm md:text-base uppercase tracking-wider transition-all duration-300 hover:opacity-80"
+            style={{
+              backgroundColor: hamburgerColor,
+              color: currentTheme === 'cream' ? 'var(--color-background)' : 'var(--color-primary)',
+              borderColor: hamburgerColor,
+            }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Book a Call
+          </motion.a>
         </div>
       </div>
     </section>

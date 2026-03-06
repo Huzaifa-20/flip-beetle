@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 interface ButtonProps {
   children: React.ReactNode;
   href?: string;
+  external?: boolean;
   onClick?: () => void;
   variant?: "filled" | "outlined";
   theme?: "cream" | "green" | "black";
@@ -18,6 +19,7 @@ interface ButtonProps {
 const Button = ({
   children,
   href,
+  external = false,
   onClick,
   variant = "filled",
   theme = "cream",
@@ -54,13 +56,26 @@ const Button = ({
   };
 
   const baseStyles =
-    "inline-block px-6 md:px-8 py-3 md:py-4 border-2 rounded-lg riposte text-sm md:text-base uppercase tracking-wider transition-all duration-300";
+    "inline-block px-6 md:px-8 py-2 md:py-3 border-2 rounded-lg riposte text-sm md:text-base uppercase tracking-wider transition-all duration-300";
 
   const disabledStyles = disabled ? "opacity-50 cursor-not-allowed" : "";
   const buttonStyles = `${baseStyles} ${getButtonStyles()} ${disabledStyles} ${className}`;
 
-  // If href is provided, render as Link
+  // If href is provided, render as Link (or <a> for external)
   if (href) {
+    if (external) {
+      return (
+        <motion.div
+          whileTap={{ scale: 0.99 }}
+          className="inline-block"
+        >
+          <a href={href} target="_blank" rel="noopener noreferrer" className={buttonStyles}>
+            {children}
+          </a>
+        </motion.div>
+      );
+    }
+
     return (
       <motion.div
         // whileHover={{ scale: 1.05 }}

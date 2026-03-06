@@ -39,13 +39,22 @@ const Footer = () => {
             <h2 className="text-xl sm:text-2xl md:text-3xl riposte mb-8 sm:mb-10 max-w-[500px]">
               Your vision. Our craft. Let&apos;s build something meaningful together.
             </h2>
-            <Button
-              href="#contact"
-              variant="outlined"
-              theme={isBlogPage ? "black" : "green"}
-            >
-              CONTACT
-            </Button>
+            <div className="flex gap-4">
+              <Button
+                href="#contact"
+                variant="outlined"
+                theme={isBlogPage ? "black" : "green"}
+              >
+                CONTACT
+              </Button>
+              <Button
+                href="https://cal.com/studio-crobe"
+                variant="filled"
+                theme={isBlogPage ? "black" : "green"}
+              >
+                BOOK A CALL
+              </Button>
+            </div>
           </div>
 
           {/* Right Section - Three Columns */}
@@ -66,6 +75,16 @@ const Footer = () => {
                     </a>
                   </li>
                 ))}
+                <li>
+                  <a
+                    href="https://cal.com/studio-crobe"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`text-lg sm:text-xl riposte transition-opacity duration-300 ${hoverColor}`}
+                  >
+                    Book a Call
+                  </a>
+                </li>
               </ul>
             </div>
 

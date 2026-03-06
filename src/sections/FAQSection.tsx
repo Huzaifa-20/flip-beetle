@@ -89,7 +89,7 @@ const FAQSection = () => {
                   transition={{ duration: 0.3 }}
                   className="flex-shrink-0 w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center"
                 >
-                  <span className="text-secondary text-2xl font-light">+</span>
+                  <span className="text-secondary text-2xl font-light leading-none -translate-y-px">+</span>
                 </motion.div>
               </button>
 

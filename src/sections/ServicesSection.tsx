@@ -108,9 +108,14 @@ const ServicesSection = ({ theme }: { theme?: string }) => {
             </motion.div>
           ))}
         </motion.div>
-        <Button href="#contact" variant="outlined" theme="black">
-          Reach out
-        </Button>
+        <div className="flex gap-4">
+          <Button href="#contact" variant="outlined" theme={theme ? (theme as "cream" | "green" | "black") : "black"}>
+            Message Us
+          </Button>
+          <Button href="https://cal.com/studio-crobe" variant="filled" theme={theme ? (theme as "cream" | "green" | "black") : "black"} external>
+            Book a Call
+          </Button>
+        </div>
       </div>
     </section>
   );

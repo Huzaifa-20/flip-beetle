@@ -3,6 +3,7 @@ import ClientsSection from "@/sections/ClientsSection";
 import ServicesSection from "@/sections/ServicesSection";
 import ProcessSection from "@/sections/ProcessSection";
 import FAQSection from "@/sections/FAQSection";
+import BookCallSection from "@/sections/BookCallSection";
 import ContactSection from "@/sections/ContactSection";
 import HeroSection from "@/sections/HeroSection";
 import MissionSection from "@/sections/MissionSection";
@@ -22,12 +23,13 @@ export default async function Home() {
       <AboutSection />
       <TextScrollBanner />
       <ServicesSection />
-      <ClientsSection />
       <ProcessSection />
+      <ClientsSection />
       <Testimonials />
-      <BlogSection posts={featuredPosts} />
       <FAQSection />
+      <BookCallSection />
       <ContactSection />
+      <BlogSection posts={featuredPosts} />
     </>
   );
 }

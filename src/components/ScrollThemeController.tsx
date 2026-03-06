@@ -73,57 +73,49 @@ export default function ScrollThemeController() {
       }
     };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // Update the intersection ratios for all entries
-        entries.forEach((entry) => {
-          const theme = entry.target.getAttribute("data-theme") as ThemeType;
+    // Use scroll-based detection for accurate, continuous ratio tracking
+    let rafId: number | null = null;
+    let lastTheme: ThemeType | null = null;
 
-          if (entry.isIntersecting) {
-            intersectingRatios.set(entry.target, {
-              ratio: entry.intersectionRatio,
-              theme,
-            });
-          } else {
-            intersectingRatios.delete(entry.target);
-          }
-        });
+    const onScroll = () => {
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
 
-        // Find the section with the highest intersection ratio
         let maxRatio = 0;
         let dominantTheme: ThemeType = "cream";
 
-        intersectingRatios.forEach(({ ratio, theme }) => {
+        sections.forEach((section) => {
+          const rect = section.getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+          const visibleTop = Math.max(0, rect.top);
+          const visibleBottom = Math.min(windowHeight, rect.bottom);
+          const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+          const ratio = visibleHeight / windowHeight;
+
           if (ratio > maxRatio) {
             maxRatio = ratio;
+            const theme = section.getAttribute("data-theme") as ThemeType;
             dominantTheme = theme;
           }
         });
 
-        // Update the theme if we found an intersecting section
-        if (maxRatio > 0) {
+        if (maxRatio > 0 && dominantTheme !== lastTheme) {
+          lastTheme = dominantTheme;
           setCurrentTheme(dominantTheme);
         }
-      },
-      {
-        // Optimized thresholds - reduced from 11 to 5 for better performance
-        // Still provides smooth theme detection without excessive callbacks
-        threshold: [0, 0.25, 0.5, 0.75, 1.0],
-        // Root margin helps trigger the transition slightly before/after
-        rootMargin: "-10% 0px -10% 0px",
-      }
-    );
+      });
+    };
 
-    // Observe all sections
-    sections.forEach((section) => observer.observe(section));
+    window.addEventListener("scroll", onScroll, { passive: true });
 
     // Check theme based on current scroll position immediately
-    // This is important when navigating back to the page
     updateThemeFromScroll();
 
     // Cleanup
     return () => {
-      observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      if (rafId) cancelAnimationFrame(rafId);
       intersectingRatios.clear();
     };
   }, [setCurrentTheme, pathname]);
