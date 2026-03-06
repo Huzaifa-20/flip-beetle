@@ -26,8 +26,8 @@ export default async function Home() {
       <ProcessSection />
       <ClientsSection />
       <Testimonials />
-      <FAQSection />
       <BookCallSection />
+      <FAQSection />
       <ContactSection />
       <BlogSection posts={featuredPosts} />
     </>

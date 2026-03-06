@@ -13,7 +13,7 @@ const BookCallSection = () => {
     <section
       ref={ref}
       data-theme="cream"
-      className="w-screen px-4 sm:px-6 md:px-8"
+      className="w-screen py-24 sm:py-32 px-4 sm:px-6 md:px-8"
     >
       <motion.div
         className="max-w-4xl mx-auto text-center"

@@ -300,6 +300,32 @@ const ContactSection = () => {
           </AnimatePresence>
         </div>
 
+        {/* Or Divider + Book a Call */}
+        <motion.div
+          variants={fadeInUp}
+          transition={{ delay: 0.3 }}
+          className="w-full max-w-[800px] flex flex-col items-center gap-6"
+        >
+          <div className="flex items-center gap-4 w-full">
+            <div className="flex-1 h-px bg-black/20" />
+            <span className="text-sm riposte uppercase tracking-widest text-black/50">or</span>
+            <div className="flex-1 h-px bg-black/20" />
+          </div>
+
+          <p className="text-base sm:text-lg riposte text-center text-black/70">
+            Prefer a conversation? Book a free call and let&apos;s talk it through.
+          </p>
+
+          <Button
+            href="https://cal.com/studio-crobe"
+            external
+            variant="outlined"
+            theme="cream"
+          >
+            Book a Call
+          </Button>
+        </motion.div>
+
         {/* Direct Contact Info */}
         <motion.div
           variants={fadeInUp}

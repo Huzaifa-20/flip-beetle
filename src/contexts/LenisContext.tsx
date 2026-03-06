@@ -1,17 +1,21 @@
 "use client";
 
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useRef } from "react";
 import Lenis from "lenis";
 
+type ScrollCallback = (scrollY: number) => void;
+
 interface LenisContextType {
-  scrollY: number;
   lenis: Lenis | null;
+  getScrollY: () => number;
+  onScroll: (callback: ScrollCallback) => () => void;
   scrollTo: (target: string | HTMLElement | number, options?: { offset?: number; duration?: number }) => void;
 }
 
 const LenisContext = createContext<LenisContextType>({
-  scrollY: 0,
   lenis: null,
+  getScrollY: () => 0,
+  onScroll: () => () => {},
   scrollTo: () => {},
 });
 
@@ -20,7 +24,17 @@ export const useLenis = () => useContext(LenisContext);
 export function LenisProvider({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
   const rafRef = useRef<number | null>(null);
-  const [scrollY, setScrollY] = useState(0);
+  const scrollYRef = useRef(0);
+  const scrollCallbacksRef = useRef<Set<ScrollCallback>>(new Set());
+
+  const getScrollY = useCallback(() => scrollYRef.current, []);
+
+  const onScroll = useCallback((callback: ScrollCallback) => {
+    scrollCallbacksRef.current.add(callback);
+    return () => {
+      scrollCallbacksRef.current.delete(callback);
+    };
+  }, []);
 
   useEffect(() => {
     // Add lenis class to HTML element
@@ -39,9 +53,10 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
       autoResize: true,
     });
 
-    // Update scroll position for components
+    // Update scroll position via ref + notify subscribers (no React state update)
     lenisRef.current.on("scroll", (e: { scroll: number }) => {
-      setScrollY(e.scroll);
+      scrollYRef.current = e.scroll;
+      scrollCallbacksRef.current.forEach((cb) => cb(e.scroll));
     });
 
     // Handle anchor link clicks for smooth scrolling
@@ -96,7 +111,7 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <LenisContext.Provider value={{ scrollY, lenis: lenisRef.current, scrollTo }}>
+    <LenisContext.Provider value={{ lenis: lenisRef.current, getScrollY, onScroll, scrollTo }}>
       {children}
     </LenisContext.Provider>
   );

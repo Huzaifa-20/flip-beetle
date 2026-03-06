@@ -1,5 +1,4 @@
 import AnimatedTextSection from "@/components/AnimatedTextSection";
-import Button from "@/components/ui/Button";
 
 const MissionSection = () => {
   return (
@@ -11,16 +10,6 @@ const MissionSection = () => {
         highlightWord="UNDERSTANDING"
         animationType="word-by-word"
       />
-      <div className="flex justify-center mt-10 sm:mt-14">
-        <Button
-          href="https://cal.com/studio-crobe"
-          external
-          variant="filled"
-          theme="cream"
-        >
-          Book a Call
-        </Button>
-      </div>
     </div>
   );
 };

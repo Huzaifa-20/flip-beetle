@@ -15,7 +15,7 @@ import { getSidebarColors } from "@/utils/themeColors";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
-  const { scrollY } = useLenis();
+  const { onScroll } = useLenis();
   const prevScrollYRef = useRef(0);
   const { currentTheme } = useTheme();
   const beetleLogo = useBeetleLogo();
@@ -24,23 +24,23 @@ const Navbar = () => {
   const { background: sidebarBg, text: sidebarText, hamburger: hamburgerColor } = getSidebarColors(currentTheme);
 
   // Track scroll direction and show/hide navbar accordingly
-  // This effect responds to external scroll position from Lenis
   useEffect(() => {
-    const prevScrollY = prevScrollYRef.current;
-    const isScrollingDown = scrollY > prevScrollY && scrollY > 50;
-    const isScrollingUp = scrollY < prevScrollY;
+    const unsubscribe = onScroll((scrollY) => {
+      const prevScrollY = prevScrollYRef.current;
+      const isScrollingDown = scrollY > prevScrollY && scrollY > 50;
+      const isScrollingUp = scrollY < prevScrollY;
 
-    // Defer state update to avoid synchronous setState in effect
-    queueMicrotask(() => {
       if (isScrollingDown) {
         setHidden(true);
       } else if (isScrollingUp) {
         setHidden(false);
       }
+
+      prevScrollYRef.current = scrollY;
     });
 
-    prevScrollYRef.current = scrollY;
-  }, [scrollY]);
+    return unsubscribe;
+  }, [onScroll]);
 
   return (
     <>
