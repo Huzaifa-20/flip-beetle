@@ -9,6 +9,7 @@ import ThemeTransition from "@/components/ThemeTransition";
 import ScrollThemeController from "@/components/ScrollThemeController";
 import Footer from "@/components/Footer";
 import { LenisProvider } from "@/contexts/LenisContext";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 const riposte = localFont({
   src: "./fonts/RiposteLight.ttf",
@@ -121,6 +122,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${riposte.variable} ${interTight.variable} antialiased`}>
+        <GoogleAnalytics />
         <ThemeProvider>
           <SplashAnimationProvider>
             <LenisProvider>
