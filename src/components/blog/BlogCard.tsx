@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { fadeInUp } from "@/utils/animations";
 import type { BlogMetadata } from "@/types/blog";
 import { getPrimaryTag, getTagColor, getPostCategory, getCategoryColor as getBlogCategoryColor } from "@/utils/blogHelpers";
+import { CursorProvider, Cursor } from "@/components/ui/cursor";
 
 // Map category to color classes for Tailwind
 const getCategoryColor = (category: string) => {
@@ -79,6 +80,13 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, variant = "default", index = 
         >
           {/* Image */}
           <div className="relative w-full aspect-[4/3] overflow-hidden">
+            <CursorProvider>
+              <Cursor>
+                <div className="bg-[var(--color-accent)] text-[var(--color-primary)] px-4 py-2 text-xs uppercase tracking-widest riposte font-medium whitespace-nowrap rounded-sm shadow-md">
+                  Read Blog
+                </div>
+              </Cursor>
+            </CursorProvider>
             <Image
               src={post.coverImage}
               alt={post.title}
@@ -120,6 +128,13 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, variant = "default", index = 
           <div className="bg-transparent overflow-hidden cursor-pointer h-full flex flex-col">
             {/* Image */}
             <div className="relative h-48 md:h-56">
+              <CursorProvider>
+                <Cursor>
+                  <div className="bg-[var(--color-accent)] text-[var(--color-primary)] px-4 py-2 text-xs uppercase tracking-widest riposte font-medium whitespace-nowrap rounded-sm shadow-md">
+                    View Blog
+                  </div>
+                </Cursor>
+              </CursorProvider>
               <Image
                 src={post.coverImage}
                 alt={post.title}
@@ -164,6 +179,13 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, variant = "default", index = 
       >
         {/* Cover Image */}
         <div className="relative w-full aspect-[16/9] overflow-hidden">
+          <CursorProvider>
+            <Cursor>
+              <div className="bg-[var(--color-accent)] text-[var(--color-primary)] px-4 py-2 text-xs uppercase tracking-widest riposte font-medium whitespace-nowrap rounded-sm shadow-md">
+                View Blog
+              </div>
+            </Cursor>
+          </CursorProvider>
           <Image
             src={post.coverImage}
             alt={post.title}

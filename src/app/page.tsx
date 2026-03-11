@@ -9,6 +9,7 @@ import HeroSection from "@/sections/HeroSection";
 import MissionSection from "@/sections/MissionSection";
 import TextScrollBanner from "@/components/TextScrollBanner";
 import Testimonials from "@/sections/Testimonials";
+// import ProjectsSection from "@/sections/ProjectsSection";
 import BlogSection from "@/sections/BlogSection";
 import { getFeaturedPosts } from "@/lib/blog";
 
@@ -21,6 +22,7 @@ export default async function Home() {
       <HeroSection />
       <MissionSection />
       <AboutSection />
+      {/* <ProjectsSection /> */}
       <TextScrollBanner />
       <ServicesSection />
       <ProcessSection />
