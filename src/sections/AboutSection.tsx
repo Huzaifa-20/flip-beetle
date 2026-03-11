@@ -50,6 +50,8 @@ const AboutSection = () => {
             loop
             muted
             playsInline
+            preload="none"
+            poster="/images/video-poster.jpg"
             className="w-full h-full object-cover"
           >
             <source src="/videos/about_us.mp4" type="video/mp4" />
