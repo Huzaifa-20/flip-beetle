@@ -3,6 +3,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Contact | Flip Beetle",
   description: "Get in touch with Flip Beetle. Let's build something remarkable together.",
+  alternates: {
+    canonical: "/contact",
+  },
   openGraph: {
     title: "Contact | Flip Beetle",
     description: "Get in touch with Flip Beetle. Let's build something remarkable together.",

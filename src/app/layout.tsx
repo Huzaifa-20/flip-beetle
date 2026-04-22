@@ -51,6 +51,9 @@ export const metadata: Metadata = {
   authors: [{ name: "Flip Beetle" }],
   creator: "Flip Beetle",
   publisher: "Flip Beetle",
+  alternates: {
+    canonical: "/",
+  },
   formatDetection: {
     email: false,
     address: false,

@@ -5,10 +5,13 @@ export const metadata: Metadata = {
   title: "Journal | Flip Beetle",
   description:
     "Web design insights, trends, and case studies from Flip Beetle design agency.",
+  alternates: {
+    canonical: "/blog",
+  },
   openGraph: {
     title: "Journal | Flip Beetle",
     description: "Web design insights, trends, and case studies.",
-    images: ["/images/blog-og.jpg"],
+    images: ["/og-image.png"],
   },
 };
 
