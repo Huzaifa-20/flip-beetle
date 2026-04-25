@@ -132,31 +132,31 @@ export const INTERACTIVE_LINKS = [
   {
     heading: "Services",
     subheading: "Discover what we offer",
-    videoSrc: "/clients/Cook_Beetle.webm",
+    videoSrc: "/clients/Cook_Beetle.webp",
     href: "#services",
   },
   {
     heading: "Team",
     subheading: "Meet the amazing people behind it",
-    videoSrc: "/clients/Gym_Beetle.webm",
+    videoSrc: "/clients/Gym_Beetle.webp",
     href: "#about",
   },
   {
     heading: "Projects",
     subheading: "Explore our recent work",
-    videoSrc: "/clients/Cook_Beetle.webm",
+    videoSrc: "/clients/Cook_Beetle.webp",
     href: "#work",
   },
   {
     heading: "Careers",
     subheading: "Join our growing team",
-    videoSrc: "/clients/Gym_Beetle.webm",
+    videoSrc: "/clients/Gym_Beetle.webp",
     href: "#careers",
   },
   {
     heading: "Blog",
     subheading: "Read our latest insights",
-    videoSrc: "/clients/Cook_Beetle.webm",
+    videoSrc: "/clients/Cook_Beetle.webp",
     href: "/blog",
   },
 ];

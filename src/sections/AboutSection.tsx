@@ -54,7 +54,10 @@ const AboutSection = () => {
             poster="/images/video-poster.jpg"
             className="w-full h-full object-cover"
           >
-            <source src="/videos/about_us.mp4" type="video/mp4" />
+            <source
+              src="https://res.cloudinary.com/dajccfztx/video/upload/f_auto,q_auto/v1777110403/about_us_vbrb4m.mp4"
+              type="video/mp4"
+            />
           </video>
         </motion.div>
       </div>
