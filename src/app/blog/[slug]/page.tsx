@@ -199,11 +199,12 @@ export default async function ArticlePage({ params }: Props) {
             headline: post.title,
             description: post.excerpt,
             image: `${SITE_URL}${post.coverImage}`,
-            datePublished: post.date,
-            dateModified: post.date,
+            datePublished: new Date(post.date).toISOString(),
+            dateModified: new Date(post.date).toISOString(),
             author: {
               "@type": "Person",
               name: post.author.name,
+              url: `${SITE_URL}/about`,
             },
             publisher: {
               "@type": "Organization",
