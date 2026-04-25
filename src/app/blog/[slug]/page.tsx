@@ -8,12 +8,15 @@ import ReadProgressBar from "@/components/blog/ReadProgressBar";
 import ArticleContent from "@/components/blog/ArticleContent";
 import ArticleNavigation from "@/components/blog/ArticleNavigation";
 import ScrollToTop from "@/components/blog/ScrollToTop";
+import JsonLd from "@/components/JsonLd";
 import {
   getAllPosts,
   getPostBySlug,
   getAdjacentPosts,
   parseMarkdown,
 } from "@/lib/blog";
+
+const SITE_URL = "https://flipbeetle.com";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -189,26 +192,43 @@ export default async function ArticlePage({ params }: Props) {
           </div>
         </div>
 
-        {/* Structured Data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "BlogPosting",
-              headline: post.title,
-              description: post.excerpt,
-              image: post.coverImage,
-              datePublished: post.date,
-              author: {
-                "@type": "Person",
-                name: post.author.name,
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: post.title,
+            description: post.excerpt,
+            image: `${SITE_URL}${post.coverImage}`,
+            datePublished: post.date,
+            dateModified: post.date,
+            author: {
+              "@type": "Person",
+              name: post.author.name,
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "Flip Beetle",
+              logo: {
+                "@type": "ImageObject",
+                url: `${SITE_URL}/icon-512x512.png`,
               },
-              publisher: {
-                "@type": "Organization",
-                name: "Flip Beetle",
-              },
-            }),
+            },
+            mainEntityOfPage: {
+              "@type": "WebPage",
+              "@id": `${SITE_URL}/blog/${slug}`,
+            },
+          }}
+        />
+
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+              { "@type": "ListItem", position: 2, name: "Journal", item: `${SITE_URL}/blog` },
+              { "@type": "ListItem", position: 3, name: post.title, item: `${SITE_URL}/blog/${slug}` },
+            ],
           }}
         />
       </article>

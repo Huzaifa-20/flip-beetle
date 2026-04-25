@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { fadeInUp, createStaggerContainer } from "@/utils/animations";
 import AnimatedTextSection from "@/components/AnimatedTextSection";
+import JsonLd from "@/components/JsonLd";
 
 interface FAQItem {
   id: string;
@@ -59,6 +60,21 @@ const FAQSection = () => {
       data-theme="cream"
       className="w-screen flex justify-center items-center py-16 md:py-32 px-4 sm:px-6 md:px-8"
     >
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.answer,
+            },
+          })),
+        }}
+      />
+
       <div className="w-full max-w-4xl flex flex-col gap-12 justify-start items-center">
         <AnimatedTextSection
           sentence="Frequently asked questions"

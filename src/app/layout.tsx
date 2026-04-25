@@ -10,6 +10,35 @@ import ScrollThemeController from "@/components/ScrollThemeController";
 import Footer from "@/components/Footer";
 import { LenisProvider } from "@/contexts/LenisContext";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import JsonLd from "@/components/JsonLd";
+
+const SITE_URL = "https://flipbeetle.com";
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Flip Beetle",
+  url: SITE_URL,
+  logo: `${SITE_URL}/icon-512x512.png`,
+  description:
+    "The creative agency that turns visions into unforgettable brands. We create powerful digital experiences to elevate your brand.",
+  sameAs: ["https://www.instagram.com/flipbeetle"],
+  contactPoint: {
+    "@type": "ContactPoint",
+    email: "flipbeetle@studiocrobe.com",
+    telephone: "+971525021443",
+    contactType: "customer service",
+    areaServed: "AE",
+    availableLanguage: ["English"],
+  },
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Flip Beetle",
+  url: SITE_URL,
+};
 
 const riposte = localFont({
   src: "./fonts/RiposteLight.ttf",
@@ -125,6 +154,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${riposte.variable} ${interTight.variable} antialiased`}>
+        <JsonLd data={organizationSchema} />
+        <JsonLd data={websiteSchema} />
         <GoogleAnalytics />
         <ThemeProvider>
           <SplashAnimationProvider>
