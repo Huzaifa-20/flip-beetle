@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
+import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { createStaggerContainer, fadeInUp } from "@/utils/animations";
 import Button from "@/components/ui/Button";
@@ -8,51 +9,54 @@ import { CursorProvider, Cursor } from "@/components/ui/cursor";
 
 const PROJECTS = [
   {
-    title: "Upwork Cookbook",
-    category: "Branding & Web Design",
-    image: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&h=500&fit=crop",
+    title: "Multipool Finance",
+    category: "Design & Development",
+    video:
+      "https://res.cloudinary.com/dajccfztx/video/upload/c_fill,ar_16:10,f_auto,q_auto/v1778083374/multipool_cjn5af.mp4",
+    poster:
+      "https://res.cloudinary.com/dajccfztx/video/upload/c_fill,ar_16:10,so_0,f_auto,q_auto/v1778083374/multipool_cjn5af.jpg",
     href: "#",
     colSpan: "md:col-span-7",
     aspectRatio: "aspect-[16/10]",
   },
   {
-    title: "Formula 1 Las Vegas",
-    category: "Campaign Design",
-    image: "https://images.unsplash.com/photo-1504817343863-5092a923803e?w=600&h=750&fit=crop",
+    title: "Prep'd",
+    category: "Branding, Design, & Development",
+    image: "/projects/prepd.webp",
     href: "#",
     colSpan: "md:col-span-5",
     aspectRatio: "aspect-[4/5]",
     offsetTop: true,
   },
   {
-    title: "A New Look for Web3 Safety",
-    category: "Product Design",
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&h=750&fit=crop",
+    title: "Camaradly",
+    category: "Design",
+    image: "/projects/camaradly.webp",
     href: "#",
     colSpan: "md:col-span-5",
     aspectRatio: "aspect-[4/5]",
     offsetTop: true,
   },
   {
-    title: "Connecting Talent Through Design",
-    category: "Web Development",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=500&fit=crop",
+    title: "Studio Crobe",
+    category: "Branding, Design, & Development",
+    image: "/projects/Studio_Crobe.webp",
     href: "#",
     colSpan: "md:col-span-7",
     aspectRatio: "aspect-[16/10]",
   },
   {
-    title: "Redefining Digital Commerce",
-    category: "E-Commerce & Branding",
-    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=500&fit=crop",
+    title: "Knot",
+    category: "Branding",
+    image: "/projects/knot.jpg",
     href: "#",
     colSpan: "md:col-span-7",
     aspectRatio: "aspect-[16/10]",
   },
   {
-    title: "Bold Moves in Fintech",
-    category: "App Design",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=750&fit=crop",
+    title: "Tokinvest",
+    category: "Development",
+    image: "/projects/Tokinvest.webp",
     href: "#",
     colSpan: "md:col-span-5",
     aspectRatio: "aspect-[4/5]",
@@ -81,17 +85,32 @@ const ProjectCard = ({ project, eager }: ProjectCardProps) => {
             </Cursor>
           </CursorProvider>
 
-          {/* Image */}
+          {/* Media */}
           <figure
             className={`relative overflow-hidden rounded-lg ${project.aspectRatio}`}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={project.image}
-              alt={project.title}
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-              loading={eager ? "eager" : "lazy"}
-            />
+            {"video" in project ? (
+              <video
+                src={project.video}
+                poster={project.poster}
+                aria-label={`${project.title} preview`}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload={eager ? "auto" : "metadata"}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              />
+            ) : (
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 720px"
+                priority={eager}
+                className="bg-white object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              />
+            )}
           </figure>
         </div>
 
@@ -112,7 +131,11 @@ const HEADING_INITIAL = { opacity: 0, y: 30 };
 const HEADING_TRANSITION = { duration: 0.6, ease: [0.33, 1, 0.68, 1] as const };
 const CTA_INITIAL = { opacity: 0, y: 20 };
 const CTA_ANIMATE = { opacity: 1, y: 0 };
-const CTA_TRANSITION = { duration: 0.5, delay: 0.8, ease: [0.33, 1, 0.68, 1] as const };
+const CTA_TRANSITION = {
+  duration: 0.5,
+  delay: 0.8,
+  ease: [0.33, 1, 0.68, 1] as const,
+};
 const STAGGER_VARIANTS = createStaggerContainer(0.15, 0.1);
 
 const ProjectsSection = () => {
