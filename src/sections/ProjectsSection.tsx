@@ -5,67 +5,12 @@ import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { createStaggerContainer, fadeInUp } from "@/utils/animations";
 import Button from "@/components/ui/Button";
+import LazyVideo from "@/components/ui/LazyVideo";
 import { CursorProvider, Cursor } from "@/components/ui/cursor";
-
-const PROJECTS = [
-  {
-    title: "Multipool Finance",
-    category: "Design & Development",
-    video:
-      "https://res.cloudinary.com/dajccfztx/video/upload/c_fill,ar_16:10,f_auto,q_auto/v1778083374/multipool_cjn5af.mp4",
-    poster:
-      "https://res.cloudinary.com/dajccfztx/video/upload/c_fill,ar_16:10,so_0,f_auto,q_auto/v1778083374/multipool_cjn5af.jpg",
-    href: "#",
-    colSpan: "md:col-span-7",
-    aspectRatio: "aspect-[16/10]",
-  },
-  {
-    title: "Prep'd",
-    category: "Branding, Design, & Development",
-    image: "/projects/prepd.webp",
-    href: "#",
-    colSpan: "md:col-span-5",
-    aspectRatio: "aspect-[4/5]",
-    offsetTop: true,
-  },
-  {
-    title: "Camaradly",
-    category: "Design",
-    image: "/projects/camaradly.webp",
-    href: "#",
-    colSpan: "md:col-span-5",
-    aspectRatio: "aspect-[4/5]",
-    offsetTop: true,
-  },
-  {
-    title: "Studio Crobe",
-    category: "Branding, Design, & Development",
-    image: "/projects/Studio_Crobe.webp",
-    href: "#",
-    colSpan: "md:col-span-7",
-    aspectRatio: "aspect-[16/10]",
-  },
-  {
-    title: "Knot",
-    category: "Branding",
-    image: "/projects/knot.jpg",
-    href: "#",
-    colSpan: "md:col-span-7",
-    aspectRatio: "aspect-[16/10]",
-  },
-  {
-    title: "Tokinvest",
-    category: "Development",
-    image: "/projects/Tokinvest.webp",
-    href: "#",
-    colSpan: "md:col-span-5",
-    aspectRatio: "aspect-[4/5]",
-    offsetTop: true,
-  },
-] as const;
+import { PROJECTS, type Project } from "@/data/projects";
 
 interface ProjectCardProps {
-  project: (typeof PROJECTS)[number];
+  project: Project;
   eager: boolean;
 }
 
@@ -90,20 +35,16 @@ const ProjectCard = ({ project, eager }: ProjectCardProps) => {
             className={`relative overflow-hidden rounded-lg ${project.aspectRatio}`}
           >
             {"video" in project ? (
-              <video
+              <LazyVideo
                 src={project.video}
                 poster={project.poster}
-                aria-label={`${project.title} preview`}
-                autoPlay
-                muted
-                loop
-                playsInline
+                alt={`${project.title} preview`}
                 preload={eager ? "auto" : "metadata"}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
             ) : (
               <Image
-                src={project.image}
+                src={project.verticalImage}
                 alt={project.title}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 720px"

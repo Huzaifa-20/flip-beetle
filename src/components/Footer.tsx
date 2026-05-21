@@ -12,45 +12,45 @@ const NAVIGATION_LINKS = [
   { name: "Contact", href: "/contact" },
 ] as const;
 
-
 const Footer = () => {
   const pathname = usePathname();
-  const isBlogPage = pathname?.startsWith("/blog");
+  const isDark = pathname?.startsWith("/blog") || pathname?.startsWith("/work");
 
   // Use black background for blog pages, primary color for others
-  const bgColor = isBlogPage ? "bg-black" : "bg-primary";
-  const textColor = isBlogPage ? "text-white" : "text-background";
-  const hoverColor = isBlogPage ? "hover:opacity-70" : "hover:opacity-70";
+  const bgColor = isDark ? "bg-black" : "bg-primary";
+  const textColor = isDark ? "text-white" : "text-background";
+  const hoverColor = isDark ? "hover:opacity-70" : "hover:opacity-70";
 
   return (
-    <footer className={`w-screen min-h-screen ${bgColor} ${textColor} px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-20 flex flex-col justify-between`}>
+    <footer
+      className={`w-screen min-h-screen ${bgColor} ${textColor} px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-20 flex flex-col justify-between`}
+    >
       <div className="w-full max-w-[1600px] mx-auto flex-1 flex flex-col justify-between gap-16 md:gap-20">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-16 lg:gap-20">
           {/* Left Section - Brand & CTA */}
           <div className="lg:col-span-5">
             <div className="mb-6 sm:mb-8">
-              <h1
-                className="text-[5rem] sm:text-[6rem] md:text-[7rem] lg:text-[7rem] xl:text-[9rem] font-inter-tight font-bold leading-22 sm:leading-[0.85]"
-              >
+              <h1 className="text-[5rem] sm:text-[6rem] md:text-[7rem] lg:text-[7rem] xl:text-[9rem] font-inter-tight font-bold leading-22 sm:leading-[0.85]">
                 FLIP BEETLE
               </h1>
             </div>
             <h2 className="text-xl sm:text-2xl md:text-3xl riposte mb-8 sm:mb-10 max-w-[500px]">
-              Your vision. Our craft. Let&apos;s build something meaningful together.
+              Your vision. Our craft. Let&apos;s build something meaningful
+              together.
             </h2>
             <div className="flex gap-4">
               <Button
                 href="#contact"
                 variant="outlined"
-                theme={isBlogPage ? "black" : "green"}
+                theme={isDark ? "black" : "green"}
               >
                 CONTACT
               </Button>
               <Button
                 href="https://cal.com/studio-crobe"
                 variant="filled"
-                theme={isBlogPage ? "black" : "green"}
+                theme={isDark ? "black" : "green"}
               >
                 BOOK A CALL
               </Button>
@@ -61,9 +61,7 @@ const Footer = () => {
           <div className="lg:col-span-7 grid grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 md:gap-12 lg:gap-8 xl:gap-12">
             {/* Navigate Column */}
             <div>
-              <h3 className="riposte text-xs uppercase mb-4">
-                NAVIGATE
-              </h3>
+              <h3 className="riposte text-xs uppercase mb-4">NAVIGATE</h3>
               <ul className="space-y-3">
                 {NAVIGATION_LINKS.map((link) => (
                   <li key={link.name}>
@@ -90,9 +88,7 @@ const Footer = () => {
 
             {/* Social Column */}
             <div>
-              <h3 className="riposte text-xs uppercase mb-4">
-                SOCIAL & STUFF
-              </h3>
+              <h3 className="riposte text-xs uppercase mb-4">SOCIAL & STUFF</h3>
               <ul className="space-y-3">
                 <li>
                   <a
@@ -119,9 +115,7 @@ const Footer = () => {
 
             {/* Contact Column */}
             <div className="col-span-2 lg:col-span-1">
-              <h3 className="riposte text-xs uppercase mb-4">
-                CONTACT DEETS
-              </h3>
+              <h3 className="riposte text-xs uppercase mb-4">CONTACT DEETS</h3>
               <div className="space-y-3">
                 <a
                   href="tel:+971525021443"

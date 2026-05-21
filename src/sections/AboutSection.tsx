@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { fadeInLeft, fadeInRight } from "@/utils/animations";
+import LazyVideo from "@/components/ui/LazyVideo";
 
 const AboutSection = () => {
   const ref = React.useRef(null);
@@ -45,20 +46,13 @@ const AboutSection = () => {
           variants={fadeInRight}
           className="relative w-full order-1 sm:order-2 aspect-[4/3] rounded-lg overflow-hidden shadow-2xl"
         >
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="none"
+          <LazyVideo
+            src="https://res.cloudinary.com/dajccfztx/video/upload/f_auto,q_auto/v1777110403/about_us_vbrb4m.mp4"
             poster="/images/video-poster.jpg"
+            alt="About Flip Beetle"
+            preload="none"
             className="w-full h-full object-cover"
-          >
-            <source
-              src="https://res.cloudinary.com/dajccfztx/video/upload/f_auto,q_auto/v1777110403/about_us_vbrb4m.mp4"
-              type="video/mp4"
-            />
-          </video>
+          />
         </motion.div>
       </div>
     </section>

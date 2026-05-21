@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
+import { getAllCaseStudySlugs } from "@/data/caseStudies";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://flipbeetle.com";
@@ -30,6 +31,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
+      url: `${baseUrl}/work`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/privacy`,
       lastModified: new Date(),
       changeFrequency: "yearly",
@@ -45,5 +52,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...blogUrls];
+  const caseStudyUrls: MetadataRoute.Sitemap = getAllCaseStudySlugs().map(
+    (slug) => ({
+      url: `${baseUrl}/work/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    }),
+  );
+
+  return [...staticPages, ...blogUrls, ...caseStudyUrls];
 }
