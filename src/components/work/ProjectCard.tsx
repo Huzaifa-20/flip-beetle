@@ -39,7 +39,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                 </div>
               </Cursor>
             </CursorProvider>
-            {"video" in project ? (
+            {project.video ? (
               <LazyVideo
                 src={project.video}
                 poster={project.poster}
@@ -48,7 +48,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
               />
             ) : (
               <Image
-                src={project.horizontalImage}
+                src={project.horizontalImage ?? project.verticalImage ?? ""}
                 alt={project.title}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"

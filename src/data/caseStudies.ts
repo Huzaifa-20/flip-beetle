@@ -104,9 +104,10 @@ function parseServices(category: string): string[] {
 }
 
 function coverFor(project: Project): GalleryItem {
-  return "video" in project
-    ? { src: project.video, type: "video", poster: project.poster }
-    : project.horizontalImage;
+  if (project.video) {
+    return { src: project.video, type: "video", poster: project.poster };
+  }
+  return project.horizontalImage ?? project.verticalImage ?? "";
 }
 
 /** Build a full, structured dummy case study from a listing project. */
@@ -414,6 +415,165 @@ const CASE_STUDY_OVERRIDES: Partial<Record<string, Partial<CaseStudy>>> = {
         count: 1,
         items: ["/projects/drafitti/designs.webp"],
         caption: "Concept",
+      },
+    ],
+  },
+  "a-mothers": {
+    title: "A Mother's",
+    tagline: "A verified marketplace for parents to buy and sell excess milk!",
+    client: "A Mother's LLC",
+    services: ["Branding", "Design"],
+    year: "2026",
+    blocks: [
+      {
+        type: "section",
+        eyebrow: "Overview",
+        heading: "What is A Mother's?",
+        body: [
+          "A Mother's is a platform with 2 purposes. Firstly, parents who are unable to meet their baby's milk demand can conect with verified mothers who produce and store excess milk. Secondly, mothers who produce excess milk can gain a revenue stream by selling their excess milk to parents in need.",
+        ],
+      },
+      {
+        type: "gallery",
+        count: 2,
+        items: [
+          "/projects/a-mothers/primary_colors.webp",
+          "/projects/a-mothers/secondary_colors.webp",
+        ],
+        caption: "Color Palette",
+      },
+      {
+        type: "gallery",
+        count: 3,
+        items: [
+          "/projects/a-mothers/logo_space_1.webp",
+          "/projects/a-mothers/logo_space_2.webp",
+          "/projects/a-mothers/logo_circles.webp",
+        ],
+      },
+      {
+        type: "gallery",
+        count: 1,
+        items: ["/projects/a-mothers/logo.webp"],
+        caption: "Crafting the logo",
+      },
+      {
+        type: "gallery",
+        count: 1,
+        items: ["/projects/a-mothers/wordmark_space.webp"],
+      },
+      {
+        type: "gallery",
+        count: 1,
+        items: ["/projects/a-mothers/wordmark.webp"],
+        caption: "Crafting the wordmark",
+      },
+      {
+        type: "section",
+        eyebrow: "UX/UI",
+        heading: "User centric design",
+        body: [
+          "After crafting the visual identity for the brand, our next step was focusing on designing the platform in an intuitive, user friendly manner.",
+        ],
+      },
+      {
+        type: "gallery",
+        count: 1,
+        items: ["/projects/a-mothers/flow_diagram.webp"],
+        caption: "User flow diagram",
+      },
+      {
+        type: "section",
+        eyebrow: "Finale",
+        heading: "Culmination of a lengthy design process",
+        body: [
+          "Once the user flows are finalised and the wireframes are made, a long list of UX interviews are setup. With careful iterations, each user experience is refined to perfection.",
+        ],
+      },
+      {
+        type: "gallery",
+        count: 1,
+        items: ["/projects/a-mothers/onboarding_screens.webp"],
+      },
+      {
+        type: "gallery",
+        count: 1,
+        items: ["/projects/a-mothers/screens.webp"],
+        caption: "A complete UX",
+      },
+    ],
+  },
+  camaradly: {
+    title: "Camaradly",
+    tagline: "Feedback, Engagement, and Alignment for Tech Services Companies",
+    client: "Camaradly",
+    services: ["Design"],
+    year: "2021",
+    projectUrl: "https://camaradly.com/",
+    blocks: [
+      {
+        type: "section",
+        eyebrow: "Overview",
+        heading: "The Culture Management Platform",
+        body: [
+          "Organizations around the world trust Camaradly for a culture of high performance and employee engagement",
+        ],
+      },
+      {
+        type: "gallery",
+        count: 2,
+        items: [
+          "/projects/camaradly/typography.png",
+          "/projects/camaradly/color_palette.png",
+        ],
+        caption: "Visual Identity",
+      },
+      {
+        type: "gallery",
+        count: 3,
+        items: [
+          "/projects/camaradly/mock_1.png",
+          "/projects/camaradly/mock_2.png",
+          "/projects/camaradly/mock_3.png",
+        ],
+        caption: "Sneak Peek at the good stuff",
+      },
+    ],
+  },
+  "multipool-finance-website": {
+    title: "Multipool Website",
+    tagline: "the DEX with CEX appeal",
+    client: "Immin8 Labs",
+    services: ["Development"],
+    year: "2023",
+    projectUrl: "https://www.multipool.finance/",
+    blocks: [
+      {
+        type: "section",
+        eyebrow: "Overview",
+        heading: "Dip into the future of trading",
+        body: [
+          "Multipool is the ground breaking DeFi protocol for advanced trading. Trade crypto & RWAs with low fees, deep institutional liquidity, fully on-chain.",
+        ],
+      },
+      {
+        type: "gallery",
+        count: 2,
+        items: [
+          "/projects/camaradly/typography.webp",
+          "/projects/camaradly/color_palette.webp",
+        ],
+        caption: "Visual Identity",
+      },
+      {
+        type: "gallery",
+        count: 3,
+        items: [
+          "/projects/camaradly/mock_1.webp",
+          "/projects/camaradly/mock_2.webp",
+          "/projects/camaradly/mock_3.webp",
+        ],
+        caption: "Sneak Peek at the good stuff",
       },
     ],
   },

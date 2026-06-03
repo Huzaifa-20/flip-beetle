@@ -4,6 +4,7 @@ import React, { useState, useMemo } from "react";
 import { motion, useInView } from "framer-motion";
 import { createStaggerContainer, fadeInUp } from "@/utils/animations";
 import ProjectCard from "@/components/work/ProjectCard";
+import ScrollToTop from "@/components/work/ScrollToTop";
 import {
   projectMatchesFilter,
   type Project,
@@ -25,20 +26,18 @@ function WorkListingClient({ projects }: WorkListingClientProps) {
 
   const [selectedFilter, setSelectedFilter] = useState<ProjectFilter>("ALL");
 
-  React.useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const filteredProjects = useMemo(
     () => projects.filter((p) => projectMatchesFilter(p, selectedFilter)),
     [projects, selectedFilter],
   );
 
   return (
-    <main
-      data-theme="black"
-      className="min-h-screen w-screen bg-black px-6 md:px-12 py-24 md:py-36"
-    >
+    <>
+      <ScrollToTop />
+      <main
+        data-theme="black"
+        className="min-h-screen w-screen bg-black px-6 md:px-12 py-24 md:py-36"
+      >
       <div className="mx-auto">
         {/* Header */}
         <motion.div
@@ -121,6 +120,7 @@ function WorkListingClient({ projects }: WorkListingClientProps) {
         )}
       </div>
     </main>
+    </>
   );
 }
 

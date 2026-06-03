@@ -34,7 +34,7 @@ const ProjectCard = ({ project, eager }: ProjectCardProps) => {
           <figure
             className={`relative overflow-hidden rounded-lg ${project.aspectRatio}`}
           >
-            {"video" in project ? (
+            {project.video ? (
               <LazyVideo
                 src={project.video}
                 poster={project.poster}
@@ -44,7 +44,7 @@ const ProjectCard = ({ project, eager }: ProjectCardProps) => {
               />
             ) : (
               <Image
-                src={project.verticalImage}
+                src={project.verticalImage ?? project.horizontalImage ?? ""}
                 alt={project.title}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 720px"
@@ -105,13 +105,15 @@ const ProjectsSection = () => {
           animate={isInView ? "visible" : "hidden"}
           className="grid grid-cols-12 gap-8 md:gap-12"
         >
-          {PROJECTS.map((project, index) => (
-            <MemoizedProjectCard
-              key={project.title}
-              project={project}
-              eager={index < 2}
-            />
-          ))}
+          {PROJECTS.filter((project) => project.featured).map(
+            (project, index) => (
+              <MemoizedProjectCard
+                key={project.title}
+                project={project}
+                eager={index < 2}
+              />
+            ),
+          )}
         </motion.div>
 
         <motion.div
