@@ -553,6 +553,61 @@ const CASE_STUDY_OVERRIDES: Partial<Record<string, Partial<CaseStudy>>> = {
         eyebrow: "Overview",
         heading: "Dip into the future of trading",
         body: [
+          "Multipool is a cutting-edge DEX transforming the trading landscape for RWAs and cryptocurrencies. Multipool is designed for fairness and equality, featuring a fully decentralized on-chain order book, deep liquidity through dynamic bracket pools, utilizing on-chain compliance tools.",
+        ],
+      },
+      {
+        type: "gallery",
+        count: 1,
+        items: ["/projects/multipool-finance-website/homescreen.webp"],
+      },
+      {
+        type: "section",
+        eyebrow: "Development",
+        heading: "NextJS all the way",
+        body: [
+          "The website was tasked to not just look amazing, but feel extraordinarily smooth. To ensure that, we built it from scratch using NextJS and powered it with custom GSAP animations to make it feel alive!",
+        ],
+      },
+      {
+        type: "gallery",
+        count: 3,
+        items: [
+          "/projects/multipool-finance-website/image_1.webp",
+          "/projects/multipool-finance-website/image_2.webp",
+          "/projects/multipool-finance-website/image_3.webp",
+        ],
+        caption: "Sneak Peek",
+      },
+      {
+        type: "section",
+        eyebrow: "Development",
+        heading: "Prismic to the rescue!",
+        body: [
+          "The client wanted to make the website dynamic. They wanted to pump out blogs every day! Create landing pages for marketing campaigns every week! You can't wait around for a dev team to push code all the time. So we landed on Prismic as a solution. The website was completely integrated with Prismic which acted not only as a CMS but also as a future page builder.",
+        ],
+      },
+      {
+        type: "gallery",
+        count: 1,
+        items: ["/projects/multipool-finance-website/blog_page.webp"],
+        caption: "Sneak Peek at the blog",
+      },
+    ],
+  },
+  knot: {
+    title: "Knot",
+    tagline: "the DEX with CEX appeal",
+    client: "Immin8 Labs",
+    services: ["Development"],
+    year: "2023",
+    projectUrl: "https://www.multipool.finance/",
+    blocks: [
+      {
+        type: "section",
+        eyebrow: "Overview",
+        heading: "Dip into the future of trading",
+        body: [
           "Multipool is the ground breaking DeFi protocol for advanced trading. Trade crypto & RWAs with low fees, deep institutional liquidity, fully on-chain.",
         ],
       },
