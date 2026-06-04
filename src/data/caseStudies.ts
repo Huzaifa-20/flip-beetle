@@ -523,8 +523,8 @@ const CASE_STUDY_OVERRIDES: Partial<Record<string, Partial<CaseStudy>>> = {
         type: "gallery",
         count: 2,
         items: [
-          "/projects/camaradly/typography.png",
-          "/projects/camaradly/color_palette.png",
+          "/projects/camaradly/typography.webp",
+          "/projects/camaradly/color_palette.webp",
         ],
         caption: "Visual Identity",
       },
@@ -532,9 +532,9 @@ const CASE_STUDY_OVERRIDES: Partial<Record<string, Partial<CaseStudy>>> = {
         type: "gallery",
         count: 3,
         items: [
-          "/projects/camaradly/mock_1.png",
-          "/projects/camaradly/mock_2.png",
-          "/projects/camaradly/mock_3.png",
+          "/projects/camaradly/mock_1.webp",
+          "/projects/camaradly/mock_2.webp",
+          "/projects/camaradly/mock_3.webp",
         ],
         caption: "Sneak Peek at the good stuff",
       },
