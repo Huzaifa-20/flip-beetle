@@ -15,6 +15,7 @@ export interface SocialLink extends NavItem {
 export const MENU_ITEMS: NavItem[] = [
   { label: "HOME", href: "/" },
   { label: "ABOUT", href: "/about" },
+  { label: "WORK", href: "/work" },
   { label: "BLOG", href: "/blog" },
   { label: "CONTACT", href: "/contact" },
 ];
